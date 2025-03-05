@@ -1,0 +1,84 @@
+table 'Subcons on C1 Deals'
+	lineageTag: d48d7217-81fd-459f-92ca-6c447874b4a3
+
+	column 'Subcon Contract.Subcon Contract Name'
+		dataType: string
+		lineageTag: 94e26c69-5d8d-4fc1-9d96-50b6ef28e7b1
+		summarizeBy: none
+		sourceColumn: Subcon Contract.Subcon Contract Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subcon Contract.Subcon Deal ID'
+		dataType: string
+		lineageTag: 19f74947-be64-4be7-b84d-3547323bceab
+		summarizeBy: none
+		sourceColumn: Subcon Contract.Subcon Deal ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subcon Contract Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: 58595f1e-8bf4-48ed-9107-6fa38b00a15c
+		summarizeBy: sum
+		sourceColumn: Subcon Contract Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subcon Contract Hours'
+		dataType: double
+		lineageTag: 46e36cde-0225-4c72-bb4f-7ba6f8d9a50e
+		summarizeBy: sum
+		sourceColumn: Subcon Contract Hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Subcon Contract Labor Cost USD'
+		dataType: double
+		lineageTag: a951de21-a52e-4596-b965-4f4421f9005f
+		summarizeBy: sum
+		sourceColumn: Subcon Contract Labor Cost USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Subcon Contract Total Cost USD'
+		dataType: double
+		lineageTag: de056ce8-734d-484d-adc7-c3313c478a24
+		summarizeBy: sum
+		sourceColumn: Subcon Contract Total Cost USD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Subcons on C1 Deals-0ea84ac3-1816-418b-874c-dd8b1091e5f0' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management1" = Source{[Name="Deal Management"]}[Data],
+				    Model = #"Deal Management1"{[Id="Model"]}[Data],
+				    #"Deal Management2" = Model{[Id="Deal Management"]}[Data],
+				    #"Added Items" = Cube.Transform(#"Deal Management2",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Subcon Contract]", {"[Subcon Contract].[Subcon Contract Name].[Subcon Contract Name]", "[Subcon Contract].[Subcon Deal ID].[Subcon Deal ID]"}, {"Subcon Contract.Subcon Contract Name", "Subcon Contract.Subcon Deal ID"}},
+				            {Cube.AddMeasureColumn, "Subcon Contract Count", "[Measures].[Subcon Contract Count]"},
+				            {Cube.AddMeasureColumn, "Subcon Contract Hours", "[Measures].[Subcon Contract Hours]"},
+				            {Cube.AddMeasureColumn, "Subcon Contract Labor Cost USD", "[Measures].[Subcon Contract Labor Cost USD]"},
+				            {Cube.AddMeasureColumn, "Subcon Contract Total Cost USD", "[Measures].[Subcon Contract Total Cost USD]"}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each [Subcon Contract.Subcon Deal ID] <> null),
+				    #"Trimmed Text" = Table.TransformColumns(#"Filtered Rows",{{"Subcon Contract.Subcon Contract Name", Text.Trim, type text}}),
+				    #"Cleaned Text" = Table.TransformColumns(#"Trimmed Text",{{"Subcon Contract.Subcon Contract Name", Text.Clean, type text}}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Cleaned Text", each [Subcon Contract Hours] > 0)
+				in
+				    #"Filtered Rows1"
+
+	annotation PBI_ResultType = Table
+

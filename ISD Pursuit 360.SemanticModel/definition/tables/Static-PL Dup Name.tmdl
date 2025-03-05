@@ -1,0 +1,56 @@
+table 'Static-PL Dup Name'
+	isHidden
+	lineageTag: 26642856-646d-4b5d-a756-544517bbbb4a
+
+	column 'Duplicate Name'
+		dataType: string
+		isHidden
+		lineageTag: 0e3ef35a-bfda-4a96-8586-4ba699fd3002
+		summarizeBy: none
+		sourceColumn: Duplicate Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Geo Mapping Name'
+		dataType: string
+		isHidden
+		lineageTag: 4bbfeebb-4769-48a6-bad6-1f17dce67818
+		summarizeBy: none
+		sourceColumn: Geo Mapping Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		isHidden
+		lineageTag: 12911e1b-6398-4f6f-8e41-1208536105a0
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-PL Dup Name-f8d85d88-8b58-4b3f-92dd-2ccdda352204' = m
+		mode: import
+		queryGroup: 'Org Related Queries'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"PL Dup Name Reconciliation_Sheet" = #"Imported Excel Workbook"{[Item="PL Dup Name Reconciliation",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"PL Dup Name Reconciliation_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Duplicate Name", type text}, {"Geo Mapping Name", type text}, {"Timezone", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

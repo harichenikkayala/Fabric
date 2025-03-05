@@ -1,0 +1,241 @@
+table 'MCS Budget-Raw'
+	isHidden
+	lineageTag: 5a08c68e-9a92-4ab0-a72f-1e8dfbddd22f
+
+	column 'Fiscal Month.Calendar Month'
+		dataType: string
+		isHidden
+		lineageTag: f72a09c3-edb9-4a75-b4f8-5a61bdf87b12
+		summarizeBy: none
+		sourceColumn: Fiscal Month.Calendar Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month.Calendar Year'
+		dataType: string
+		isHidden
+		lineageTag: dde9637f-5eae-416e-a64b-7c45c40075da
+		summarizeBy: none
+		sourceColumn: Fiscal Month.Calendar Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month.Fiscal Month'
+		dataType: string
+		isHidden
+		lineageTag: 48662868-7aba-4f21-b0bc-006b0d829416
+		summarizeBy: none
+		sourceColumn: Fiscal Month.Fiscal Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month.Fiscal Quarter'
+		dataType: string
+		isHidden
+		lineageTag: 318b35ed-0729-4d3e-a6a5-63809a07745f
+		summarizeBy: none
+		sourceColumn: Fiscal Month.Fiscal Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month.Fiscal Year'
+		dataType: string
+		isHidden
+		lineageTag: 9b41a8f6-5905-47d4-aa60-368e36de613b
+		summarizeBy: none
+		sourceColumn: Fiscal Month.Fiscal Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month.Is Current - Fiscal Month'
+		dataType: string
+		isHidden
+		lineageTag: 749d6854-82fe-4bb6-8834-c58a8993c206
+		summarizeBy: none
+		sourceColumn: Fiscal Month.Is Current - Fiscal Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Area Short Name'
+		dataType: string
+		isHidden
+		lineageTag: ee327eb8-9dfe-4599-a401-6e894559d4eb
+		summarizeBy: none
+		sourceColumn: Sales Geography.Area Short Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Is US Federal'
+		dataType: string
+		isHidden
+		lineageTag: 67f9972d-30f9-4992-9f0b-e1dca5760655
+		summarizeBy: none
+		sourceColumn: Sales Geography.Is US Federal
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sales Unit'
+		dataType: string
+		isHidden
+		lineageTag: 2cba1d5d-9f10-4b59-81f9-cdb41d0de3da
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sales Unit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Time Zone'
+		dataType: string
+		isHidden
+		lineageTag: 0fea0529-1a9f-40e5-94cf-42b39b80e25a
+		summarizeBy: none
+		sourceColumn: Sales Geography.Time Zone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DV Budget'
+		dataType: double
+		isHidden
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: c3c7065b-84d2-442a-9270-097b0fe8c4af
+		summarizeBy: sum
+		sourceColumn: DV Budget
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Service Line Offering.Short Solution Area'
+		dataType: string
+		isHidden
+		lineageTag: 5edf1fb4-9f9b-4336-a776-74a102d34de9
+		summarizeBy: none
+		sourceColumn: Service Line Offering.Short Solution Area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CrossTableKey
+		dataType: string
+		isHidden
+		lineageTag: e346ba62-c33d-419e-b5ce-35907641fe50
+		summarizeBy: none
+		sourceColumn: CrossTableKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DV Actual'
+		dataType: double
+		lineageTag: 59a559c1-4bd7-4840-86f4-e12f4a27841f
+		summarizeBy: sum
+		sourceColumn: DV Actual
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'DV Leakage'
+		dataType: double
+		lineageTag: fd7c9ea7-acc1-4ad0-a96b-687739681fcf
+		summarizeBy: sum
+		sourceColumn: DV Leakage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Forecast - MCS_DV'
+		dataType: double
+		lineageTag: ffb65f9b-167f-4630-9bbb-a0dd6711ceb3
+		summarizeBy: sum
+		sourceColumn: Forecast - MCS_DV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Gross DV'
+		dataType: double
+		lineageTag: 757cd960-f7ce-4d8f-ab68-13e9380d075e
+		summarizeBy: sum
+		sourceColumn: Gross DV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Net DV'
+		dataType: double
+		lineageTag: 3b847f0a-61fe-4205-866e-6a289dee49f6
+		summarizeBy: sum
+		sourceColumn: Net DV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sales Geography.Subsidiary'
+		dataType: string
+		lineageTag: 89e8b355-39a7-465f-9b7e-1832823b0fc6
+		summarizeBy: none
+		sourceColumn: Sales Geography.Subsidiary
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'MCS Budget-Raw-7db526b9-d555-4d8a-8509-b7e1fe7233d8' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    Sales1 = Source{[Name="Sales"]}[Data],
+				    Sales2 = Sales1{[Id="Sales"]}[Data],
+				    Sales3 = Sales2{[Id="Sales"]}[Data],
+				    #"Added Items" = Cube.Transform(Sales3,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Fiscal Month]", {"[Fiscal Month].[Calendar Month].[Calendar Month]", "[Fiscal Month].[Calendar Year].[Calendar Year]", "[Fiscal Month].[Fiscal Month].[Fiscal Month]", "[Fiscal Month].[Fiscal Quarter].[Fiscal Quarter]", "[Fiscal Month].[Fiscal Year].[Fiscal Year]", "[Fiscal Month].[Is Current - Fiscal Month].[Is Current - Fiscal Month]"}, {"Fiscal Month.Calendar Month", "Fiscal Month.Calendar Year", "Fiscal Month.Fiscal Month", "Fiscal Month.Fiscal Quarter", "Fiscal Month.Fiscal Year", "Fiscal Month.Is Current - Fiscal Month"}},
+				            {Cube.AddAndExpandDimensionColumn, "[Sales Geography]", {"[Sales Geography].[Area Short Name].[Area Short Name]", "[Sales Geography].[Is US Federal].[Is US Federal]", "[Sales Geography].[Sales Unit].[Sales Unit]", "[Sales Geography].[Time Zone].[Time Zone]","[Sales Geography].[Subsidiary].[Subsidiary]"}, {"Sales Geography.Area Short Name", "Sales Geography.Is US Federal", "Sales Geography.Sales Unit", "Sales Geography.Time Zone", "Sales Geography.Subsidiary"}},
+				            {Cube.AddMeasureColumn, "DV Budget", "[Measures].[DV Budget]"},
+				            {Cube.AddAndExpandDimensionColumn, "[Service Line Offering]", {"[Service Line Offering].[Short Solution Area].[Short Solution Area]"}, {"Service Line Offering.Short Solution Area"}},
+				            {Cube.AddMeasureColumn, "DV Actual", "[Measures].[DV Actual]"},
+				            {Cube.AddMeasureColumn, "DV Leakage", "[Measures].[DV Leakage]"},
+				            {Cube.AddMeasureColumn, "Forecast - MCS_DV", "[Measures].[Forecast - MCS_DV]"},
+				            {Cube.AddMeasureColumn, "Gross DV", "[Measures].[Gross DV]"},
+				            {Cube.AddMeasureColumn, "Net DV", "[Measures].[Net DV]"}
+				        }),
+				    #"Filtered Rows1" = Table.SelectRows(#"Added Items", each (Cube.AttributeMemberId([Sales Geography.Is US Federal]) = "[Sales Geography].[Is US Federal].&[No]" meta [DisplayName = "No"])),
+				    #"Replaced Value" = Table.ReplaceValue(#"Filtered Rows1",null,0,Replacer.ReplaceValue,{"DV Budget", "DV Actual", "DV Leakage", "Forecast - MCS_DV", "Gross DV", "Net DV"}),
+				    #"Added Custom" = Table.AddColumn(#"Replaced Value", "CrossTableKey", each [Sales Geography.Area Short Name] & "|" & [Sales Geography.Subsidiary] & "|" & [Sales Geography.Sales Unit] & "|" & [Fiscal Month.Fiscal Month] & "|" & [Service Line Offering.Short Solution Area])
+				in
+				    #"Added Custom"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

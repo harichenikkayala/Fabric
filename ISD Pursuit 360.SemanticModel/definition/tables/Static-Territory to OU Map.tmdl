@@ -1,0 +1,56 @@
+table 'Static-Territory to OU Map'
+	isHidden
+	lineageTag: 17210911-a6b2-469f-a6e7-34688ddf43e4
+
+	column OU
+		dataType: string
+		isHidden
+		lineageTag: c2b37c85-0097-417b-8ea8-73b00099bce0
+		summarizeBy: none
+		sourceColumn: OU
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Territory
+		dataType: string
+		isHidden
+		lineageTag: f925ae0b-7fa0-4b2b-b2e8-e8e4ae7d0245
+		summarizeBy: none
+		sourceColumn: Territory
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		isHidden
+		lineageTag: 13aa0dc0-ea27-4196-be83-ef882c4a437b
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-Territory to OU Map-926048e8-753f-458e-9374-0f3f3423f321' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"Territory to OU Map_Sheet" = #"Imported Excel Workbook"{[Item="Territory to OU Map",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Territory to OU Map_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"OU", type text}, {"Territory", type text}, {"Timezone", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

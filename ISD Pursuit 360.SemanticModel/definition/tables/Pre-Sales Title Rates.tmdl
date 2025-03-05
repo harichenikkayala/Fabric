@@ -1,0 +1,98 @@
+table 'Pre-Sales Title Rates'
+	isHidden
+	lineageTag: 0d5d37fd-6f9f-43f7-b359-f261976a89ec
+
+	column 'Opportunity Presales Consumption.Resource Standard Title'
+		dataType: string
+		isHidden
+		lineageTag: cd7a7841-2e7d-43db-8ebd-9b72f52d75f4
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Resource Standard Title
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Cost'
+		dataType: double
+		isHidden
+		lineageTag: e7f8f10b-1b08-4d29-89d8-4b5d7cad4e47
+		summarizeBy: sum
+		sourceColumn: Total Cost
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Hours'
+		dataType: double
+		isHidden
+		lineageTag: 66f77cc4-3048-4f5d-9466-f776d5d33365
+		summarizeBy: sum
+		sourceColumn: Total Hours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ABR
+		dataType: double
+		isHidden
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 64c616ca-9918-40ce-9b85-887b2333e6bf
+		summarizeBy: sum
+		sourceColumn: ABR
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Opportunity Presales Consumption.Billing Role Name'
+		dataType: string
+		lineageTag: 389dbc55-7e46-4b08-89d4-0c9be0ab88f6
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Billing Role Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pre-Sales Title Rates-7a7bc210-d8db-49e9-9ba7-7d50f0fbfa40' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Opportunity Presales Consumption]", {"[Opportunity Presales Consumption].[Billing Role Name].[Billing Role Name]", "[Opportunity Presales Consumption].[Corp HQ Cost Center Region].[Corp HQ Cost Center Region]", "[Opportunity Presales Consumption].[Oppty Architect First Work Date].[Oppty Architect First Work Date]", "[Opportunity Presales Consumption].[PreSales Planned Cost].[PreSales Planned Cost]", "[Opportunity Presales Consumption].[Resource Standard Title].[Resource Standard Title]"}, {"Opportunity Presales Consumption.Billing Role Name", "Opportunity Presales Consumption.Corp HQ Cost Center Region", "Opportunity Presales Consumption.Oppty Architect First Work Date", "Opportunity Presales Consumption.PreSales Planned Cost", "Opportunity Presales Consumption.Resource Standard Title"}},
+				            {Cube.AddMeasureColumn, "Presales Task Planned Hours", "[Measures].[Presales Task Planned Hours]"}
+				        }),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Items",{{"Opportunity Presales Consumption.Oppty Architect First Work Date", type date}, {"Opportunity Presales Consumption.PreSales Planned Cost", type number}}),
+				    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"Opportunity Presales Consumption.Oppty Architect First Work Date", null}}),
+				    #"Filtered Rows7" = Table.SelectRows(#"Replaced Errors", each [Opportunity Presales Consumption.Oppty Architect First Work Date] > #date(2022, 6, 30)),
+				    #"Filtered Rows" = Table.SelectRows(#"Filtered Rows7", each [Opportunity Presales Consumption.Corp HQ Cost Center Region] = "United States"),
+				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each [Presales Task Planned Hours] > 0),
+				    #"Filtered Rows2" = Table.SelectRows(#"Filtered Rows1", each [Opportunity Presales Consumption.PreSales Planned Cost] > 0),
+				    #"Filtered Rows3" = Table.SelectRows(#"Filtered Rows2", each [Opportunity Presales Consumption.Resource Standard Title] <> null),
+				    #"Filtered Rows6" = Table.SelectRows(#"Filtered Rows3", each [Opportunity Presales Consumption.Billing Role Name] <> null),
+				    #"Grouped Rows" = Table.Group(#"Filtered Rows6", {"Opportunity Presales Consumption.Resource Standard Title", "Opportunity Presales Consumption.Billing Role Name"}, {{"Total Cost", each List.Sum([Opportunity Presales Consumption.PreSales Planned Cost]), type nullable number}, {"Total Hours", each List.Sum([Presales Task Planned Hours]), type nullable number}}),
+				    #"Added Custom" = Table.AddColumn(#"Grouped Rows", "ABR", each [Total Cost]/[Total Hours])
+				in
+				    #"Added Custom"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

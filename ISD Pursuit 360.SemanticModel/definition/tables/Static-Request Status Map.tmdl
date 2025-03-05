@@ -1,0 +1,45 @@
+table 'Static-Request Status Map'
+	isHidden
+	lineageTag: da25f78e-219f-4125-879d-e0a7627daf1e
+
+	column 'Pursuit Status'
+		dataType: string
+		isHidden
+		lineageTag: 8eed8e57-d619-44c3-8528-b3938663fc8e
+		summarizeBy: none
+		sourceColumn: Pursuit Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		isHidden
+		lineageTag: 0e51372f-3556-47a1-b96e-de6b1ed9f34c
+		summarizeBy: none
+		sourceColumn: Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-Request Status Map-5321376e-b1fe-45af-a6b5-4bbe7c58b67c' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"Request Status Map_Sheet" = #"Imported Excel Workbook"{[Item="Request Status Map",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Request Status Map_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Pursuit Status", type text}, {"Status", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

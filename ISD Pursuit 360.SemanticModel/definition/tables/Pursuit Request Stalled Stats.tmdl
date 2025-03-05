@@ -1,0 +1,140 @@
+table 'Pursuit Request Stalled Stats'
+	isHidden
+	lineageTag: 15203aae-c1a7-4319-b3a5-fabee8004dbb
+
+	column 'Pursuit Request.CRM Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: 6f3fbb8b-3c12-4c1c-8550-164e44002ea9
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CRM Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request ID'
+		dataType: string
+		isHidden
+		lineageTag: 5245b3a0-3b78-44e7-8477-ba1a5bd823b0
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request State'
+		dataType: string
+		isHidden
+		lineageTag: 1937cdb2-4f18-424c-bd94-3381cd63ca63
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request State
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Stalled Count'
+		dataType: string
+		isHidden
+		lineageTag: 638e900c-8a32-471c-adf6-681e9d1114dd
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Stalled Count
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Stalled Reasons'
+		dataType: string
+		isHidden
+		lineageTag: cb57abe3-d812-4059-8f9a-be4999eb1624
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Stalled Reasons
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Time Zone'
+		dataType: string
+		isHidden
+		lineageTag: b5f9727f-2b2f-477a-aa35-42a3ed25777e
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Time Zone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Avg Total Stalled Days'
+		dataType: double
+		isHidden
+		lineageTag: d9aecf94-b990-4920-ad75-2aa9bfb232c4
+		summarizeBy: sum
+		sourceColumn: Avg Total Stalled Days
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Current Stalled Days'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 085359d0-d042-450b-87f7-5e12f6d5ee08
+		summarizeBy: sum
+		sourceColumn: Current Stalled Days
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Stalled Days'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 27a0a67e-cfc7-47a8-a9cc-e19f1931eb49
+		summarizeBy: sum
+		sourceColumn: Total Stalled Days
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.CurrentStalledDays > 90/60/30'
+		dataType: string
+		lineageTag: f3ef7cfc-4071-4bc7-b605-95e6b4558c6d
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CurrentStalledDays > 90/60/30
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pursuit Request Stalled Stats-9bebcea9-b84e-402b-9b2d-18a9e16e12b6' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Pursuit Request]", {"[Pursuit Request].[CRM Opportunity ID].[CRM Opportunity ID]", "[Pursuit Request].[CurrentStalledDays > 90/60/30].[CurrentStalledDays > 90/60/30]", "[Pursuit Request].[Request ID].[Request ID]", "[Pursuit Request].[Request State].[Request State]", "[Pursuit Request].[Stalled Count].[Stalled Count]", "[Pursuit Request].[Stalled Reasons].[Stalled Reasons]", "[Pursuit Request].[Time Zone].[Time Zone]"}, {"Pursuit Request.CRM Opportunity ID", "Pursuit Request.CurrentStalledDays > 90/60/30", "Pursuit Request.Request ID", "Pursuit Request.Request State", "Pursuit Request.Stalled Count", "Pursuit Request.Stalled Reasons", "Pursuit Request.Time Zone"}},
+				            {Cube.AddMeasureColumn, "Avg Total Stalled Days", "[Measures].[Avg Total Stalled Days]"},
+				            {Cube.AddMeasureColumn, "Current Stalled Days", "[Measures].[Current Stalled Days]"},
+				            {Cube.AddMeasureColumn, "Total Stalled Days", "[Measures].[Total Stalled Days]"}
+				        }),
+				    #"Filtered Rows2" = Table.SelectRows(#"Added Items", each Text.Contains([Pursuit Request.CRM Opportunity ID], "6-") or Text.Contains([Pursuit Request.CRM Opportunity ID], "7-")),
+				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows2", each (Cube.AttributeMemberId([Pursuit Request.Request State]) = "[Pursuit Request].[Request State].&[Stalled]" meta [DisplayName = "Stalled"]))
+				in
+				    #"Filtered Rows1"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

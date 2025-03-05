@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "ISD Pursuit 360"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "9582a70c-8c2b-b76b-472b-8d02744fbb97"
+  }
+}

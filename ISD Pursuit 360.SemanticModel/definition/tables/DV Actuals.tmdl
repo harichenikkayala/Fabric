@@ -1,0 +1,118 @@
+table 'DV Actuals'
+	lineageTag: 30cfaa21-2c78-411b-ae3a-6e8dabd29bdb
+
+	column 'Delivery Value.DV Recorded - MS Fiscal Month Alt Name'
+		dataType: string
+		lineageTag: c72674df-4302-457f-b9b9-3f2530bfe213
+		summarizeBy: none
+		sourceColumn: Delivery Value.DV Recorded - MS Fiscal Month Alt Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Value.DV Recorded - MS Fiscal Qtr Name'
+		dataType: string
+		lineageTag: 48230cc0-2689-482f-af04-515281b94bfa
+		summarizeBy: none
+		sourceColumn: Delivery Value.DV Recorded - MS Fiscal Qtr Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Value.DV Recorded - MS Fiscal Year Name'
+		dataType: string
+		lineageTag: 6367363d-435f-4a15-9792-13af4a89dc95
+		summarizeBy: none
+		sourceColumn: Delivery Value.DV Recorded - MS Fiscal Year Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Value.DV Recorded Date'
+		dataType: string
+		lineageTag: 95cf9e4d-03a5-4b6d-bdea-75a577eb5b3f
+		summarizeBy: none
+		sourceColumn: Delivery Value.DV Recorded Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Value.DV Scenario'
+		dataType: string
+		lineageTag: 0d6725b1-b0d2-40ff-921b-c851ce0ff941
+		summarizeBy: none
+		sourceColumn: Delivery Value.DV Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Value.DVCreditedDate'
+		dataType: string
+		lineageTag: 7105cc87-057f-4051-80c5-1199ccc93454
+		summarizeBy: none
+		sourceColumn: Delivery Value.DVCreditedDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Value.Opportunity ID'
+		dataType: string
+		lineageTag: fa66f501-638c-4814-a3db-de31d056b77c
+		summarizeBy: none
+		sourceColumn: Delivery Value.Opportunity ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total DV Gross CCUS'
+		dataType: double
+		lineageTag: fa3f62f6-464d-4224-9315-bb2061b3171a
+		summarizeBy: sum
+		sourceColumn: Total DV Gross CCUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total DV Leakage CCUS'
+		dataType: double
+		lineageTag: bc7e2244-9799-4622-9621-9681d108925a
+		summarizeBy: sum
+		sourceColumn: Total DV Leakage CCUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total DV Net CCUS'
+		dataType: double
+		lineageTag: bec465e5-f23d-4714-a9df-792786a483c1
+		summarizeBy: sum
+		sourceColumn: Total DV Net CCUS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Delivery Value.Sales Unit'
+		dataType: string
+		lineageTag: f43a64f7-064d-4244-8030-10e6a67d6e61
+		summarizeBy: none
+		sourceColumn: Delivery Value.Sales Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DV Actuals-d583b4bb-62f8-4fa9-b988-89513d43906d' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Delivery Value]", {"[Delivery Value].[DV Recorded - MS Fiscal Month Alt Name].[DV Recorded - MS Fiscal Month Alt Name]", "[Delivery Value].[DV Recorded - MS Fiscal Qtr Name].[DV Recorded - MS Fiscal Qtr Name]", "[Delivery Value].[DV Recorded - MS Fiscal Year Name].[DV Recorded - MS Fiscal Year Name]", "[Delivery Value].[DV Recorded Date].[DV Recorded Date]", "[Delivery Value].[DV Scenario].[DV Scenario]", "[Delivery Value].[DVCreditedDate].[DVCreditedDate]", "[Delivery Value].[Opportunity ID].[Opportunity ID]", "[Delivery Value].[Sales Unit].[Sales Unit]"}, {"Delivery Value.DV Recorded - MS Fiscal Month Alt Name", "Delivery Value.DV Recorded - MS Fiscal Qtr Name", "Delivery Value.DV Recorded - MS Fiscal Year Name", "Delivery Value.DV Recorded Date", "Delivery Value.DV Scenario", "Delivery Value.DVCreditedDate", "Delivery Value.Opportunity ID", "Delivery Value.Sales Unit"}},
+				            {Cube.AddMeasureColumn, "Total DV Gross CCUS", "[Measures].[Total DV Gross CCUS]"},
+				            {Cube.AddMeasureColumn, "Total DV Leakage CCUS", "[Measures].[Total DV Leakage CCUS]"},
+				            {Cube.AddMeasureColumn, "Total DV Net CCUS", "[Measures].[Total DV Net CCUS]"}
+				        })
+				in
+				    #"Added Items"
+
+	annotation PBI_ResultType = Exception
+

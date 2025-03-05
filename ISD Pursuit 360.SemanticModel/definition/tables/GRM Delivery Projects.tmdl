@@ -1,0 +1,325 @@
+table 'GRM Delivery Projects'
+	isHidden
+	lineageTag: 5a45dc37-cad1-4f5b-9336-6c5e8f1bc6bd
+
+	column 'GCM Project Request.Business Scenario'
+		dataType: string
+		isHidden
+		lineageTag: da7bc8a8-4628-4b39-9f18-5f85f8887aaa
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Business Scenario
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Delivery Manager Name'
+		dataType: string
+		isHidden
+		lineageTag: b89d8c7e-f1de-47b2-a320-64a840edb24c
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Delivery Manager Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Demand Source ID'
+		dataType: string
+		isHidden
+		lineageTag: 756477d5-c2fa-476e-b302-c5d791233ea1
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Demand Source ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.GRM Project Hyperlink'
+		dataType: string
+		isHidden
+		lineageTag: 70aaa62e-2e77-40f4-ab33-7abed8f36e9f
+		summarizeBy: none
+		sourceColumn: GCM Project Request.GRM Project Hyperlink
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Has EarlyStaffing Requests'
+		dataType: string
+		isHidden
+		lineageTag: 6994589a-439d-4eb9-b1e0-34b9752304b5
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Has EarlyStaffing Requests
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Has Orphan Requests'
+		dataType: string
+		isHidden
+		lineageTag: 1fb51781-4087-44fb-ad56-a58aeec3817e
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Has Orphan Requests
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Has Outdated Request'
+		dataType: string
+		isHidden
+		lineageTag: 9b263563-619f-4b98-afa4-790150cd52be
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Has Outdated Request
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Has Suspended Requests'
+		dataType: string
+		isHidden
+		lineageTag: c612d240-edf2-43f4-a83b-77babd22c628
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Has Suspended Requests
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Primary Product'
+		dataType: string
+		isHidden
+		lineageTag: 55584c7f-a25f-4269-a205-5b1e846dbefa
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Primary Product
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Created By'
+		dataType: string
+		isHidden
+		lineageTag: 1580b0d1-ed22-4d94-9943-82cc19d70487
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Created By
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Created Date'
+		dataType: string
+		isHidden
+		lineageTag: 39b32d7c-b8d1-46c7-a896-0c5d6cafb190
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Created Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Domain'
+		dataType: string
+		isHidden
+		lineageTag: 1ca19e89-0337-4129-8af6-42f23db33498
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Domain
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project End Date'
+		dataType: string
+		isHidden
+		lineageTag: 159525de-5267-4bcf-ad1c-6bde888155ce
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project End Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Last Modified Date'
+		dataType: string
+		isHidden
+		lineageTag: 1c332d65-f3de-467a-b4eb-a2c4aa93799f
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Last Modified Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Manager Name'
+		dataType: string
+		isHidden
+		lineageTag: 5f6a6166-3ad3-4b6a-87a9-1a8dcb8abcc4
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Manager Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Modified By'
+		dataType: string
+		isHidden
+		lineageTag: acd524c8-82c4-4c5b-a603-e1710ef0f511
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Modified By
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Name'
+		dataType: string
+		isHidden
+		lineageTag: f224fd59-8146-4e8c-a7a7-c8082438e302
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Request Id'
+		dataType: string
+		isHidden
+		lineageTag: c00f3d65-89a7-45d7-b2b8-fa27458cda90
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Request Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Start Date'
+		dataType: string
+		isHidden
+		lineageTag: 2613f895-fe74-48a7-ae9b-d5d683c7f451
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Start Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Status'
+		dataType: string
+		isHidden
+		lineageTag: c20165c4-ed9c-4dcf-bdd8-80863582bc12
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Project Sub Status'
+		dataType: string
+		isHidden
+		lineageTag: d6092eed-6023-4f64-a5b1-cb657d1d534f
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Project Sub Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Request Type'
+		dataType: string
+		isHidden
+		lineageTag: 623ff3b7-5119-40e2-96a5-e8e8455c46ae
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Request Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Requestor Alias'
+		dataType: string
+		isHidden
+		lineageTag: c8d9d02a-f962-4c07-85c0-35c649e33de1
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Requestor Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GCM Project Request.Requestor Standard Title'
+		dataType: string
+		isHidden
+		lineageTag: 783bb54c-a5d9-439d-9eed-ff17258f74f2
+		summarizeBy: none
+		sourceColumn: GCM Project Request.Requestor Standard Title
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Id'
+		dataType: string
+		isHidden
+		lineageTag: c825809f-9048-4f8e-a0f9-2de24bf20254
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Time Zone'
+		dataType: string
+		isHidden
+		lineageTag: 3fd8d528-eeb2-4be2-92a0-6c5a3e9fa8c1
+		summarizeBy: none
+		sourceColumn: Sales Geography.Time Zone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM Project Count'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e103a79d-9a3c-4d7e-b73a-644677f935b1
+		summarizeBy: sum
+		sourceColumn: GRM Project Count
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'GRM Delivery Projects-d5aba3c2-ab16-48bc-81a4-e4543e46721d' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model = #"Deal Management"{[Id="Model"]}[Data],
+				    #"Pursuit Management and Presales1" = Model{[Id="Pursuit Management and Presales"]}[Data],
+				    #"Added Items" = Cube.Transform(#"Pursuit Management and Presales1",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[GCM Project Request]", {"[GCM Project Request].[Business Scenario].[Business Scenario]", "[GCM Project Request].[Delivery Manager Name].[Delivery Manager Name]", "[GCM Project Request].[Demand Source ID].[Demand Source ID]", "[GCM Project Request].[GRM Project Hyperlink].[GRM Project Hyperlink]", "[GCM Project Request].[Has EarlyStaffing Requests].[Has EarlyStaffing Requests]", "[GCM Project Request].[Has Orphan Requests].[Has Orphan Requests]", "[GCM Project Request].[Has Outdated Request].[Has Outdated Request]", "[GCM Project Request].[Has Suspended Requests].[Has Suspended Requests]", "[GCM Project Request].[Primary Product].[Primary Product]", "[GCM Project Request].[Project Created By].[Project Created By]", "[GCM Project Request].[Project Created Date].[Project Created Date]", "[GCM Project Request].[Project Domain].[Project Domain]", "[GCM Project Request].[Project End Date].[Project End Date]", "[GCM Project Request].[Project Last Modified Date].[Project Last Modified Date]", "[GCM Project Request].[Project Manager Name].[Project Manager Name]", "[GCM Project Request].[Project Modified By].[Project Modified By]", "[GCM Project Request].[Project Name].[Project Name]", "[GCM Project Request].[Project Request Id].[Project Request Id]", "[GCM Project Request].[Project Start Date].[Project Start Date]", "[GCM Project Request].[Project Status].[Project Status]", "[GCM Project Request].[Project Sub Status].[Project Sub Status]", "[GCM Project Request].[Request Type].[Request Type]", "[GCM Project Request].[Requestor Alias].[Requestor Alias]", "[GCM Project Request].[Requestor Standard Title].[Requestor Standard Title]"}, {"GCM Project Request.Business Scenario", "GCM Project Request.Delivery Manager Name", "GCM Project Request.Demand Source ID", "GCM Project Request.GRM Project Hyperlink", "GCM Project Request.Has EarlyStaffing Requests", "GCM Project Request.Has Orphan Requests", "GCM Project Request.Has Outdated Request", "GCM Project Request.Has Suspended Requests", "GCM Project Request.Primary Product", "GCM Project Request.Project Created By", "GCM Project Request.Project Created Date", "GCM Project Request.Project Domain", "GCM Project Request.Project End Date", "GCM Project Request.Project Last Modified Date", "GCM Project Request.Project Manager Name", "GCM Project Request.Project Modified By", "GCM Project Request.Project Name", "GCM Project Request.Project Request Id", "GCM Project Request.Project Start Date", "GCM Project Request.Project Status", "GCM Project Request.Project Sub Status", "GCM Project Request.Request Type", "GCM Project Request.Requestor Alias", "GCM Project Request.Requestor Standard Title"}},
+				            {Cube.AddAndExpandDimensionColumn, "[Opportunity]", {"[Opportunity].[Opportunity Id].[Opportunity Id]"}, {"Opportunity.Opportunity Id"}},
+				            {Cube.AddAndExpandDimensionColumn, "[Sales Geography]", {"[Sales Geography].[Time Zone].[Time Zone]"}, {"Sales Geography.Time Zone"}},
+				            {Cube.AddMeasureColumn, "GRM Project Count", "[Measures].[GRM Project Count]"}
+				        })
+				in
+				    #"Added Items"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

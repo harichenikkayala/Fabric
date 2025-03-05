@@ -1,0 +1,55 @@
+table 'Static-Prodcut to Initiative Map'
+	lineageTag: 7ca88ee3-7f11-4b31-a6ed-a32d9de263d5
+
+	column Initiative
+		dataType: string
+		isHidden
+		lineageTag: 0129c9b4-5fe6-4ea3-9fa4-26a00d4e0128
+		summarizeBy: none
+		sourceColumn: Initiative
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		isHidden
+		lineageTag: a62e22b9-aa3d-4df7-aea6-2c3a759cd102
+		summarizeBy: none
+		sourceColumn: Product
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		isHidden
+		lineageTag: eeda08da-b0d0-41fa-bf75-9ef9ad8e8b4a
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-Prodcut to Initiative Map-ad9e298a-aba4-44c7-9d0e-25f392693d71' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"Area Initiatives_Sheet" = #"Imported Excel Workbook"{[Item="Area Initiatives",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Area Initiatives_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Initiative", type text}, {"Product", type text}, {"Timezone", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

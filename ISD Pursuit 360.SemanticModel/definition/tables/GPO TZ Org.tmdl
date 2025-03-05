@@ -1,0 +1,229 @@
+table 'GPO TZ Org'
+	isHidden
+	lineageTag: eece17d0-05a0-42ba-8db9-f06f4a2a3c17
+
+	column Alias
+		dataType: string
+		isHidden
+		lineageTag: d82b9680-6a22-42f4-a5f0-4c0c094f23b5
+		summarizeBy: none
+		sourceColumn: Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		isHidden
+		lineageTag: b30d6fb7-965e-4d02-a6a6-459a8125a9af
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Alias'
+		dataType: string
+		isHidden
+		lineageTag: 61b33a6d-4595-42fb-8be4-b3022f65272a
+		summarizeBy: none
+		sourceColumn: HR Person.Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Full Name'
+		dataType: string
+		isHidden
+		lineageTag: 1e8e05e5-abbe-4318-8f4a-2451f32c028c
+		summarizeBy: none
+		sourceColumn: HR Person.Full Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Alias.1'
+		dataType: string
+		isHidden
+		lineageTag: 99498957-deb8-401e-b529-d38e6d7f993d
+		summarizeBy: none
+		sourceColumn: HR Person.Alias.1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Full Name.1'
+		dataType: string
+		isHidden
+		lineageTag: 3dbdbb67-e1ea-40ba-ad9a-53826727ad37
+		summarizeBy: none
+		sourceColumn: HR Person.Full Name.1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Alias.2'
+		dataType: string
+		isHidden
+		lineageTag: 19834067-28c3-4248-ad46-e1e36c44074f
+		summarizeBy: none
+		sourceColumn: HR Person.Alias.2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Full Name.2'
+		dataType: string
+		isHidden
+		lineageTag: 1660e251-c2b4-4ff3-ae64-5ed3cbfd5bbb
+		summarizeBy: none
+		sourceColumn: HR Person.Full Name.2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Low Complexity'
+		dataType: string
+		isHidden
+		lineageTag: c5d98f37-5c0e-4504-804e-5d04be5037e2
+		summarizeBy: none
+		sourceColumn: Low Complexity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PL
+		dataType: string
+		isHidden
+		lineageTag: bc0c2245-5878-4422-af02-f7aa9d692505
+		summarizeBy: none
+		sourceColumn: PL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.First Name'
+		dataType: string
+		isHidden
+		lineageTag: 0f86a34a-4692-440d-9ba1-75ea70d2c5d7
+		summarizeBy: none
+		sourceColumn: HR Person.First Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Last Name'
+		dataType: string
+		isHidden
+		lineageTag: 81cff179-8485-4e03-beed-0d6e2acb473f
+		summarizeBy: none
+		sourceColumn: HR Person.Last Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.First Name.1'
+		dataType: string
+		isHidden
+		lineageTag: d6e2c46a-aa8f-4fab-897f-8eaa772784db
+		summarizeBy: none
+		sourceColumn: HR Person.First Name.1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Last Name.1'
+		dataType: string
+		isHidden
+		lineageTag: 47d071a5-5475-46f6-8d4b-bc32aeef7c33
+		summarizeBy: none
+		sourceColumn: HR Person.Last Name.1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PL Last Name'
+		dataType: string
+		isHidden
+		lineageTag: 82dd1b50-436a-4b13-9231-49c2f8457320
+		summarizeBy: none
+		sourceColumn: PL Last Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PL First Name'
+		dataType: string
+		isHidden
+		lineageTag: 1201a9d9-ebb5-4ede-840a-415a16c9f866
+		summarizeBy: none
+		sourceColumn: PL First Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLM-HR
+		dataType: string
+		isHidden
+		lineageTag: c01c28ae-2041-4f81-b3e3-e40850b166b3
+		summarizeBy: none
+		sourceColumn: PLM-HR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PLM-HR Alias'
+		dataType: string
+		isHidden
+		lineageTag: ee49ec88-a33d-4387-8f85-d38bf8f4842f
+		summarizeBy: none
+		sourceColumn: PLM-HR Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'GPO TZ Org-f94291fc-747b-4fde-828a-0b5d290b51fe' = m
+		mode: import
+		queryGroup: 'Org Related Queries'
+		source =
+				let
+				    Source = #"Static-Timezone Leaders",
+				    #"Uppercased Text" = Table.TransformColumns(Source,{{"Alias", Text.Upper, type text}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Uppercased Text", {"Alias"}, #"GPO People", {"HR Person.Reports To Alias"}, "GPO People", JoinKind.LeftOuter),
+				    #"Expanded GPO People" = Table.ExpandTableColumn(#"Merged Queries", "GPO People", {"HR Person.Alias", "HR Person.Full Name"}, {"HR Person.Alias", "HR Person.Full Name"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Expanded GPO People", {"HR Person.Alias"}, #"GPO People", {"HR Person.Reports To Alias"}, "GPO People", JoinKind.LeftOuter),
+				    #"Expanded GPO People1" = Table.ExpandTableColumn(#"Merged Queries1", "GPO People", {"HR Person.Alias", "HR Person.First Name", "HR Person.Full Name", "HR Person.Last Name"}, {"HR Person.Alias.1", "HR Person.First Name", "HR Person.Full Name.1", "HR Person.Last Name"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Expanded GPO People1", {"HR Person.Alias.1"}, #"GPO People", {"HR Person.Reports To Alias"}, "GPO People", JoinKind.LeftOuter),
+				    #"Expanded GPO People2" = Table.ExpandTableColumn(#"Merged Queries2", "GPO People", {"HR Person.Alias", "HR Person.First Name", "HR Person.Full Name", "HR Person.Last Name"}, {"HR Person.Alias.2", "HR Person.First Name.1", "HR Person.Full Name.2", "HR Person.Last Name.1"}),
+				    #"Added Custom" = Table.AddColumn(#"Expanded GPO People2", "Low Complexity", each if [HR Person.Alias.2]<>null then "Low Complexity Team" else ""),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "PL", each if [Low Complexity] = "" then [HR Person.Full Name.1] else [HR Person.Full Name.2]),
+				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "PL Last Name", each if [Low Complexity] = "" then [HR Person.Last Name] else [HR Person.Last Name.1]),
+				    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "PL First Name", each if ([Low Complexity]="") then [HR Person.First Name] else [HR Person.First Name.1]),
+				    #"Added Custom4" = Table.AddColumn(#"Added Custom3", "PLM-HR", each if [Low Complexity]="" then [HR Person.Full Name] else [HR Person.Full Name.1]),
+				    #"Added Custom5" = Table.AddColumn(#"Added Custom4", "PLM-HR Alias", each if [Low Complexity]="" then [HR Person.Alias] else [HR Person.Alias.1]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom5",{{"PL", type text}, {"PL Last Name", type text}, {"PL First Name", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Exception
+

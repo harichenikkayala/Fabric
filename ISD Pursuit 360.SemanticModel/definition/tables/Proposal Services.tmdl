@@ -1,0 +1,114 @@
+table 'Proposal Services'
+	isHidden
+	lineageTag: 94bf31d2-ef8a-4d01-b433-938e8acc227e
+
+	column 'Proposal Services.GPS Lead'
+		dataType: string
+		isHidden
+		lineageTag: 56c6a0bb-ba74-49b4-a176-a51dd0905d2a
+		summarizeBy: none
+		sourceColumn: Proposal Services.GPS Lead
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proposal Services.Proposal Services Needed'
+		dataType: string
+		isHidden
+		lineageTag: 836a37e7-c86d-4551-aa9f-f62a7f2bc14f
+		summarizeBy: none
+		sourceColumn: Proposal Services.Proposal Services Needed
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proposal Services.RequestID'
+		dataType: string
+		isHidden
+		lineageTag: 1cefff07-5c2d-4bcc-9001-4d8e5bdc2434
+		summarizeBy: none
+		sourceColumn: Proposal Services.RequestID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proposal Services.RequestType'
+		dataType: string
+		isHidden
+		lineageTag: e15c0800-0e73-4f82-be8f-b32ba703e958
+		summarizeBy: none
+		sourceColumn: Proposal Services.RequestType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proposal Services.Status'
+		dataType: string
+		isHidden
+		lineageTag: d000b648-398f-48f4-b114-8c5401132004
+		summarizeBy: none
+		sourceColumn: Proposal Services.Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proposal Services.Team Members'
+		dataType: string
+		isHidden
+		lineageTag: 1b0510db-bbaa-4402-be25-eb8e3c86791c
+		summarizeBy: none
+		sourceColumn: Proposal Services.Team Members
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proposal Services.Customer'
+		dataType: string
+		lineageTag: be3068d8-6329-4713-97f4-566a7e188c03
+		summarizeBy: none
+		sourceColumn: Proposal Services.Customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proposal Services.EPGGSXId'
+		dataType: string
+		lineageTag: 936fe7b9-feee-4986-80d7-213cd5cd26cf
+		summarizeBy: none
+		sourceColumn: Proposal Services.EPGGSXId
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Proposal Services.IsPMXPRequest'
+		dataType: string
+		lineageTag: 2aa18f17-2b93-44ab-9a35-9cb26aa5873f
+		summarizeBy: none
+		sourceColumn: Proposal Services.IsPMXPRequest
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Proposal Services-ddb1fcc0-87ea-48c7-a253-fb7c5a5b6105' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Proposal Services]", {"[Proposal Services].[Customer].[Customer]", "[Proposal Services].[EPGGSXId].[EPGGSXId]", "[Proposal Services].[GPS Lead].[GPS Lead]", "[Proposal Services].[IsPMXPRequest].[IsPMXPRequest]", "[Proposal Services].[Proposal Services Needed].[Proposal Services Needed]", "[Proposal Services].[RequestID].[RequestID]", "[Proposal Services].[RequestType].[RequestType]", "[Proposal Services].[Status].[Status]", "[Proposal Services].[Team Members].[Team Members]"}, {"Proposal Services.Customer", "Proposal Services.EPGGSXId", "Proposal Services.GPS Lead", "Proposal Services.IsPMXPRequest", "Proposal Services.Proposal Services Needed", "Proposal Services.RequestID", "Proposal Services.RequestType", "Proposal Services.Status", "Proposal Services.Team Members"}}
+				        })
+				in
+				    #"Added Items"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Exception
+

@@ -1,0 +1,43 @@
+table 'Static-Product to Initiative Map'
+	lineageTag: 1d36395d-332d-46fa-b24d-b1a4b730bde6
+
+	column Initiative
+		dataType: string
+		lineageTag: 6d80c617-76eb-44f5-9c3d-0710d8abe2f0
+		summarizeBy: none
+		sourceColumn: Initiative
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: f0549af9-522f-471d-a4a2-890e1fb34bd5
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		lineageTag: 65e00f81-b6dd-4fd5-95ce-ebf107bd5f63
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-Product to Initiative Map-2d40cc0a-d3fa-42e6-95fa-641f2dcaaaec' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"Area Initiatives_Sheet" = #"Imported Excel Workbook"{[Item="Area Initiatives",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Area Initiatives_Sheet", [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	annotation PBI_ResultType = Table
+

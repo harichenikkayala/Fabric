@@ -1,0 +1,148 @@
+table 'Pursuit Request Additional'
+	isHidden
+	lineageTag: 6139285b-7172-4b59-ae4c-1f3c3e6e3539
+
+	column 'Pursuit Request.CRM Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: 20ace88c-2a79-4396-9b44-e300b2f1a9b5
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CRM Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Initiative'
+		dataType: string
+		isHidden
+		lineageTag: 8b2e8b8e-7f8b-4560-b27e-03b243d283c4
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Initiative
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Is 8hDomain Architect'
+		dataType: string
+		isHidden
+		lineageTag: f8a86656-e774-4e9c-88c8-a635df02a8ff
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Is 8hDomain Architect
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL GeoMapping Name'
+		dataType: string
+		isHidden
+		lineageTag: e5c29347-8218-4fc9-8573-5c6de0d764ae
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL GeoMapping Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Pursuit Plan Confidence'
+		dataType: string
+		isHidden
+		lineageTag: 9d516ab3-9e81-4db4-9420-efd4a2e4fd5a
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Pursuit Plan Confidence
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request ID'
+		dataType: string
+		isHidden
+		lineageTag: 51cdd0f0-f86d-4ee6-9d83-a558d6c1901c
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Secondary PL GeoMapping Name'
+		dataType: string
+		isHidden
+		lineageTag: f3f471a5-18f8-48df-932c-e73807b7e701
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Secondary PL GeoMapping Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Time Zone'
+		dataType: string
+		isHidden
+		lineageTag: 2d3d8956-65d3-4058-8be1-6ac659ee7009
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Time Zone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Deal Type'
+		dataType: string
+		lineageTag: c4d24b6a-9cfb-47a5-ac6c-fb11f1853bbe
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Deal Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Expected outcome'
+		dataType: string
+		lineageTag: 88957adb-b14d-40c1-a7e1-41e083557834
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Expected outcome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL Manager 1 Alias'
+		dataType: string
+		lineageTag: 79e3d041-98d3-4101-85c3-08a4a23eae1d
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL Manager 1 Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Pursuit Lead'
+		dataType: string
+		lineageTag: e591e01a-d668-49a5-afb8-b6b8109ba6d7
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Pursuit Lead
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pursuit Request Additional-bde0afd3-893e-45f5-b73d-df3ed64bedb9' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Pursuit Request]", {"[Pursuit Request].[CRM Opportunity ID].[CRM Opportunity ID]", "[Pursuit Request].[Deal Type].[Deal Type]", "[Pursuit Request].[Expected outcome].[Expected outcome]", "[Pursuit Request].[Initiative].[Initiative]", "[Pursuit Request].[Is 8hDomain Architect].[Is 8hDomain Architect]", "[Pursuit Request].[PL GeoMapping Name].[PL GeoMapping Name]", "[Pursuit Request].[PL Manager 1 Alias].[PL Manager 1 Alias]", "[Pursuit Request].[Pursuit Lead].[Pursuit Lead]", "[Pursuit Request].[Pursuit Plan Confidence].[Pursuit Plan Confidence]", "[Pursuit Request].[Request ID].[Request ID]", "[Pursuit Request].[Secondary PL GeoMapping Name].[Secondary PL GeoMapping Name]", "[Pursuit Request].[Time Zone].[Time Zone]"}, {"Pursuit Request.CRM Opportunity ID", "Pursuit Request.Deal Type", "Pursuit Request.Expected outcome", "Pursuit Request.Initiative", "Pursuit Request.Is 8hDomain Architect", "Pursuit Request.PL GeoMapping Name", "Pursuit Request.PL Manager 1 Alias", "Pursuit Request.Pursuit Lead", "Pursuit Request.Pursuit Plan Confidence", "Pursuit Request.Request ID", "Pursuit Request.Secondary PL GeoMapping Name", "Pursuit Request.Time Zone"}}
+				        }),
+				    #"Filtered Rows2" = Table.SelectRows(#"Added Items", each Text.Contains([Pursuit Request.CRM Opportunity ID], "6-") or Text.Contains([Pursuit Request.CRM Opportunity ID], "7-")),
+				    #"Lowercased Text" = Table.TransformColumns(#"Filtered Rows2",{{"Pursuit Request.PL GeoMapping Name", Text.Lower, type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Lowercased Text",{{"Pursuit Request.PL GeoMapping Name", Text.Proper, type text}}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Capitalized Each Word", each true)
+				in
+				    #"Filtered Rows1"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

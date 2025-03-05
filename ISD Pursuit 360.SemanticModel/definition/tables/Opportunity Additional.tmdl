@@ -1,0 +1,221 @@
+table 'Opportunity Additional'
+	isHidden
+	lineageTag: 711660ee-87f4-4232-a510-4be3af23882b
+
+	column 'Opportunity.Opportunity Id'
+		dataType: string
+		isHidden
+		lineageTag: 84e3b1a9-3c4e-4585-a74f-953cf8c838d0
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Primary Product'
+		dataType: string
+		isHidden
+		lineageTag: ff2a776f-1f69-40b8-a8ad-1149b87dea6d
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Primary Product
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Solution Area'
+		dataType: string
+		isHidden
+		lineageTag: fc739995-2b58-4318-90d4-f6202c3abfc7
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Solution Area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Services Solution Area'
+		dataType: string
+		isHidden
+		lineageTag: 006f4d37-ae7d-44f4-ac74-99ae88783295
+		summarizeBy: none
+		sourceColumn: Opportunity.Services Solution Area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Short Solution Area'
+		dataType: string
+		isHidden
+		lineageTag: fab564d3-51b2-4d67-933a-57e0a94fb751
+		summarizeBy: none
+		sourceColumn: Opportunity.Short Solution Area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Description'
+		dataType: string
+		lineageTag: 9fc2e79f-eccc-40b2-9908-2cd70ae24ea9
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Oppty Hyperlink'
+		dataType: string
+		lineageTag: df6db7b6-a8d0-477a-9bef-346d57f804e1
+		summarizeBy: none
+		sourceColumn: Opportunity.Oppty Hyperlink
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Engagement Manager Alias'
+		dataType: string
+		lineageTag: 55b86bc8-0b6d-411d-86db-9e3059d916f3
+		summarizeBy: none
+		sourceColumn: Opportunity.Engagement Manager Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Forecast Comments'
+		dataType: string
+		lineageTag: 5fd2985b-b782-4f44-98b3-08f7d1c54d29
+		summarizeBy: none
+		sourceColumn: Opportunity.Forecast Comments
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Licensing Program'
+		dataType: string
+		lineageTag: acf744b4-09db-43b0-9ca7-c1fd348292c8
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Licensing Program
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Due Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8f3fdbfd-7829-48a0-9284-b76a4e4f8c3a
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Due Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Opportunity.Deal Size Revenue Group'
+		dataType: string
+		lineageTag: b6484c03-e5f7-41a0-89c3-be86e3b7e875
+		summarizeBy: none
+		sourceColumn: Opportunity.Deal Size Revenue Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Estimated DV Bins'
+		dataType: string
+		lineageTag: 9af49cf1-0b88-4566-abd6-ef94240d1c1f
+		summarizeBy: none
+		sourceColumn: Opportunity.Estimated DV Bins
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Is Consulting Opportunity'
+		dataType: string
+		lineageTag: ebd56c28-df18-49e9-a95e-49dcd7ba279a
+		summarizeBy: none
+		sourceColumn: Opportunity.Is Consulting Opportunity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Budget Amount'
+		dataType: string
+		lineageTag: 75704107-6665-42a0-bdd6-e9a16ed744f4
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Budget Amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Currency'
+		dataType: string
+		lineageTag: 11a0c184-229e-485f-b1a0-5a7d279ea7c4
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Revenue'
+		dataType: string
+		lineageTag: f30f562d-a085-47af-b5bf-86dc68fdc5a6
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Revenue Cluster'
+		dataType: string
+		lineageTag: f69acd91-8011-4f29-bf8b-0dad2a2229ec
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Revenue Cluster
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Pipeline Revenue CUS'
+		dataType: string
+		lineageTag: bdeb0352-57cc-42ef-8b8f-5a3477b30f25
+		summarizeBy: none
+		sourceColumn: Opportunity.Pipeline Revenue CUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Premier Revenue CUS'
+		dataType: string
+		lineageTag: 3bfa7eb4-b92c-4b83-b468-4893a1ad5840
+		summarizeBy: none
+		sourceColumn: Opportunity.Premier Revenue CUS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Revenue Cluster CRM'
+		dataType: string
+		lineageTag: da8a3205-8bfc-4568-8034-a91ccb483026
+		summarizeBy: none
+		sourceColumn: Opportunity.Revenue Cluster CRM
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Estimated Revenue'
+		dataType: string
+		lineageTag: c337f924-a00f-4729-a6d1-32fea251433a
+		summarizeBy: none
+		sourceColumn: Opportunity.Estimated Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Opportunity Additional-4d49cec0-4865-4d12-84ee-f4cb7630063a' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Opportunity]", {"[Opportunity].[Deal Size Revenue Group].[Deal Size Revenue Group]", "[Opportunity].[Engagement Manager Alias].[Engagement Manager Alias]", "[Opportunity].[Estimated DV Bins].[Estimated DV Bins]", "[Opportunity].[Estimated Revenue].[Estimated Revenue]", "[Opportunity].[Forecast Comments].[Forecast Comments]", "[Opportunity].[Is Consulting Opportunity].[Is Consulting Opportunity]", "[Opportunity].[Opportunity Budget Amount].[Opportunity Budget Amount]", "[Opportunity].[Opportunity Currency].[Opportunity Currency]", "[Opportunity].[Opportunity Description].[Opportunity Description]", "[Opportunity].[Opportunity Due Date].[Opportunity Due Date]", "[Opportunity].[Opportunity Id].[Opportunity Id]", "[Opportunity].[Opportunity Licensing Program].[Opportunity Licensing Program]", "[Opportunity].[Opportunity Primary Product].[Opportunity Primary Product]", "[Opportunity].[Opportunity Revenue].[Opportunity Revenue]", "[Opportunity].[Opportunity Revenue Cluster].[Opportunity Revenue Cluster]", "[Opportunity].[Opportunity Solution Area].[Opportunity Solution Area]", "[Opportunity].[Oppty Hyperlink].[Oppty Hyperlink]", "[Opportunity].[Pipeline Revenue CUS].[Pipeline Revenue CUS]", "[Opportunity].[Premier Revenue CUS].[Premier Revenue CUS]", "[Opportunity].[Revenue Cluster CRM].[Revenue Cluster CRM]", "[Opportunity].[Services Solution Area].[Services Solution Area]", "[Opportunity].[Short Solution Area].[Short Solution Area]"}, {"Opportunity.Deal Size Revenue Group", "Opportunity.Engagement Manager Alias", "Opportunity.Estimated DV Bins", "Opportunity.Estimated Revenue", "Opportunity.Forecast Comments", "Opportunity.Is Consulting Opportunity", "Opportunity.Opportunity Budget Amount", "Opportunity.Opportunity Currency", "Opportunity.Opportunity Description", "Opportunity.Opportunity Due Date", "Opportunity.Opportunity Id", "Opportunity.Opportunity Licensing Program", "Opportunity.Opportunity Primary Product", "Opportunity.Opportunity Revenue", "Opportunity.Opportunity Revenue Cluster", "Opportunity.Opportunity Solution Area", "Opportunity.Oppty Hyperlink", "Opportunity.Pipeline Revenue CUS", "Opportunity.Premier Revenue CUS", "Opportunity.Revenue Cluster CRM", "Opportunity.Services Solution Area", "Opportunity.Short Solution Area"}}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each Text.Contains([Opportunity.Opportunity Id], "6-") or Text.Contains([Opportunity.Opportunity Id], "7-")),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows",{{"Opportunity.Opportunity Due Date", type date}}),
+				    #"Filtered Rows1" = Table.SelectRows(#"Changed Type", each [Opportunity.Opportunity Due Date] >= #"Min Due Date" and [Opportunity.Opportunity Due Date] <= #"Max Due Date")
+				in
+				    #"Filtered Rows1"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Exception
+

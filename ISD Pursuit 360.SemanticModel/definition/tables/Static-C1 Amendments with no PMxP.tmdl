@@ -1,0 +1,57 @@
+table 'Static-C1 Amendments with no PMxP'
+	isHidden
+	lineageTag: 8ef76024-e9c6-4071-be2c-9c1a8983d023
+
+	column GlobalCRMID
+		dataType: string
+		isHidden
+		lineageTag: 43860a82-66f8-4b07-9180-418f7cf8eda5
+		summarizeBy: none
+		sourceColumn: GlobalCRMID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		isHidden
+		lineageTag: d1374043-5c18-40e6-94cb-826dee0a260f
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpportunitySID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8dbe721a-470d-4124-9074-bc9273a94d9f
+		summarizeBy: count
+		sourceColumn: OpportunitySID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-C1 Amendments with no PMxP-d747989e-e715-4a18-82a0-22459359745e' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"C1 Amendments with no PMxP_Sheet" = #"Imported Excel Workbook"{[Item="C1 Amendments with no PMxP",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"C1 Amendments with no PMxP_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"GlobalCRMID", type text}, {"Timezone", type text}, {"OpportunitySID", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

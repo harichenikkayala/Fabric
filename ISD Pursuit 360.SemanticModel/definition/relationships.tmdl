@@ -1,0 +1,43 @@
+relationship 64cb2127-dab9-4c18-bd19-ff316adbb915
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Pursuit Request-Asazure'.'Pursuit Request.CRM Opportunity ID'
+	toColumn: Opportunity-Asazure.'Opportunity.Opportunity Id'
+
+relationship dadfb2bf-aa6e-4e22-930b-738098faf61c
+	crossFilteringBehavior: bothDirections
+	fromColumn: Package-Asazure.'Opportunity.Opportunity Id'
+	toColumn: Opportunity-Asazure.'Opportunity.Opportunity Id'
+
+relationship bb2c857f-0b7a-4bee-959b-0de6a55f2790
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'DV Adjustments'.'DeliveryValue.Project Opportunity ID'
+	toColumn: Opportunity-Asazure.'Opportunity.Opportunity Id'
+
+relationship 0da75f61-6e38-49cc-910f-6b1b41f6d7c7
+	toCardinality: many
+	fromColumn: Opportunity-Asazure.'Budget.Key'
+	toColumn: 'MCS Budget and Actuals'.'Budget.Key'
+
+relationship 864647ac-4efd-4b21-b4af-390dbe27068d
+	crossFilteringBehavior: bothDirections
+	fromColumn: 'Pre-Sales Resources'.'Opportunity Presales Consumption.Request ID'
+	toColumn: 'Pursuit Request-Asazure'.'Pursuit Request.Request ID'
+
+relationship 0fc68b25-160c-4f1c-b67b-d36397d30c23
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Opportunity-Asazure.'Opportunity.Opportunity Id'
+	toColumn: 'Pursuit Request DV Info'.'Pursuit Request.CRM Opportunity ID'
+
+relationship dec17ba3-8df3-4f1d-bdcb-353d1a519c04
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'DV Actuals'.'Delivery Value.Sales Unit'
+	toColumn: 'MCS Budget and Actuals'.'Sales Geography.Sales Unit'
+
+relationship 0be3ca46-279d-4f46-a268-a0f0d4399158
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: 'Subcons on C1 Deals'.'Subcon Contract.Subcon Deal ID'
+	toColumn: Package-Asazure.'Deal.Deal Id'
+

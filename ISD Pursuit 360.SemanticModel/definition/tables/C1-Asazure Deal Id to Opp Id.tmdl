@@ -1,0 +1,51 @@
+table 'C1-Asazure Deal Id to Opp Id'
+	isHidden
+	lineageTag: 35d3513f-5c7f-4484-952b-0d743908f5ff
+
+	column 'Opportunity.Opportunity Id'
+		dataType: string
+		isHidden
+		lineageTag: b2a778a8-9333-4f99-8251-b22959548d20
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Deal Id'
+		dataType: string
+		isHidden
+		lineageTag: 194bd71e-5b8d-49c2-a9e1-c449928624d6
+		summarizeBy: none
+		sourceColumn: Deal.Deal Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'C1-Asazure Deal Id to Opp Id-8517f1dd-f4b0-42fe-bccb-1f6bcc38c492' = m
+		mode: import
+		queryGroup: 'Org Related Queries'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Contract]", {"[Contract].[CRM Deal ID].[CRM Deal ID]"}, {"Contract.CRM Deal ID"}}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each [Contract.CRM Deal ID] <> null),
+				    #"Added Custom" = Table.AddColumn(#"Filtered Rows", "Opportunity.Opportunity Id", each Text.BeforeDelimiter([Contract.CRM Deal ID],"/",0)),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Deal.Deal Id", each Text.AfterDelimiter([Contract.CRM Deal ID],"/",0)),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Added Custom1",{"Opportunity.Opportunity Id", "Deal.Deal Id"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns")
+				in
+				    #"Removed Duplicates"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

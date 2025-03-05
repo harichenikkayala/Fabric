@@ -1,0 +1,57 @@
+table 'Static-Sales Unit to OU'
+	isHidden
+	lineageTag: d07c1fc8-64fd-4be3-a2f4-f16393ed9255
+
+	column 'Sales Unit or Special Account'
+		dataType: string
+		isHidden
+		lineageTag: 4c560e5b-0e7c-464d-843e-26c292af502a
+		summarizeBy: none
+		sourceColumn: Sales Unit or Special Account
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OU
+		dataType: string
+		isHidden
+		lineageTag: 733abf81-7120-4c69-bc1d-1a4889f63526
+		summarizeBy: none
+		sourceColumn: OU
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		isHidden
+		lineageTag: 837eeb11-99f9-46d4-8b75-34b38437005c
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-Sales Unit to OU-d03f69d4-1f1e-4e40-b59c-d5db353c5427' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"Sales Unit to OU Map_Sheet" = #"Imported Excel Workbook"{[Item="Sales Unit to OU Map",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"Sales Unit to OU Map_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Sales Unit or Special Account", type text}, {"OU", type text}, {"Timezone", type text}}),
+				    #"Sorted Rows" = Table.Sort(#"Changed Type",{{"Timezone", Order.Ascending}})
+				in
+				    #"Sorted Rows"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

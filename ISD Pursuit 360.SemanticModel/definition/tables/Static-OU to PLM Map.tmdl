@@ -1,0 +1,116 @@
+table 'Static-OU to PLM Map'
+	isHidden
+	lineageTag: f84db5c8-3376-43a3-b264-5cb8ce69dbad
+
+	column OU
+		dataType: string
+		isHidden
+		lineageTag: b986be1c-67e4-4203-83fe-698219c847b9
+		summarizeBy: none
+		sourceColumn: OU
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PLM Name'
+		dataType: string
+		isHidden
+		lineageTag: 44deac6c-6480-4305-bfa4-4cb30bf9f83a
+		summarizeBy: none
+		sourceColumn: PLM Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		isHidden
+		lineageTag: af06dbf3-f1a4-4444-b592-2aacf22bb56e
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY23 OU'
+		dataType: string
+		isHidden
+		lineageTag: 7cfb93ce-c955-468a-ac50-6f20df6d2351
+		summarizeBy: none
+		sourceColumn: FY23 OU
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY23 PLM'
+		dataType: string
+		isHidden
+		lineageTag: e051074d-cbd1-468b-86b3-2f6f43f39a09
+		summarizeBy: none
+		sourceColumn: FY23 PLM
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'FY22 OU DV Gross $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[OU]='Static-OU to PLM Map'[OU]))
+		isHidden
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: c0a6f80b-d907-4ffe-ae84-9239d6bf1ae5
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'FY23 OU DV Gross $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[OU-FY23]='Static-OU to PLM Map'[FY23 OU]))
+		isHidden
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 4cfabfa9-4ce8-4034-a983-20fac5a98c99
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column TieBackName
+		dataType: string
+		isHidden
+		lineageTag: 7c26821d-e852-4d16-9c67-cd07e8adb033
+		summarizeBy: none
+		sourceColumn: TieBackName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-OU to PLM Map-8babbc2c-1207-4466-ab6a-20acb040360b' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"OU to PLM Map_Sheet" = #"Imported Excel Workbook"{[Item="OU to PLM Map",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"OU to PLM Map_Sheet", [PromoteAllScalars=true])
+				in
+				    #"Promoted Headers"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

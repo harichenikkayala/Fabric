@@ -1,0 +1,81 @@
+table 'MAI Metric Governance'
+	lineageTag: 1cb5e5ea-d3a8-43e9-9e4b-3b10b9fece04
+
+	measure 'ISD PM Insights 1' = ```
+			"Welcome to ISD Pursuit 360 " 
+			```
+		lineageTag: 159fc02b-bb22-4ff4-9da6-14b40450269b
+
+	column 'MAI Metric Governance.CubeName'
+		dataType: string
+		lineageTag: 3b92b649-787d-49de-8a43-88855415315a
+		summarizeBy: none
+		sourceColumn: MAI Metric Governance.CubeName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MAI Metric Governance.IsActive'
+		dataType: string
+		lineageTag: c238bbf7-a97e-4a36-9b0c-0d1b20227249
+		summarizeBy: none
+		sourceColumn: MAI Metric Governance.IsActive
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MAI Metric Governance.MetricDefinition'
+		dataType: string
+		lineageTag: 741bdfa4-618b-44e8-a3a4-3be1e5e2f827
+		summarizeBy: none
+		sourceColumn: MAI Metric Governance.MetricDefinition
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MAI Metric Governance.MetricFormula'
+		dataType: string
+		lineageTag: 9278f65e-23aa-4348-b764-a1fb3b46da90
+		summarizeBy: none
+		sourceColumn: MAI Metric Governance.MetricFormula
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MAI Metric Governance.MetricName'
+		dataType: string
+		lineageTag: bffc7326-8ba7-4e90-b557-e8f500994081
+		summarizeBy: none
+		sourceColumn: MAI Metric Governance.MetricName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MAI Metric Governance.PodName'
+		dataType: string
+		lineageTag: f331c531-718f-4fd4-ae17-19cd96b5ff94
+		summarizeBy: none
+		sourceColumn: MAI Metric Governance.PodName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MAI Metric Governance.ReportName'
+		dataType: string
+		lineageTag: 270e2fbe-dfcc-4845-8de5-6fd0dd0ff0ad
+		summarizeBy: none
+		sourceColumn: MAI Metric Governance.ReportName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'MAI Metric Governance-5c87ced8-3d95-4525-8573-f2bc37e696a7' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Database("MAIPRODL2OAS:1433", "Deal Management", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    Model1 = Source{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[MAI Metric Governance]", { "[MAI Metric Governance].[CubeName].[CubeName]","[MAI Metric Governance].[IsActive].[IsActive]",  "[MAI Metric Governance].[MetricDefinition].[MetricDefinition]", "[MAI Metric Governance].[MetricFormula].[MetricFormula]", "[MAI Metric Governance].[MetricName].[MetricName]", "[MAI Metric Governance].[PodName].[PodName]", "[MAI Metric Governance].[ReportName].[ReportName]"}, { "MAI Metric Governance.CubeName", "MAI Metric Governance.IsActive",  "MAI Metric Governance.MetricDefinition", "MAI Metric Governance.MetricFormula", "MAI Metric Governance.MetricName",  "MAI Metric Governance.PodName", "MAI Metric Governance.ReportName"}}
+				        })
+				in
+				    #"Added Items"
+
+	annotation PBI_ResultType = Table
+

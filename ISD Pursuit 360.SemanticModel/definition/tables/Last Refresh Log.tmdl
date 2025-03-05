@@ -1,0 +1,53 @@
+table 'Last Refresh Log'
+	lineageTag: 7ee6c0bb-67f1-493f-98f8-c371a9e55fcb
+
+	column 'Last Refresh Log.JobName'
+		dataType: string
+		lineageTag: 89caa10a-bd54-4b75-94cf-92c7c801468c
+		summarizeBy: none
+		sourceColumn: Last Refresh Log.JobName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Refresh Log.LastRefreshDate'
+		dataType: string
+		lineageTag: 6c5e2b31-3848-4b5d-ad26-9c59e9700bb3
+		summarizeBy: none
+		sourceColumn: Last Refresh Log.LastRefreshDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Refresh Log.LastRefreshDatePST'
+		dataType: string
+		lineageTag: 01d0153c-0d4f-4709-aeae-1940d0b53a93
+		summarizeBy: none
+		sourceColumn: Last Refresh Log.LastRefreshDatePST
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Last Refresh Log.ModelName'
+		dataType: string
+		lineageTag: 8da9ba18-1ea1-435a-ab1e-3ddff251e8c4
+		summarizeBy: none
+		sourceColumn: Last Refresh Log.ModelName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Last Refresh Log-b6d58054-a03e-4f7a-ad8b-56138dfcd9ae' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Last Refresh Log]", {"[Last Refresh Log].[JobName].[JobName]", "[Last Refresh Log].[LastRefreshDate].[LastRefreshDate]", "[Last Refresh Log].[LastRefreshDatePST].[LastRefreshDatePST]", "[Last Refresh Log].[ModelName].[ModelName]"}, {"Last Refresh Log.JobName", "Last Refresh Log.LastRefreshDate", "Last Refresh Log.LastRefreshDatePST", "Last Refresh Log.ModelName"}}
+				        })
+				in
+				    #"Added Items"
+
+	annotation PBI_ResultType = Exception
+
