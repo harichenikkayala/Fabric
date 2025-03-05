@@ -357,6 +357,30 @@
         "name": "Office 365 Outlook1",
         "dependsOn": [
           {
+            "activity": "Dataflow1",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "6954ea4a-8c13-4189-8f2a-4d4037504ccc",
+          "workspaceId": "731d745e-c3f7-4b62-b85f-66635649366e",
+          "notifyOption": "NoNotification"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Dataflow1",
+        "dependsOn": [
+          {
             "activity": "Copy_xn3",
             "dependencyConditions": [
               "Succeeded"
