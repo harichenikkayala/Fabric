@@ -1,0 +1,90 @@
+table 'PLs from C1-Asazure'
+	isHidden
+	lineageTag: eef446ff-64fc-4f86-a1ed-7da6267648c7
+
+	column 'Deal.Deal Id'
+		dataType: string
+		isHidden
+		lineageTag: ad2266d5-3319-47fc-a403-3f2e31c74af7
+		summarizeBy: none
+		sourceColumn: Deal.Deal Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Is Public Sector'
+		dataType: string
+		isHidden
+		lineageTag: d2178724-e663-4ca2-8d03-9c0d2fd6249a
+		summarizeBy: none
+		sourceColumn: Deal.Is Public Sector
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.TPID'
+		dataType: string
+		isHidden
+		lineageTag: 39be25ed-b7d0-4be9-bf08-547d4ce1ba42
+		summarizeBy: none
+		sourceColumn: Deal.TPID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Work Performed For TPID'
+		dataType: string
+		isHidden
+		lineageTag: 4ccdb29e-e83d-4b2e-89a5-e5b08ef0d984
+		summarizeBy: none
+		sourceColumn: Deal.Work Performed For TPID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PL Primary'
+		dataType: string
+		isHidden
+		lineageTag: 28d82e1b-658d-4897-9e9e-391a192ca846
+		summarizeBy: none
+		sourceColumn: PL Primary
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Id'
+		dataType: string
+		lineageTag: 6d611d76-75de-42bf-bb7c-57180247aaf3
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'All PLs'
+		dataType: string
+		lineageTag: 76b558ac-2d61-4dfe-88cb-7500d6a2d209
+		summarizeBy: none
+		sourceColumn: All PLs
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PLs from C1-Asazure-19901fd1-4e66-4dc4-a60a-1f45027e4152' = m
+		mode: import
+		queryGroup: 'Org Related Queries'
+		source =
+				let
+				    Source = #"C1-Asazure PL to Deal Id",
+				    #"Merged Queries" = Table.NestedJoin(Source, {"Deal.Deal Id"}, #"C1-Asazure Deal Id to Opp Id", {"Deal.Deal Id"}, "C1-Asazure Deal Id to Opp Id", JoinKind.LeftOuter),
+				    #"Expanded C1-Asazure Deal Id to Opp Id" = Table.ExpandTableColumn(#"Merged Queries", "C1-Asazure Deal Id to Opp Id", {"Opportunity.Opportunity Id"}, {"Opportunity.Opportunity Id"})
+				in
+				    #"Expanded C1-Asazure Deal Id to Opp Id"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

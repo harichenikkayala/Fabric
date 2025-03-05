@@ -1,0 +1,68 @@
+table 'MCS Budget-All Sales Units'
+	isHidden
+	lineageTag: a833eb44-581d-47dd-97c8-1b518a60e20b
+
+	column 'Sales Geography.Area Short Name'
+		dataType: string
+		isHidden
+		lineageTag: 794f32e3-d12c-44d9-a67d-208bce085fc8
+		summarizeBy: none
+		sourceColumn: Sales Geography.Area Short Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sales Unit'
+		dataType: string
+		isHidden
+		lineageTag: 3c90a5e8-2162-4f66-9553-4cdcd31b1f6b
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sales Unit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Time Zone'
+		dataType: string
+		isHidden
+		lineageTag: dc032bf8-80f7-4298-b87f-a7d34098b4c8
+		summarizeBy: none
+		sourceColumn: Sales Geography.Time Zone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Subsidiary'
+		dataType: string
+		lineageTag: 707aa100-e400-4c82-9bb9-912952b60756
+		summarizeBy: none
+		sourceColumn: Sales Geography.Subsidiary
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'MCS Budget-All Sales Units-c41fe4b1-fc6d-4ea4-b68e-f876c789ddb1' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model = #"Deal Management"{[Id="Model"]}[Data],
+				    #"Pursuit Management and Presales1" = Model{[Id="Pursuit Management and Presales"]}[Data],
+				    #"Added Items" = Cube.Transform(#"Pursuit Management and Presales1",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Sales Geography]", {"[Sales Geography].[Area Short Name].[Area Short Name]", "[Sales Geography].[Sales Unit].[Sales Unit]", "[Sales Geography].[Time Zone].[Time Zone]", "[Sales Geography].[Subsidiary].[Subsidiary]"}, {"Sales Geography.Area Short Name", "Sales Geography.Sales Unit", "Sales Geography.Time Zone", "Sales Geography.Subsidiary"}}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each [Sales Geography.Sales Unit] <> "USA - Federal"),
+				    #"Replaced Value" = Table.ReplaceValue(#"Filtered Rows",null,"Not Applicable",Replacer.ReplaceValue,{"Sales Geography.Sales Unit"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Replaced Value")
+				in
+				    #"Removed Duplicates"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

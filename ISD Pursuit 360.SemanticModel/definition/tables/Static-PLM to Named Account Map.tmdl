@@ -1,0 +1,68 @@
+table 'Static-PLM to Named Account Map'
+	isHidden
+	lineageTag: 691eee14-9470-4e9e-8fa0-7db5719b101d
+
+	column Account
+		dataType: string
+		isHidden
+		lineageTag: 9a4df9ce-08d4-4069-b835-60813f9fc2e6
+		summarizeBy: none
+		sourceColumn: Account
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MSSalesTPID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3617a0ef-b7e1-422c-942c-3cce4f61b846
+		summarizeBy: count
+		sourceColumn: MSSalesTPID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PLM Name'
+		dataType: string
+		isHidden
+		lineageTag: ea7647e5-f163-4407-a258-c76bef374aa3
+		summarizeBy: none
+		sourceColumn: PLM Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		isHidden
+		lineageTag: 9e5f882f-5cab-42a0-b1a1-d49b9c36e119
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-PLM to Named Account Map-8f72b36e-85b7-4464-8ffc-ab6d50830a93' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"PLM to Named Account Map_Sheet" = #"Imported Excel Workbook"{[Item="PLM to Named Account Map",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"PLM to Named Account Map_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Account", type text}, {"MSSalesTPID", Int64.Type}, {"PLM Name", type text}, {"Timezone", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

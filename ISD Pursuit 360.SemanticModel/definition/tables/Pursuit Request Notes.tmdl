@@ -1,0 +1,104 @@
+table 'Pursuit Request Notes'
+	isHidden
+	lineageTag: 2087b023-c4ef-45cc-9de9-1e2408c8ef8a
+
+	column 'Pursuit Request.CRM Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: bb43cb62-84a7-4cf7-bd7d-5b4f20510b85
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CRM Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Pursuit Status Notes'
+		dataType: string
+		isHidden
+		lineageTag: 4c0854f3-372c-4a83-bd8c-1a826b416ad5
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Pursuit Status Notes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request ID'
+		dataType: string
+		isHidden
+		lineageTag: 030a8b17-b275-432c-994b-a2acca0ada6f
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Second Last Pursuit Status Notes'
+		dataType: string
+		isHidden
+		lineageTag: 3cdf0c91-aab9-43bd-9276-fc14aa36ef19
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Second Last Pursuit Status Notes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Time Zone'
+		dataType: string
+		isHidden
+		lineageTag: fa3f1890-340a-4d39-842a-bfa2fb375e8c
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Time Zone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Is 8hDomain Architect'
+		dataType: string
+		lineageTag: c66a5955-6312-46a2-897e-c23c34b42e62
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Is 8hDomain Architect
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Expected outcome'
+		dataType: string
+		lineageTag: c15efbb0-a77e-430a-b400-a735ac3bde0e
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Expected outcome
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Initiative'
+		dataType: string
+		lineageTag: 9e1c19a5-5d63-41c7-9de9-44cd8f824413
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Initiative
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pursuit Request Notes-2e9b56e9-ef1d-4faa-818d-53da5bf6af0e' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Pursuit Request]", {"[Pursuit Request].[CRM Opportunity ID].[CRM Opportunity ID]", "[Pursuit Request].[Expected outcome].[Expected outcome]", "[Pursuit Request].[Initiative].[Initiative]", "[Pursuit Request].[Is 8hDomain Architect].[Is 8hDomain Architect]", "[Pursuit Request].[Pursuit Status Notes].[Pursuit Status Notes]", "[Pursuit Request].[Request ID].[Request ID]", "[Pursuit Request].[Second Last Pursuit Status Notes].[Second Last Pursuit Status Notes]", "[Pursuit Request].[Time Zone].[Time Zone]"}, {"Pursuit Request.CRM Opportunity ID", "Pursuit Request.Expected outcome", "Pursuit Request.Initiative", "Pursuit Request.Is 8hDomain Architect", "Pursuit Request.Pursuit Status Notes", "Pursuit Request.Request ID", "Pursuit Request.Second Last Pursuit Status Notes", "Pursuit Request.Time Zone"}}
+				        }),
+				    #"Filtered Rows2" = Table.SelectRows(#"Added Items", each Text.Contains([Pursuit Request.CRM Opportunity ID], "6-") or Text.Contains([Pursuit Request.CRM Opportunity ID], "7-"))
+				in
+				    #"Filtered Rows2"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

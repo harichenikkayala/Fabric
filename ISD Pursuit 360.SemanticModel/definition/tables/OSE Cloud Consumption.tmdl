@@ -1,0 +1,107 @@
+table 'OSE Cloud Consumption'
+	isHidden
+	lineageTag: b97a44db-cfb3-4b38-838e-e5d6b41f3d51
+
+	column 'OSECloudEstimates.Accountid'
+		dataType: string
+		isHidden
+		lineageTag: a9b28bcd-5102-49e0-8179-bc1f3f2bdb69
+		summarizeBy: none
+		sourceColumn: OSECloudEstimates.Accountid
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OSECloudEstimates.ContractId'
+		dataType: string
+		isHidden
+		lineageTag: e9a6cab6-a416-40f6-a688-ddd145df4dac
+		summarizeBy: none
+		sourceColumn: OSECloudEstimates.ContractId
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OSECloudEstimates.Deal ID'
+		dataType: string
+		isHidden
+		lineageTag: ad0b1042-7b9d-4379-bd6b-c182d8b2388b
+		summarizeBy: none
+		sourceColumn: OSECloudEstimates.Deal ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OSECloudEstimates.HybridGeo'
+		dataType: string
+		isHidden
+		lineageTag: 0f4610f9-413a-4fec-9d58-a91ea013be9e
+		summarizeBy: none
+		sourceColumn: OSECloudEstimates.HybridGeo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OSECloudEstimates.NetNewACR'
+		dataType: string
+		isHidden
+		lineageTag: fe23a954-3392-4a64-b923-ce5bce554639
+		summarizeBy: none
+		sourceColumn: OSECloudEstimates.NetNewACR
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OSECloudEstimates.OpportunityKey'
+		dataType: string
+		isHidden
+		lineageTag: 88fe71f0-71e6-43cb-b76c-78dc7479db0e
+		summarizeBy: none
+		sourceColumn: OSECloudEstimates.OpportunityKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OSE ACR Estimates'
+		dataType: double
+		isHidden
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 90ae804c-80ac-46ef-9cb0-f4ec70c8d3b0
+		summarizeBy: sum
+		sourceColumn: OSE ACR Estimates
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition 'OSE Cloud Consumption-09f59038-c25b-439e-87c2-b269a1a87a4a' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[OSECloudEstimates]", {"[OSECloudEstimates].[Accountid].[Accountid]", "[OSECloudEstimates].[ContractId].[ContractId]", "[OSECloudEstimates].[Deal ID].[Deal ID]", "[OSECloudEstimates].[HybridGeo].[HybridGeo]", "[OSECloudEstimates].[NetNewACR].[NetNewACR]", "[OSECloudEstimates].[OpportunityKey].[OpportunityKey]"}, {"OSECloudEstimates.Accountid", "OSECloudEstimates.ContractId", "OSECloudEstimates.Deal ID", "OSECloudEstimates.HybridGeo", "OSECloudEstimates.NetNewACR", "OSECloudEstimates.OpportunityKey"}},
+				            {Cube.AddMeasureColumn, "OSE ACR Estimates", "[Measures].[OSE ACR Estimates]"}
+				        })
+				in
+				    #"Added Items"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Exception
+

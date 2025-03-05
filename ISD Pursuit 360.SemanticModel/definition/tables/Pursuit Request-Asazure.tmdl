@@ -1,0 +1,1056 @@
+table 'Pursuit Request-Asazure'
+	isHidden
+	lineageTag: 92d328d6-a3b2-4c3d-a9f6-70efe3635dfa
+
+	column 'Pursuit Request.Approver Alias'
+		dataType: string
+		isHidden
+		lineageTag: 88199b4a-950c-449e-8ffd-eee0b6e0ac45
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Approver Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Approver Name'
+		dataType: string
+		isHidden
+		lineageTag: a6c4c012-032a-48a5-9269-bb92793d6ea1
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Approver Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Assigned By'
+		dataType: string
+		isHidden
+		lineageTag: 73b6e922-7c05-467e-9d1a-2bdea7927738
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Assigned By
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Assigned Date'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 56e5183b-4372-4bbb-ba02-6e5e39bccb29
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Assigned Date
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Pursuit Request.Billing type'
+		dataType: string
+		isHidden
+		lineageTag: ed9d3a20-bc95-45fb-930e-7dc329c009c2
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Billing type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Contract Approval Date'
+		dataType: string
+		isHidden
+		lineageTag: 78116c96-f94f-4f10-899d-3b077df4d4f6
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Contract Approval Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Contract Created Date'
+		dataType: string
+		isHidden
+		lineageTag: 6669c8a0-606b-4be5-b42e-f2279a316137
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Contract Created Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Contract Hyperlink'
+		dataType: string
+		isHidden
+		lineageTag: ba309af8-cf4d-49ea-8fe4-026f8ae79d67
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Contract Hyperlink
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Contract Planned Revenue'
+		dataType: string
+		isHidden
+		lineageTag: cd6cb29e-c33d-43ef-8083-e98232ce276d
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Contract Planned Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Contract Price To Customer'
+		dataType: string
+		isHidden
+		lineageTag: d7b6fb33-17e9-4a2d-a7b9-5c39a83b1ed7
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Contract Price To Customer
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Contract Status Group'
+		dataType: string
+		isHidden
+		lineageTag: 5aeb7427-c98a-4192-a551-a18a21da674f
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Contract Status Group
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Contract Target Approval Date'
+		dataType: string
+		isHidden
+		lineageTag: f8987a8d-7285-465c-9869-a8f6b31e6d65
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Contract Target Approval Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Deal Id'
+		dataType: string
+		isHidden
+		lineageTag: 70ecd1b8-b525-4555-89f5-1c6d7a480121
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Deal Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Deal Owner'
+		dataType: string
+		isHidden
+		lineageTag: bced91b1-49a3-4211-9dac-17cceaf2053c
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Deal Owner
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Deal Type'
+		dataType: string
+		isHidden
+		lineageTag: 16b7c20b-b653-4252-b708-71e0c434b657
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Deal Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Overall Risk Rating'
+		dataType: string
+		isHidden
+		lineageTag: 005f6386-5f29-44cd-906f-e5d4a13a4b35
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Overall Risk Rating
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Primary Domain Short Name'
+		dataType: string
+		isHidden
+		lineageTag: 07a2848d-2960-4432-8fb6-1dc64d371502
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Primary Domain Short Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.C1 Standard Offering Type'
+		dataType: string
+		isHidden
+		lineageTag: de4e3fb4-c05f-4efd-88b6-c85bc28ebe80
+		summarizeBy: none
+		sourceColumn: Pursuit Request.C1 Standard Offering Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.CDD Architect Assigned'
+		dataType: string
+		isHidden
+		lineageTag: e7795800-6d65-470e-ac03-fdc13ddbdd4d
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CDD Architect Assigned
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.CDD Attach'
+		dataType: string
+		isHidden
+		lineageTag: c19f6661-13ea-4538-b5f5-04cb8a756f91
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CDD Attach
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.CRM Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: d0f78ae6-2396-4d61-8ee1-465499cde215
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CRM Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.CurrentStalledDays > 90/60/30'
+		dataType: string
+		isHidden
+		lineageTag: 3410c4ec-f60b-4d93-9503-56390d5edc3d
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CurrentStalledDays > 90/60/30
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Deal Type'
+		dataType: string
+		isHidden
+		lineageTag: cad5b562-9d1c-44ff-87d6-732edd45a6c2
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Deal Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Domain'
+		dataType: string
+		isHidden
+		lineageTag: edc9155f-e775-4901-af72-538c7e9c9195
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Domain
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Domain Short Name'
+		dataType: string
+		isHidden
+		lineageTag: 9aee14c5-9b7f-4ec5-be3d-051c3cf81fdb
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Domain Short Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Expected outcome'
+		dataType: string
+		isHidden
+		lineageTag: 37928789-335c-4187-b6a4-2a5f1d4cfcf3
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Expected outcome
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Has MRT Exception'
+		dataType: string
+		isHidden
+		lineageTag: d5f9bad8-5428-4bdd-8ba3-ebad1f51587b
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Has MRT Exception
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Has NBUE'
+		dataType: string
+		isHidden
+		lineageTag: 0f47d9ca-4945-4554-b2c6-083b372db33a
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Has NBUE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Has PL Assigned on Submitted Date'
+		dataType: string
+		isHidden
+		lineageTag: 82d84a88-43f8-4199-a0cb-6686e11bbd4b
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Has PL Assigned on Submitted Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Initial Oppty Due Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: dfa19544-89f5-44a2-92d1-e3561532d72c
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Initial Oppty Due Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Pursuit Request.Is Active Pursuit'
+		dataType: string
+		isHidden
+		lineageTag: aef01d3e-4791-421f-8c8d-9fc3a68c30a2
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Is Active Pursuit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Is Azure Pursuit'
+		dataType: string
+		isHidden
+		lineageTag: 98f3ff8c-d943-4283-b621-2e08819616b8
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Is Azure Pursuit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Is PreQual Request'
+		dataType: string
+		isHidden
+		lineageTag: 244d0740-2278-45e7-bb5c-19ed119bc2ad
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Is PreQual Request
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.IS SMC'
+		dataType: string
+		isHidden
+		lineageTag: ebbf7d5c-6a7e-4ddb-8c1d-39c7cb73b594
+		summarizeBy: none
+		sourceColumn: Pursuit Request.IS SMC
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Is Vanguard Request'
+		dataType: string
+		isHidden
+		lineageTag: 20494228-136c-4d14-8311-54e9a20d669a
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Is Vanguard Request
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.MRT Exception Code'
+		dataType: string
+		isHidden
+		lineageTag: 2aa70f48-9835-474a-af99-b652d279cdaf
+		summarizeBy: none
+		sourceColumn: Pursuit Request.MRT Exception Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Must Win'
+		dataType: string
+		isHidden
+		lineageTag: 0d4ef2ef-7257-4fe6-b43a-d4f4698da4aa
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Must Win
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Oppty Rev Match'
+		dataType: string
+		isHidden
+		lineageTag: 92c74423-6357-4cf9-abef-3eb22d218e4c
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Oppty Rev Match
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Other Attach'
+		dataType: string
+		isHidden
+		lineageTag: 582aede8-113a-4832-9638-915485386856
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Other Attach
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL Assigned'
+		dataType: string
+		isHidden
+		lineageTag: 5af26ce2-edec-441a-9d81-6da3dd24621e
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL Assigned
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL M1 StandardTitle'
+		dataType: string
+		isHidden
+		lineageTag: a1ac12b3-e996-420d-af1a-07564cb63564
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL M1 StandardTitle
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL M2 StandardTitle'
+		dataType: string
+		isHidden
+		lineageTag: a64ea870-203d-41b7-8935-ae2199bac665
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL M2 StandardTitle
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL Manager 1'
+		dataType: string
+		isHidden
+		lineageTag: 02843742-f4dd-48c1-9107-db76f3e2400a
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL Manager 1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL Manager 1 Alias'
+		dataType: string
+		isHidden
+		lineageTag: bfb20f77-0e07-4947-90e2-a81ee3e6607d
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL Manager 1 Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL Manager 2'
+		dataType: string
+		isHidden
+		lineageTag: 7b7c1dd1-1993-4b73-ab67-f3fd28b75342
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL Manager 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL Manager 2 Alias'
+		dataType: string
+		isHidden
+		lineageTag: 584768eb-037f-400a-b8b8-a3654b94016e
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL Manager 2 Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL Request Status'
+		dataType: string
+		isHidden
+		lineageTag: 668656e9-cba7-4139-b655-bcddc19afc1e
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL Request Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL2 Manager 1'
+		dataType: string
+		isHidden
+		lineageTag: c2c80a33-7cd3-4d2d-8e9f-173f9273155c
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL2 Manager 1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PL2 Manager 2'
+		dataType: string
+		isHidden
+		lineageTag: a6eda54a-5dbd-4550-b764-74421e601271
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL2 Manager 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Planned SRM Date'
+		dataType: string
+		isHidden
+		lineageTag: f264a085-05c9-4346-b3e8-e20c53c75c6e
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Planned SRM Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.PM Hyperlink'
+		dataType: string
+		isHidden
+		lineageTag: 4960247d-a2c9-48bf-bb43-acfa312ab544
+		dataCategory: WebUrl
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PM Hyperlink
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Presales Architects'
+		dataType: string
+		isHidden
+		lineageTag: 70f49c51-7481-4697-a433-f72e7c2e3e74
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Presales Architects
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Presales Consultants'
+		dataType: string
+		isHidden
+		lineageTag: 73ded7aa-6a4c-4d59-b22d-c72d4dd75459
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Presales Consultants
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Presales PjMs'
+		dataType: string
+		isHidden
+		lineageTag: 2f776787-c8ba-4b27-aa42-9d16205acc89
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Presales PjMs
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Pursuit Lead'
+		dataType: string
+		isHidden
+		lineageTag: aa0c5049-5ff1-4326-81fe-6c27fe6c387e
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Pursuit Lead
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Pursuit Lead 2'
+		dataType: string
+		isHidden
+		lineageTag: a2a52a70-32a4-4a8f-a34e-b4b7c523997a
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Pursuit Lead 2
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Pursuit notes'
+		dataType: string
+		isHidden
+		lineageTag: 3cdd32fd-8a23-4b4a-bd3f-6af75a346532
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Pursuit notes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Pursuit Status Notes'
+		dataType: string
+		isHidden
+		lineageTag: d894a2c9-c17d-4c17-b500-79f507ef7f4a
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Pursuit Status Notes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Req WO Contract > 90Days'
+		dataType: string
+		isHidden
+		lineageTag: d500266a-cdfe-4951-8c70-cfc98971392a
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Req WO Contract > 90Days
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request ID'
+		dataType: string
+		isHidden
+		lineageTag: bdb179e0-1b22-4c1a-90f6-38c298981341
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request Owner Type'
+		dataType: string
+		isHidden
+		lineageTag: 0cf90ca4-7f5e-499f-a481-4ef9d2b622ed
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request Owner Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request State'
+		dataType: string
+		isHidden
+		lineageTag: 6edc6b49-1420-4f27-8c27-ca8911e6c182
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request State
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request Status Group'
+		dataType: string
+		isHidden
+		lineageTag: 023f02f8-ac62-4b25-a0a5-8a615d7840dc
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request Status Group
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request Type'
+		dataType: string
+		isHidden
+		lineageTag: af4f7e8a-8ba6-4f6f-a4e2-a50e05ed0eda
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Requestor Alias'
+		dataType: string
+		isHidden
+		lineageTag: 7b61c8dd-5b56-451f-9793-575f77f7be37
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Requestor Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Requestor Name'
+		dataType: string
+		isHidden
+		lineageTag: 8409bb7d-27e4-4b40-a8df-9669fa0b7e00
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Requestor Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Requestor Type'
+		dataType: string
+		isHidden
+		lineageTag: e7256176-4af4-452d-afb0-35c7e59f2a63
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Requestor Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Risk Type'
+		dataType: string
+		isHidden
+		lineageTag: cd985078-d339-4315-b074-542c5284f7d9
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Risk Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.SBD Attach'
+		dataType: string
+		isHidden
+		lineageTag: a9bb31ad-bf35-4379-884e-327d95425660
+		summarizeBy: none
+		sourceColumn: Pursuit Request.SBD Attach
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.SC PL Assigned'
+		dataType: string
+		isHidden
+		lineageTag: 66fe7eea-b6b8-40ff-b35b-48fe992918ea
+		summarizeBy: none
+		sourceColumn: Pursuit Request.SC PL Assigned
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Sent for Feedback'
+		dataType: string
+		isHidden
+		lineageTag: 24d6b90f-e74f-4c0e-8277-764bb8a3383d
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Sent for Feedback
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Service center Attach'
+		dataType: string
+		isHidden
+		lineageTag: d40fa297-23d1-49e0-824e-c0e10a186c41
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Service center Attach
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Standard Title'
+		dataType: string
+		isHidden
+		lineageTag: 1c9d6a67-3aad-45f4-9456-e0cd1036d3c3
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Standard Title
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Submitted Date'
+		dataType: dateTime
+		isHidden
+		formatString: yyyy-mm-dd
+		lineageTag: 56be7323-20c4-4bdd-8009-b96268a5bc45
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Submitted Date
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Pursuit Request.Support Attach'
+		dataType: string
+		isHidden
+		lineageTag: 64ed756d-9134-4f7c-9be8-1b0d668a7fe3
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Support Attach
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Presales Approved Hours'
+		dataType: double
+		isHidden
+		formatString: #,0
+		lineageTag: b7bc6d1c-5d9d-4858-b354-29ac312bfe5b
+		summarizeBy: sum
+		sourceColumn: Presales Approved Hours
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column 'Due Date +6mo'
+		dataType: string
+		isHidden
+		lineageTag: 25f2080b-0d9a-46e2-a361-03153be2b4ec
+		summarizeBy: none
+		sourceColumn: Due Date +6mo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Initiatives = CALCULATE(CONCATENATEX('Pursuit Request Additional','Pursuit Request Additional'[Pursuit Request.Initiative],","),FILTER('Pursuit Request Additional','Pursuit Request Additional'[Pursuit Request.Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID]))
+		isHidden
+		lineageTag: d647f03c-7037-4485-a2c8-32e9840763f2
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PL Confidence' = CALCULATE(MIN('Pursuit Request Additional'[Pursuit Request.Pursuit Plan Confidence]),FILTER('Pursuit Request Additional','Pursuit Request Additional'[Pursuit Request.Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID]))
+		isHidden
+		lineageTag: a42e3970-fd50-49dc-8efc-3e88d06b5a5a
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PreSales Type' = IF(CALCULATE(MIN('Pursuit Request Notes'[Pursuit Request.Is 8hDomain Architect]),FILTER('Pursuit Request Notes','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Pursuit Request Notes'[Pursuit Request.Request ID]))="Yes","8hr","Standard")
+		isHidden
+		lineageTag: fb7749c2-8bba-47cb-abbe-f5b6094034b0
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Lead Common Name' = 'Pursuit Request-Asazure'[Pursuit Lead GeoMapping Name]
+		isHidden
+		lineageTag: d359090c-fc49-4d57-8f58-7c235976dff8
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Status Notes' = CONCATENATEX(FILTER('Pursuit Request Notes','Pursuit Request Notes'[Pursuit Request.Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID]),'Pursuit Request Notes'[Pursuit Request.Pursuit Status Notes],UNICHAR(10) & UNICHAR(13))
+		isHidden
+		lineageTag: 992f7612-7fa6-498e-ae29-6f95ff912698
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TaskAssignmentCRMID = IF('Pursuit Request-Asazure'[PreSales Type]="8hr",'Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID] & "-8h",'Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID])
+		isHidden
+		lineageTag: 4deeeaa5-0ed9-4239-ad73-86a0bd4d250f
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NBUE Remaining $' = [## NBUE Assigned Over/Under $]
+		isHidden
+		lineageTag: 2a355dc1-f86f-4c0c-ad10-4170c595d6f1
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'NBUE Remaining Hrs' = [## NBUE Total PreSales Provided Hrs]-[## NBUE Spent Hrs]
+		isHidden
+		lineageTag: 6e57b3ea-9f7e-454d-a146-19d4099ee2d8
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Task.Architect List' = CONCATENATEX(FILTER('Pre-Sales Resources','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Pre-Sales Resources'[Opportunity Presales Consumption.Request ID]),'Pre-Sales Resources'[Opportunity Presales Consumption.Resource Name],"; ",'Pre-Sales Resources'[Opportunity Presales Consumption.Resource Name])
+		isHidden
+		lineageTag: e097ea50-e078-4375-83bb-2ff64bc6dafb
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task.Architect Count' = CALCULATE(COUNT('Pre-Sales Resources'[Opportunity Presales Consumption.Resource Name]),FILTER('Pre-Sales Resources','Pre-Sales Resources'[Opportunity Presales Consumption.Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID]))
+		isHidden
+		formatString: 0
+		lineageTag: 07db4dc7-7ed0-4184-bc35-020704716c68
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Expected Outcome' = CALCULATE(MIN('Pursuit Request Additional'[Pursuit Request.Expected outcome]),FILTER('Pursuit Request Additional','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Pursuit Request Additional'[Pursuit Request.Request ID]))
+		isHidden
+		lineageTag: 023ceb57-190c-4b0e-834a-692c95b126e3
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NBUE Over/Under Percent' = [## NBUE Assigned Over/Under Hrs]/[## NBUE Assigned Hrs]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: ac30a14d-4896-4790-9d71-46ccbfbb2932
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Lead GeoMapping Name' = CALCULATE(MIN('Pursuit Request Additional'[Pursuit Request.PL GeoMapping Name]),FILTER('Pursuit Request Additional','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Pursuit Request Additional'[Pursuit Request.Request ID]))
+		lineageTag: 17856e61-d0e5-4942-90d7-d6ee91348198
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pre-Sales Staffing Hyperlink' = CALCULATE(MIN('Pre-Sales Resources'[Resourcing Link]),FILTER('Pre-Sales Resources','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Pre-Sales Resources'[Opportunity Presales Consumption.Request ID]))
+		lineageTag: add0434b-2b25-441a-9434-ef2c4c19fda1
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Task.Planned Start' = CALCULATE(MIN('Pre-Sales Resources'[Opportunity Presales Consumption.Task Planned Start Date]),FILTER('Pre-Sales Resources','Pre-Sales Resources'[Opportunity Presales Consumption.Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID]))
+		formatString: yyyy-mm-dd
+		lineageTag: 4be845e8-6f53-4bfc-9b58-6cf2f035a762
+		summarizeBy: none
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Pursuit Request.Days from Assigned to Planned' = IF('Pursuit Request-Asazure'[Pursuit Request.Assigned Date]<='Pursuit Request-Asazure'[Task.Planned Start],DATEDIFF('Pursuit Request-Asazure'[Pursuit Request.Assigned Date],'Pursuit Request-Asazure'[Task.Planned Start],DAY),BLANK())
+		formatString: 0
+		lineageTag: c76bf226-4283-4cc5-bfb5-9016d0ef5b8d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	partition 'Pursuit Request-Asazure-237d1232-51e9-4a27-81a4-cc40e5cbfe67' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model = #"Deal Management"{[Id="Model"]}[Data],
+				    #"Pursuit Management and Presales1" = Model{[Id="Pursuit Management and Presales"]}[Data],
+				    #"Added Items" = Cube.Transform(#"Pursuit Management and Presales1",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Pursuit Request]", {"[Pursuit Request].[Approver Alias].[Approver Alias]", "[Pursuit Request].[Approver Name].[Approver Name]", "[Pursuit Request].[Assigned By].[Assigned By]", "[Pursuit Request].[Assigned Date].[Assigned Date]", "[Pursuit Request].[Billing type].[Billing type]", "[Pursuit Request].[C1 Contract Approval Date].[C1 Contract Approval Date]", "[Pursuit Request].[C1 Contract Created Date].[C1 Contract Created Date]", "[Pursuit Request].[C1 Contract Hyperlink].[C1 Contract Hyperlink]", "[Pursuit Request].[C1 Contract Planned Revenue].[C1 Contract Planned Revenue]", "[Pursuit Request].[C1 Contract Price To Customer].[C1 Contract Price To Customer]", "[Pursuit Request].[C1 Contract Status Group].[C1 Contract Status Group]", "[Pursuit Request].[C1 Contract Target Approval Date].[C1 Contract Target Approval Date]", "[Pursuit Request].[C1 Deal Id].[C1 Deal Id]", "[Pursuit Request].[C1 Deal Owner].[C1 Deal Owner]", "[Pursuit Request].[C1 Deal Type].[C1 Deal Type]", "[Pursuit Request].[C1 Overall Risk Rating].[C1 Overall Risk Rating]", "[Pursuit Request].[C1 Primary Domain Short Name].[C1 Primary Domain Short Name]", "[Pursuit Request].[C1 Standard Offering Type].[C1 Standard Offering Type]", "[Pursuit Request].[CDD Architect Assigned].[CDD Architect Assigned]", "[Pursuit Request].[CDD Attach].[CDD Attach]", "[Pursuit Request].[CRM Opportunity ID].[CRM Opportunity ID]", "[Pursuit Request].[CurrentStalledDays > 90/60/30].[CurrentStalledDays > 90/60/30]", "[Pursuit Request].[Deal Type].[Deal Type]", "[Pursuit Request].[Domain].[Domain]", "[Pursuit Request].[Domain Short Name].[Domain Short Name]", "[Pursuit Request].[Expected outcome].[Expected outcome]", "[Pursuit Request].[Has MRT Exception].[Has MRT Exception]", "[Pursuit Request].[Has NBUE].[Has NBUE]", "[Pursuit Request].[Has PL Assigned on Submitted Date].[Has PL Assigned on Submitted Date]", "[Pursuit Request].[Initial Oppty Due Date].[Initial Oppty Due Date]", "[Pursuit Request].[Is Active Pursuit].[Is Active Pursuit]", "[Pursuit Request].[Is Azure Pursuit].[Is Azure Pursuit]", "[Pursuit Request].[Is PreQual Request].[Is PreQual Request]", "[Pursuit Request].[IS SMC].[IS SMC]", "[Pursuit Request].[Is Vanguard Request].[Is Vanguard Request]", "[Pursuit Request].[MRT Exception Code].[MRT Exception Code]", "[Pursuit Request].[Must Win].[Must Win]", "[Pursuit Request].[Oppty Rev Match].[Oppty Rev Match]", "[Pursuit Request].[Other Attach].[Other Attach]", "[Pursuit Request].[PL Assigned].[PL Assigned]", "[Pursuit Request].[PL M1 StandardTitle].[PL M1 StandardTitle]", "[Pursuit Request].[PL M2 StandardTitle].[PL M2 StandardTitle]", "[Pursuit Request].[PL Manager 1].[PL Manager 1]", "[Pursuit Request].[PL Manager 1 Alias].[PL Manager 1 Alias]", "[Pursuit Request].[PL Manager 2].[PL Manager 2]", "[Pursuit Request].[PL Manager 2 Alias].[PL Manager 2 Alias]", "[Pursuit Request].[PL Request Status].[PL Request Status]", "[Pursuit Request].[PL2 Manager 1].[PL2 Manager 1]", "[Pursuit Request].[PL2 Manager 2].[PL2 Manager 2]", "[Pursuit Request].[Planned SRM Date].[Planned SRM Date]", "[Pursuit Request].[PM Hyperlink].[PM Hyperlink]", "[Pursuit Request].[Presales Architects].[Presales Architects]", "[Pursuit Request].[Presales Consultants].[Presales Consultants]", "[Pursuit Request].[Presales PjMs].[Presales PjMs]", "[Pursuit Request].[Pursuit Lead].[Pursuit Lead]", "[Pursuit Request].[Pursuit Lead 2].[Pursuit Lead 2]", "[Pursuit Request].[Pursuit notes].[Pursuit notes]", "[Pursuit Request].[Pursuit Status Notes].[Pursuit Status Notes]", "[Pursuit Request].[Req WO Contract > 90Days].[Req WO Contract > 90Days]", "[Pursuit Request].[Request ID].[Request ID]", "[Pursuit Request].[Request Owner Type].[Request Owner Type]", "[Pursuit Request].[Request State].[Request State]", "[Pursuit Request].[Request Status Group].[Request Status Group]", "[Pursuit Request].[Request Type].[Request Type]", "[Pursuit Request].[Requestor Alias].[Requestor Alias]", "[Pursuit Request].[Requestor Name].[Requestor Name]", "[Pursuit Request].[Requestor Type].[Requestor Type]", "[Pursuit Request].[Risk Type].[Risk Type]", "[Pursuit Request].[SBD Attach].[SBD Attach]", "[Pursuit Request].[SC PL Assigned].[SC PL Assigned]", "[Pursuit Request].[Sent for Feedback].[Sent for Feedback]", "[Pursuit Request].[Service center Attach].[Service center Attach]", "[Pursuit Request].[Standard Title].[Standard Title]", "[Pursuit Request].[Submitted Date].[Submitted Date]", "[Pursuit Request].[Support Attach].[Support Attach]"}, {"Pursuit Request.Approver Alias", "Pursuit Request.Approver Name", "Pursuit Request.Assigned By", "Pursuit Request.Assigned Date", "Pursuit Request.Billing type", "Pursuit Request.C1 Contract Approval Date", "Pursuit Request.C1 Contract Created Date", "Pursuit Request.C1 Contract Hyperlink", "Pursuit Request.C1 Contract Planned Revenue", "Pursuit Request.C1 Contract Price To Customer", "Pursuit Request.C1 Contract Status Group", "Pursuit Request.C1 Contract Target Approval Date", "Pursuit Request.C1 Deal Id", "Pursuit Request.C1 Deal Owner", "Pursuit Request.C1 Deal Type", "Pursuit Request.C1 Overall Risk Rating", "Pursuit Request.C1 Primary Domain Short Name", "Pursuit Request.C1 Standard Offering Type", "Pursuit Request.CDD Architect Assigned", "Pursuit Request.CDD Attach", "Pursuit Request.CRM Opportunity ID", "Pursuit Request.CurrentStalledDays > 90/60/30", "Pursuit Request.Deal Type", "Pursuit Request.Domain", "Pursuit Request.Domain Short Name", "Pursuit Request.Expected outcome", "Pursuit Request.Has MRT Exception", "Pursuit Request.Has NBUE", "Pursuit Request.Has PL Assigned on Submitted Date", "Pursuit Request.Initial Oppty Due Date", "Pursuit Request.Is Active Pursuit", "Pursuit Request.Is Azure Pursuit", "Pursuit Request.Is PreQual Request", "Pursuit Request.IS SMC", "Pursuit Request.Is Vanguard Request", "Pursuit Request.MRT Exception Code", "Pursuit Request.Must Win", "Pursuit Request.Oppty Rev Match", "Pursuit Request.Other Attach", "Pursuit Request.PL Assigned", "Pursuit Request.PL M1 StandardTitle", "Pursuit Request.PL M2 StandardTitle", "Pursuit Request.PL Manager 1", "Pursuit Request.PL Manager 1 Alias", "Pursuit Request.PL Manager 2", "Pursuit Request.PL Manager 2 Alias", "Pursuit Request.PL Request Status", "Pursuit Request.PL2 Manager 1", "Pursuit Request.PL2 Manager 2", "Pursuit Request.Planned SRM Date", "Pursuit Request.PM Hyperlink", "Pursuit Request.Presales Architects", "Pursuit Request.Presales Consultants", "Pursuit Request.Presales PjMs", "Pursuit Request.Pursuit Lead", "Pursuit Request.Pursuit Lead 2", "Pursuit Request.Pursuit notes", "Pursuit Request.Pursuit Status Notes", "Pursuit Request.Req WO Contract > 90Days", "Pursuit Request.Request ID", "Pursuit Request.Request Owner Type", "Pursuit Request.Request State", "Pursuit Request.Request Status Group", "Pursuit Request.Request Type", "Pursuit Request.Requestor Alias", "Pursuit Request.Requestor Name", "Pursuit Request.Requestor Type", "Pursuit Request.Risk Type", "Pursuit Request.SBD Attach", "Pursuit Request.SC PL Assigned", "Pursuit Request.Sent for Feedback", "Pursuit Request.Service center Attach", "Pursuit Request.Standard Title", "Pursuit Request.Submitted Date", "Pursuit Request.Support Attach"}}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each [Pursuit Request.Request ID] <> null),
+				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each (Cube.AttributeMemberId([Pursuit Request.Request Type]) = "[Pursuit Request].[Request Type].&[Presales]" meta [DisplayName = "Presales"])),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows1",{{"Pursuit Request.Initial Oppty Due Date", type date}}),
+				    #"Replaced Errors" = Table.ReplaceErrorValues(#"Changed Type", {{"Pursuit Request.Initial Oppty Due Date", null}}),
+				    #"Added Custom" = Table.AddColumn(#"Replaced Errors", "Due Date +6mo", each Date.AddMonths([Pursuit Request.Initial Oppty Due Date],6)),
+				    #"Removed Duplicates" = Table.Distinct(#"Added Custom"),
+				    #"Lowercased Text" = Table.TransformColumns(#"Removed Duplicates",{{"Pursuit Request.Pursuit Lead", Text.Lower, type text}}),
+				    #"Capitalized Each Word" = Table.TransformColumns(#"Lowercased Text",{{"Pursuit Request.Pursuit Lead", Text.Proper, type text}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Capitalized Each Word", {"Pursuit Request.Request ID"}, #"Pursuit Request Sales Hours", {"Pursuit Request.Request ID"}, "Pre-Sales Approved Hours", JoinKind.LeftOuter),
+				    #"Expanded Pre-Sales Approved Hours" = Table.ExpandTableColumn(#"Merged Queries", "Pre-Sales Approved Hours", {"Presales Approved Hours"}, {"Presales Approved Hours"})
+				in
+				    #"Expanded Pre-Sales Approved Hours"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

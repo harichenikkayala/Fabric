@@ -1,0 +1,330 @@
+table 'DV Adjustments'
+	lineageTag: f573ba00-0094-4982-9474-8004750c7b16
+
+	measure '## DV Gross CCUS' = CALCULATE(SUM('DV Adjustments'[DeliveryValue.DV Gross CCUS]),FILTER('DV Adjustments','DV Adjustments'[DeliveryValue.DV Credited - MS Fiscal Year Name]=[## Current Fiscal Year]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: ec34f1e5-a961-431f-b433-a98410035c7d
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## DV Leakage CCUS' = CALCULATE(SUM('DV Adjustments'[DeliveryValue.DV Leakage CCUS]),FILTER('DV Adjustments','DV Adjustments'[DeliveryValue.DV Credited - MS Fiscal Year Name]=[## Current Fiscal Year]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e348e0b0-251c-4193-a84c-9e50b3ea0f1b
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## DV Net CCUS' = CALCULATE(SUM('DV Adjustments'[DeliveryValue.DV Net CCUS]),FILTER('DV Adjustments','DV Adjustments'[DeliveryValue.DV Credited - MS Fiscal Year Name]=[## Current Fiscal Year]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: a87107bb-8f33-43ef-bcbc-ff599ed1ce1a
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'DeliveryValue.DV Adjustment Date'
+		dataType: string
+		lineageTag: 6394a7a1-5492-4bf8-96ae-27518f7064fa
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Adjustment Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Adjustment Reason'
+		dataType: string
+		lineageTag: 24d24031-b3d9-4748-8b39-1afc8ce83760
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Adjustment Reason
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Credited Date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 73e9d16a-8047-4db4-89d4-4e32a25b8efa
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Credited Date
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'DeliveryValue.DV Credited MSSales TPID'
+		dataType: string
+		lineageTag: 6347d615-be16-4c45-a8c8-a49ba7574357
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Credited MSSales TPID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Gross CCUS'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 2818905c-a605-4cc2-b732-60254141f30c
+		summarizeBy: sum
+		sourceColumn: DeliveryValue.DV Gross CCUS
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'DeliveryValue.DV Leakage CCUS'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 7290a71e-b134-4e1f-a213-7507934b2001
+		summarizeBy: sum
+		sourceColumn: DeliveryValue.DV Leakage CCUS
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'DeliveryValue.DV Net CCUS'
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 96df8386-86f4-4f84-9878-dbd96fe30090
+		summarizeBy: sum
+		sourceColumn: DeliveryValue.DV Net CCUS
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'DeliveryValue.Opportunity ID'
+		dataType: string
+		lineageTag: 334e68dc-c873-4bab-be22-1dae6d4036db
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Project Opportunity ID'
+		dataType: string
+		lineageTag: 6610b6e5-1975-4367-aa23-f842f4e1f9b1
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Project Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.SalesGeoKey'
+		dataType: string
+		lineageTag: 718daf31-5545-438f-8816-ccbe48b44aaf
+		summarizeBy: none
+		sourceColumn: DeliveryValue.SalesGeoKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Adjustment Amount CCUS'
+		dataType: string
+		lineageTag: bdb4248e-009a-485d-9489-41717afb7f4e
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Adjustment Amount CCUS
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Adjustment Comments'
+		dataType: string
+		lineageTag: dfa3a689-900f-4da3-bd5e-4a24a932e580
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Adjustment Comments
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Recorded Date'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c0b84cdf-8a12-4227-8595-28df3be0476e
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Recorded Date
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Scenario'
+		dataType: string
+		lineageTag: c385ce52-ec6b-4001-ae51-1f6cf2a214ff
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Scenario
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Is DV Eligible Indicator'
+		dataType: string
+		lineageTag: 9883fc40-82ef-443b-be23-be66efce9581
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Is DV Eligible Indicator
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.MSSales TPID'
+		dataType: string
+		lineageTag: 76481dc9-b9d9-438c-8422-23c49d1dbdca
+		summarizeBy: none
+		sourceColumn: DeliveryValue.MSSales TPID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Sales Unit'
+		dataType: string
+		lineageTag: e3eb3b0e-8aea-49c4-846e-73314ade0ec3
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Sales Unit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Delivery Sales Location'
+		dataType: string
+		lineageTag: 1d251173-0d24-416c-8d15-c962c4588e25
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Delivery Sales Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Credited - MS Fiscal Month Alt Name'
+		dataType: string
+		lineageTag: eb30191a-bc56-4a89-91bb-cd23ce739669
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Credited - MS Fiscal Month Alt Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Credited - MS Fiscal Qtr Name'
+		dataType: string
+		lineageTag: 834a9bb7-a079-4d38-8d4b-f3e96c64291b
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Credited - MS Fiscal Qtr Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Credited - MS Fiscal Quarter Name'
+		dataType: string
+		lineageTag: d49144a9-13b6-46f5-8177-35f3f65aa390
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Credited - MS Fiscal Quarter Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.DV Credited - MS Fiscal Year Name'
+		dataType: string
+		lineageTag: f8d406d8-e61a-4137-8543-379ec454d87f
+		summarizeBy: none
+		sourceColumn: DeliveryValue.DV Credited - MS Fiscal Year Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Sales Group'
+		dataType: string
+		lineageTag: afdb500b-afc1-469c-9a2b-769465428110
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Sales Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Sales Location'
+		dataType: string
+		lineageTag: 0fa05e7a-1357-4868-9f92-9e752eff6ab0
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Sales Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Service Office Name'
+		dataType: string
+		lineageTag: 0f743d9a-53bf-4d52-a557-2cb1b0dcf19f
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Service Office Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.ServiceLineOfferingKey'
+		dataType: string
+		lineageTag: 4fe2de2c-2ec4-4d6a-b1cf-e3202f49a256
+		summarizeBy: none
+		sourceColumn: DeliveryValue.ServiceLineOfferingKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DeliveryValue.Subsidiary'
+		dataType: string
+		lineageTag: bb196279-2f42-40ff-bad7-131d559360d2
+		summarizeBy: none
+		sourceColumn: DeliveryValue.Subsidiary
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'DV Adjustments-363f4add-e4f3-40e7-aad5-4242ebfbf359' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    Sales1 = Source{[Name="Sales"]}[Data],
+				    Sales2 = Sales1{[Id="Sales"]}[Data],
+				    Sales3 = Sales2{[Id="Sales"]}[Data],
+				    #"Added Items" = Cube.Transform(Sales3,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[DeliveryValue]", {"[DeliveryValue].[Adjustment Amount CCUS].[Adjustment Amount CCUS]", "[DeliveryValue].[Delivery Sales Location].[Delivery Sales Location]", "[DeliveryValue].[DV Adjustment Comments].[DV Adjustment Comments]", "[DeliveryValue].[DV Adjustment Date].[DV Adjustment Date]", "[DeliveryValue].[DV Adjustment Reason].[DV Adjustment Reason]", "[DeliveryValue].[DV Credited - MS Fiscal Month Alt Name].[DV Credited - MS Fiscal Month Alt Name]", "[DeliveryValue].[DV Credited - MS Fiscal Qtr Name].[DV Credited - MS Fiscal Qtr Name]", "[DeliveryValue].[DV Credited - MS Fiscal Quarter Name].[DV Credited - MS Fiscal Quarter Name]", "[DeliveryValue].[DV Credited - MS Fiscal Year Name].[DV Credited - MS Fiscal Year Name]", "[DeliveryValue].[DV Credited Date].[DV Credited Date]", "[DeliveryValue].[DV Credited MSSales TPID].[DV Credited MSSales TPID]", "[DeliveryValue].[DV Gross CCUS].[DV Gross CCUS]", "[DeliveryValue].[DV Leakage CCUS].[DV Leakage CCUS]", "[DeliveryValue].[DV Net CCUS].[DV Net CCUS]", "[DeliveryValue].[DV Recorded Date].[DV Recorded Date]", "[DeliveryValue].[DV Scenario].[DV Scenario]", "[DeliveryValue].[Is DV Eligible Indicator].[Is DV Eligible Indicator]", "[DeliveryValue].[MSSales TPID].[MSSales TPID]", "[DeliveryValue].[Opportunity ID].[Opportunity ID]", "[DeliveryValue].[Project Opportunity ID].[Project Opportunity ID]", "[DeliveryValue].[Sales Group].[Sales Group]", "[DeliveryValue].[Sales Location].[Sales Location]", "[DeliveryValue].[Sales Unit].[Sales Unit]", "[DeliveryValue].[SalesGeoKey].[SalesGeoKey]", "[DeliveryValue].[Service Office Name].[Service Office Name]", "[DeliveryValue].[ServiceLineOfferingKey].[ServiceLineOfferingKey]", "[DeliveryValue].[Subsidiary].[Subsidiary]"}, {"DeliveryValue.Adjustment Amount CCUS", "DeliveryValue.Delivery Sales Location", "DeliveryValue.DV Adjustment Comments", "DeliveryValue.DV Adjustment Date", "DeliveryValue.DV Adjustment Reason", "DeliveryValue.DV Credited - MS Fiscal Month Alt Name", "DeliveryValue.DV Credited - MS Fiscal Qtr Name", "DeliveryValue.DV Credited - MS Fiscal Quarter Name", "DeliveryValue.DV Credited - MS Fiscal Year Name", "DeliveryValue.DV Credited Date", "DeliveryValue.DV Credited MSSales TPID", "DeliveryValue.DV Gross CCUS", "DeliveryValue.DV Leakage CCUS", "DeliveryValue.DV Net CCUS", "DeliveryValue.DV Recorded Date", "DeliveryValue.DV Scenario", "DeliveryValue.Is DV Eligible Indicator", "DeliveryValue.MSSales TPID", "DeliveryValue.Opportunity ID", "DeliveryValue.Project Opportunity ID", "DeliveryValue.Sales Group", "DeliveryValue.Sales Location", "DeliveryValue.Sales Unit", "DeliveryValue.SalesGeoKey", "DeliveryValue.Service Office Name", "DeliveryValue.ServiceLineOfferingKey", "DeliveryValue.Subsidiary"}}
+				        })
+				in
+				    #"Added Items"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Exception
+

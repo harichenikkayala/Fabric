@@ -1,0 +1,606 @@
+table 'Pre-Sales Resources'
+	lineageTag: 821ecd92-819b-4399-8291-4d15e5c20375
+
+	measure '## NBUE Spent $' = SUM('Pre-Sales Resources'[Consumed $])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d478a67e-9783-4c9b-aece-c5212782ef5e
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## NBUE Spent Hrs' = SUM('Pre-Sales Resources'[Presales Consumed Hours])
+		formatString: #,0.00
+		lineageTag: dcb40e7a-e10c-4cbb-acac-21540124a1f9
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## NBUE Days Since Last Billed' = DATEDIFF('Pre-Sales Resources'[## NBUE Latest Bill Month],[## NBUE Refresh Date Start of Month],DAY)
+		formatString: 0
+		lineageTag: b1b1f9bd-bfd9-4a34-a4e9-b5ca62d28173
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## NBUE Assigned Hrs' = SUM('Pre-Sales Resources'[Adjusted Task Planned Hours])
+		lineageTag: a7a897d1-f9ad-46f8-82e2-fabb493a45e5
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '## NBUE Assigned Over/Under $' = SUM('Pre-Sales Resources'[Remaining $])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f1e4d8e1-345b-4b35-8fde-c096994233fc
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## NBUE Assigned Over/Under Hrs' = [## NBUE Assigned Hrs]-[## NBUE Spent Hrs]
+		formatString: #,0.00
+		lineageTag: b860f1f6-72f0-4307-ab73-7c5575468dd9
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## NBUE Total PreSales Provided Hrs' = SUM('Pursuit Request-Asazure'[Presales Approved Hours])
+		formatString: #,0.00
+		lineageTag: c7651881-dc4b-4adb-bccc-072a04b92ab7
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## NBUE Unassigned Hours' = IF([## NBUE Total PreSales Provided Hrs]>='Pre-Sales Resources'[## NBUE Assigned Hrs],[## NBUE Total PreSales Provided Hrs]-[## NBUE Assigned Hrs],0)
+		lineageTag: 9e32751e-4f2d-4ba5-9cb0-564e5f970629
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '## NBUE Average Bill Rate' = AVERAGE('Pre-Sales Resources'[Title Rate])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 54be66e2-3791-40f5-9c1b-caf4794f4d36
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## NBUE Unassigned $' = [## NBUE Unassigned Hours] * 'Pre-Sales Resources'[## NBUE Average Bill Rate]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: da2aa452-8c6d-4846-b12f-4ecaaa91a015
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## NBUE Assigned Over/Under %' = [## NBUE Assigned Over/Under Hrs]/[## NBUE Assigned Hrs]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 72b22387-0936-44d7-88ed-924afc2703ff
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## NBUE Hrs Left to Assign' = [## NBUE Total PreSales Provided Hrs]-[## NBUE Assigned Hrs]
+		lineageTag: 1c21db4d-bafb-454d-8484-f01e62be4b52
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '## NBUE Assigned $' = [## NBUE Assigned Hrs]*[## NBUE Average Bill Rate]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 14440090-0f3d-4c45-9cae-54c6c6ed02c1
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## NBUE Latest Bill Month' = MAX('Pre-Sales Resources'[Opportunity Presales Consumption.Resource Latest Date])
+		formatString: mmmm yyyy
+		lineageTag: 3d17e5a3-2d95-4ee3-b616-f1ed9c2c166c
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	measure '## NBUE Resource Manager' = IF(COUNT('Pre-Sales Resources'[Opportunity Presales Consumption.Resource Name])=1,FIRSTNONBLANK('Pre-Sales Resources'[Opportunity Presales Consumption.Resource Manager],TRUE()))
+		lineageTag: 7e79b5b2-8315-4b79-adec-dbb8af5af690
+
+		changedProperty = IsHidden
+
+	measure '## NBUE Task State' = IF(COUNT('Pre-Sales Resources'[Opportunity Presales Consumption.Resource Name])=1,FIRSTNONBLANK('Pre-Sales Resources'[Opportunity Presales Consumption.Is Task Locked],TRUE()))
+		lineageTag: 336c5ba2-9e91-468b-bcee-321944ce0231
+
+		changedProperty = IsHidden
+
+	measure '## NBUE Remaining Hrs' = [## NBUE Remaining Hrs Opp]
+		lineageTag: 44cebf53-e2d1-4b7c-a39b-985860d7a5b3
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '## NBUE Refresh Date Start of Month' = DATE(YEAR(FIRSTNONBLANK('Opportunity-Asazure'[Refreshed],TRUE())),MONTH(FIRSTNONBLANK('Opportunity-Asazure'[Refreshed],TRUE())),1)
+		formatString: dd-mmm-yy
+		lineageTag: c450b363-c25e-4702-b592-515fa5b2dbc3
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Opportunity Presales Consumption.Engagement Id'
+		dataType: string
+		lineageTag: 3a5483bb-1718-445e-a5c0-b20b8e7fb661
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Engagement Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Engagement Name'
+		dataType: string
+		lineageTag: eb32636f-50ab-4eb5-8589-cdba24d10fc3
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Engagement Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Is Task Locked'
+		dataType: string
+		lineageTag: 47124bea-b09d-4d75-acdb-360425717b5c
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Is Task Locked
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Project ID'
+		dataType: string
+		lineageTag: e3005512-4de1-4776-8eaf-6ed360f63a9d
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Project ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Project Name'
+		dataType: string
+		lineageTag: f9678fa0-8e9f-4487-95e5-a6658d5f022a
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Project Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Request ID'
+		dataType: string
+		lineageTag: 043be648-91fa-4468-8b54-f148d0a14319
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Request ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Resource Latest Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ab345ba3-3b80-444e-967f-e4c163bae351
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Resource Latest Date
+
+		changedProperty = DataType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Opportunity Presales Consumption.Resource Manager'
+		dataType: string
+		lineageTag: 60ae314c-a58d-4f0d-a8be-1511253814ad
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Resource Manager
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Resource Name'
+		dataType: string
+		lineageTag: 7768ef98-9356-46db-8f85-c24ac84df696
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Resource Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Resource Standard Title'
+		dataType: string
+		lineageTag: febc4165-5c64-49b4-bce4-d1ad6de0c700
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Resource Standard Title
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Task ID'
+		dataType: string
+		lineageTag: b98c406e-64c1-4de1-804b-1ed521c3b5fd
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Task ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Task Name'
+		dataType: string
+		lineageTag: 83b9bb51-1336-4db7-946b-bc6c27762c70
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Task Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Presales Approved Hours PL'
+		dataType: double
+		lineageTag: 5935658d-c4bc-4e41-b917-d2ddfd1fd619
+		summarizeBy: sum
+		sourceColumn: Presales Approved Hours PL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Presales Consumed Hours'
+		dataType: double
+		lineageTag: 93d45fc9-1941-4139-8b42-20f697ca470d
+		summarizeBy: sum
+		sourceColumn: Presales Consumed Hours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Presales Hours Available'
+		dataType: double
+		lineageTag: 1f3894cb-ce4d-4931-ae4f-bdbf8289b23c
+		summarizeBy: sum
+		sourceColumn: Presales Hours Available
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Presales Outstanding Hours'
+		dataType: double
+		lineageTag: 0852f040-17bb-40e7-b259-a5075208a886
+		summarizeBy: sum
+		sourceColumn: Presales Outstanding Hours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Presales Task Planned Hours'
+		dataType: double
+		lineageTag: 9f174cc0-18a1-49bd-9f36-1d79ab1c2175
+		summarizeBy: sum
+		sourceColumn: Presales Task Planned Hours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Resource Hours Remaining'
+		dataType: double
+		lineageTag: 0dac8208-8438-44a2-bd7c-769c1da39577
+		summarizeBy: sum
+		sourceColumn: Resource Hours Remaining
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Resource Hours RemainingPL'
+		dataType: double
+		lineageTag: 20ce7d84-e870-4cc5-a23c-2e89a3896fa0
+		summarizeBy: sum
+		sourceColumn: Resource Hours RemainingPL
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Presales Remaining/Overspend'
+		dataType: double
+		lineageTag: 048bba2a-a5a4-4e9c-bc35-c6b115bcd314
+		summarizeBy: sum
+		sourceColumn: Presales Remaining/Overspend
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Remaining Unassigned Hours'
+		dataType: double
+		lineageTag: e16a1235-30de-40d1-8af2-c9f34be04ec5
+		summarizeBy: sum
+		sourceColumn: Remaining Unassigned Hours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Title Rate' = CALCULATE(AVERAGE('Pre-Sales Title Rates'[ABR]),FILTER('Pre-Sales Title Rates','Pre-Sales Title Rates'[Opportunity Presales Consumption.Resource Standard Title]='Pre-Sales Resources'[Opportunity Presales Consumption.Resource Standard Title] && 'Pre-Sales Title Rates'[Opportunity Presales Consumption.Billing Role Name]='Pre-Sales Resources'[Opportunity Presales Consumption.Billing Role Name]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 748ccaf9-9c7f-4166-9b9f-69894d05b7bc
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Consumed $' = 'Pre-Sales Resources'[Title Rate] * 'Pre-Sales Resources'[Presales Consumed Hours]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d00d0101-3407-4f3b-810a-2207c0ef198d
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Remaining $' = 'Pre-Sales Resources'[Title Rate] * 'Pre-Sales Resources'[Resource Hours RemainingPL]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 0f53065b-56df-4d0b-9f17-cddb6cb36a71
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Resourcing Link' = "https://esxp.microsoft.com/#/pjm/internalEngagement/" & 'Pre-Sales Resources'[Opportunity Presales Consumption.Engagement ID] & "/staffing"
+		lineageTag: 20b99b5b-0049-4c3b-a4a8-c2508b620e08
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Task Planned Start Date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 50710b87-9f8e-4af1-b98c-685d2499b778
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Task Planned Start Date
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Adjusted Task Planned Hours' = IF('Pre-Sales Resources'[Presales Task Planned Hours]=0,'Pre-Sales Resources'[Presales Consumed Hours],'Pre-Sales Resources'[Presales Task Planned Hours])
+		lineageTag: e5088f0f-ad0b-4fff-9d9b-1e3f70f3e04c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Opportunity Presales Consumption.Account Name'
+		dataType: string
+		lineageTag: 8f4fc467-0876-496d-8251-16aad0c7a8e8
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Account Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Billing Role Name'
+		dataType: string
+		lineageTag: 76c2a791-3374-4bf4-a7d1-8bc80c453932
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Billing Role Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Engagement Type'
+		dataType: string
+		lineageTag: 994be532-ac98-46e1-a40c-5b4f79b4d18c
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Engagement Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.GCMRequestID'
+		dataType: string
+		lineageTag: fada0d98-676c-4951-9424-2127ab5af0cd
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.GCMRequestID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Lead ID'
+		dataType: string
+		lineageTag: b2e925ed-4594-4cfd-b510-48e6db625eda
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Lead ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Pursuit Lead'
+		dataType: string
+		lineageTag: 95e5633e-0a62-4265-ab9c-f8c91c3508ab
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Pursuit Lead
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Resource Alias'
+		dataType: string
+		lineageTag: 0b595a92-ff27-4814-a7e2-864f263fddba
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Resource Alias
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Presales Consumption.Utilization Type'
+		dataType: string
+		lineageTag: dccd9d52-7c5d-4f1f-9525-f051b1723755
+		summarizeBy: none
+		sourceColumn: Opportunity Presales Consumption.Utilization Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Presales Consumed Hours YTD'
+		dataType: double
+		lineageTag: e252f8c3-591d-4aba-8074-f8179c07b52a
+		summarizeBy: sum
+		sourceColumn: Presales Consumed Hours YTD
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Current CP Consumed Hours'
+		dataType: double
+		lineageTag: ee75f3f8-fc2f-4596-8ab4-d48cc3c307d7
+		summarizeBy: sum
+		sourceColumn: Current CP Consumed Hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'CY Presales Consumed Hours'
+		dataType: double
+		lineageTag: df28ee6b-abb1-423f-b886-a39ec6f0e2d8
+		summarizeBy: sum
+		sourceColumn: CY Presales Consumed Hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Prior CP Consumed hours'
+		dataType: double
+		lineageTag: 2eb1b5b6-6c9b-4c93-872b-9e9643f881a9
+		summarizeBy: sum
+		sourceColumn: Prior CP Consumed hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'PY Presales Consumed Hours'
+		dataType: double
+		lineageTag: 59a50c69-48da-4e56-a31d-a2be561e1164
+		summarizeBy: sum
+		sourceColumn: PY Presales Consumed Hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Pre-Sales Resources-bbef86dd-6b3f-4f7e-a3f8-b98b27bc8f45' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Opportunity Presales Consumption]", {"[Opportunity Presales Consumption].[Account Name].[Account Name]", "[Opportunity Presales Consumption].[Billing Role Name].[Billing Role Name]", "[Opportunity Presales Consumption].[Engagement Id].[Engagement Id]", "[Opportunity Presales Consumption].[Engagement Name].[Engagement Name]", "[Opportunity Presales Consumption].[Engagement Type].[Engagement Type]", "[Opportunity Presales Consumption].[GCMRequestID].[GCMRequestID]", "[Opportunity Presales Consumption].[Is Task Locked].[Is Task Locked]", "[Opportunity Presales Consumption].[Lead ID].[Lead ID]", "[Opportunity Presales Consumption].[Project ID].[Project ID]", "[Opportunity Presales Consumption].[Project Name].[Project Name]", "[Opportunity Presales Consumption].[Pursuit Lead].[Pursuit Lead]", "[Opportunity Presales Consumption].[Request ID].[Request ID]", "[Opportunity Presales Consumption].[Resource Alias].[Resource Alias]", "[Opportunity Presales Consumption].[Resource Latest Date].[Resource Latest Date]", "[Opportunity Presales Consumption].[Resource Manager].[Resource Manager]", "[Opportunity Presales Consumption].[Resource Name].[Resource Name]", "[Opportunity Presales Consumption].[Resource Standard Title].[Resource Standard Title]", "[Opportunity Presales Consumption].[Task ID].[Task ID]", "[Opportunity Presales Consumption].[Task Name].[Task Name]", "[Opportunity Presales Consumption].[Task Planned Start Date].[Task Planned Start Date]", "[Opportunity Presales Consumption].[Utilization Type].[Utilization Type]"}, {"Opportunity Presales Consumption.Account Name", "Opportunity Presales Consumption.Billing Role Name", "Opportunity Presales Consumption.Engagement Id", "Opportunity Presales Consumption.Engagement Name", "Opportunity Presales Consumption.Engagement Type", "Opportunity Presales Consumption.GCMRequestID", "Opportunity Presales Consumption.Is Task Locked", "Opportunity Presales Consumption.Lead ID", "Opportunity Presales Consumption.Project ID", "Opportunity Presales Consumption.Project Name", "Opportunity Presales Consumption.Pursuit Lead", "Opportunity Presales Consumption.Request ID", "Opportunity Presales Consumption.Resource Alias", "Opportunity Presales Consumption.Resource Latest Date", "Opportunity Presales Consumption.Resource Manager", "Opportunity Presales Consumption.Resource Name", "Opportunity Presales Consumption.Resource Standard Title", "Opportunity Presales Consumption.Task ID", "Opportunity Presales Consumption.Task Name", "Opportunity Presales Consumption.Task Planned Start Date","Opportunity Presales Consumption.Utilization Type"}},
+				            {Cube.AddMeasureColumn, "Presales Approved Hours PL", "[Measures].[Presales Approved Hours PL]"},
+				            {Cube.AddMeasureColumn, "Presales Consumed Hours", "[Measures].[Presales Consumed Hours]"},
+				            {Cube.AddMeasureColumn, "Presales Hours Available", "[Measures].[Presales Hours Available]"},
+				            {Cube.AddMeasureColumn, "Presales Outstanding Hours", "[Measures].[Presales Outstanding Hours]"},
+				            {Cube.AddMeasureColumn, "Presales Task Planned Hours", "[Measures].[Presales Task Planned Hours]"},
+				            {Cube.AddMeasureColumn, "Resource Hours Remaining", "[Measures].[Resource Hours Remaining]"},
+				            {Cube.AddMeasureColumn, "Resource Hours RemainingPL", "[Measures].[Resource Hours RemainingPL]"},
+				            {Cube.AddMeasureColumn, "Presales Remaining/Overspend", "[Measures].[Presales Remaining/Overspend]"},
+				            {Cube.AddMeasureColumn, "Remaining Unassigned Hours", "[Measures].[Remaining Unassigned Hours]"},
+				            {Cube.AddMeasureColumn, "Presales Consumed Hours YTD", "[Measures].[Presales Consumed Hours YTD]"},
+				            {Cube.AddMeasureColumn, "Current CP Consumed Hours", "[Measures].[Current CP Consumed Hours]"},
+				            {Cube.AddMeasureColumn, "CY Presales Consumed Hours", "[Measures].[CY Presales Consumed Hours]"},
+				            {Cube.AddMeasureColumn, "Prior CP Consumed hours", "[Measures].[Prior CP Consumed hours]"},
+				            {Cube.AddMeasureColumn, "PY Presales Consumed Hours", "[Measures].[PY Presales Consumed Hours]"}
+				        }),
+				    #"Filtered Rows2" = Table.SelectRows(#"Added Items", each [Opportunity Presales Consumption.Request ID] <> "NULL")
+				in
+				    #"Filtered Rows2"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

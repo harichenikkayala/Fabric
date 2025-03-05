@@ -1,0 +1,56 @@
+table 'Static-Top Accounts'
+	isHidden
+	lineageTag: c0b53944-4661-4be2-ac25-e52a2ac04128
+
+	column MSSalesID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 707cd589-f190-4d45-97d6-e5c46cc71c83
+		summarizeBy: count
+		sourceColumn: MSSalesID
+
+		changedProperty = IsHidden
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MS Sales Account Name'
+		dataType: string
+		isHidden
+		lineageTag: 034d7038-5d00-4e7f-ae56-f26d5ccae070
+		summarizeBy: none
+		sourceColumn: MS Sales Account Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timezone
+		dataType: string
+		lineageTag: dba33d35-8252-4d64-ac57-9844bc46503f
+		summarizeBy: none
+		sourceColumn: Timezone
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Static-Top Accounts-92dc77cb-48eb-4b1b-8fd5-5a0ed9fcf5cf' = m
+		mode: import
+		queryGroup: 'Excel Org Alignment Tables'
+		source =
+				let
+				    Source = SharePoint.Files("https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/", [ApiVersion = 15]),
+				    #"Filtered Rows" = Table.SelectRows(Source, each ([Name] = "Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx")),
+				    #"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/" = #"Filtered Rows"{[Name="Static Mappings - DO NOT MOVE OR DELETE THIS FILE.xlsx",#"Folder Path"="https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"]}[Content],
+				    #"Imported Excel Workbook" = Excel.Workbook(#"Static Mappings-DO NOT MOVE OR DELETE THIS FILE.xlsx_https://microsoftapc.sharepoint.com/teams/PursuitManagementInsights/Shared Documents/General/Pursuit Management Insights/Static Files/"),
+				    #"FY22 Top Accounts_Sheet" = #"Imported Excel Workbook"{[Item="Top Accounts",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(#"FY22 Top Accounts_Sheet", [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"MSSalesID", type text}, {"MS Sales Account Name", type text}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

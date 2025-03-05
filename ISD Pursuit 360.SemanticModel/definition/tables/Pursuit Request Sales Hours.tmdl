@@ -1,0 +1,81 @@
+table 'Pursuit Request Sales Hours'
+	isHidden
+	lineageTag: 608e88b7-6531-4cf0-921a-d24b2a5bb7da
+
+	column 'Pursuit Request.CRM Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: 63909d28-dcea-4d2f-b058-fbc51e3cccab
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CRM Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Current Oppty Revenue'
+		dataType: string
+		isHidden
+		lineageTag: 76b62a02-70ac-4c56-b623-8da54ec5b376
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Current Oppty Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Request ID'
+		dataType: string
+		isHidden
+		lineageTag: 811a74fc-0a2f-47e3-9205-558b4421a1ae
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Request ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Time Zone'
+		dataType: string
+		isHidden
+		lineageTag: 40a9b8c2-70fd-4159-92b0-e785e12fb07b
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Time Zone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Presales Approved Hours'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ae849ea3-6901-4490-8fea-ae2f3e1e0f37
+		summarizeBy: sum
+		sourceColumn: Presales Approved Hours
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Pursuit Request Sales Hours-8c1b345f-33ac-45df-878e-e72dd819f764' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Pursuit Request]", {"[Pursuit Request].[CRM Opportunity ID].[CRM Opportunity ID]", "[Pursuit Request].[Current Oppty Revenue].[Current Oppty Revenue]", "[Pursuit Request].[Request ID].[Request ID]", "[Pursuit Request].[Time Zone].[Time Zone]"}, {"Pursuit Request.CRM Opportunity ID", "Pursuit Request.Current Oppty Revenue", "Pursuit Request.Request ID", "Pursuit Request.Time Zone"}},
+				            {Cube.AddMeasureColumn, "Presales Approved Hours", "[Measures].[Presales Approved Hours]"}
+				        })
+				in
+				    #"Added Items"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

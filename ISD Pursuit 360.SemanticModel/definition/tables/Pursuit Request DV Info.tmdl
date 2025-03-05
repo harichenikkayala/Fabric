@@ -1,0 +1,114 @@
+table 'Pursuit Request DV Info'
+	isHidden
+	lineageTag: 9c4bdd84-28c0-4f68-b4ba-3ceccdff9beb
+
+	column 'Pursuit Request.CRM Opportunity ID'
+		dataType: string
+		isHidden
+		lineageTag: 089ab534-7ccb-4598-853f-82d61bc65dec
+		summarizeBy: none
+		sourceColumn: Pursuit Request.CRM Opportunity ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Current Oppty Revenue'
+		dataType: string
+		isHidden
+		lineageTag: abd8b42b-0077-4545-afe1-6cd293262968
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Current Oppty Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Initial Revenue Cluster'
+		dataType: string
+		isHidden
+		lineageTag: 3cf430b1-c5f8-4518-8d33-19669ed7d7c5
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Initial Revenue Cluster
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SC Current Contract Revenue'
+		dataType: double
+		isHidden
+		lineageTag: 6fb3f0ce-f892-45be-b136-dd45a17b1ed5
+		summarizeBy: sum
+		sourceColumn: SC Current Contract Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SC Current Oppty Revenue'
+		dataType: double
+		isHidden
+		lineageTag: b0f19644-ef86-424b-97c4-9478fe74eeb3
+		summarizeBy: sum
+		sourceColumn: SC Current Oppty Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SC Initial Oppty Revenue'
+		dataType: double
+		isHidden
+		lineageTag: e84d0d30-9882-4a01-963b-44919a3adb0f
+		summarizeBy: sum
+		sourceColumn: SC Initial Oppty Revenue
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'SC Services Revenue Diff'
+		dataType: double
+		isHidden
+		lineageTag: 63064c80-7927-437f-8d77-4ccbb6aa90f1
+		summarizeBy: sum
+		sourceColumn: SC Services Revenue Diff
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Pursuit Request DV Info-d90d2f46-70f6-464c-98fb-4b92b2e13bd1' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Pursuit Request]", {"[Pursuit Request].[CRM Opportunity ID].[CRM Opportunity ID]", "[Pursuit Request].[Current Oppty Revenue].[Current Oppty Revenue]", "[Pursuit Request].[Initial Revenue Cluster].[Initial Revenue Cluster]"}, {"Pursuit Request.CRM Opportunity ID", "Pursuit Request.Current Oppty Revenue", "Pursuit Request.Initial Revenue Cluster"}},
+				            {Cube.AddMeasureColumn, "SC Current Contract Revenue", "[Measures].[SC Current Contract Revenue]"},
+				            {Cube.AddMeasureColumn, "SC Current Oppty Revenue", "[Measures].[SC Current Oppty Revenue]"},
+				            {Cube.AddMeasureColumn, "SC Initial Oppty Revenue", "[Measures].[SC Initial Oppty Revenue]"},
+				            {Cube.AddMeasureColumn, "SC Services Revenue Diff", "[Measures].[SC Services Revenue Diff]"}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each Text.StartsWith([Pursuit Request.CRM Opportunity ID], "6-") or Text.StartsWith([Pursuit Request.CRM Opportunity ID], "7-"))
+				in
+				    #"Filtered Rows"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Exception
+

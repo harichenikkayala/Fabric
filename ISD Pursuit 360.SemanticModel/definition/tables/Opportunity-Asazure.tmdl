@@ -1,0 +1,2772 @@
+table Opportunity-Asazure
+	lineageTag: e52503ea-3d2f-4bba-a6ca-24d72e0cef86
+
+	measure '## Opps All Count' = CALCULATE(COUNT('Opportunity-Asazure'[Opportunity.Opportunity Id]),FILTER('Opportunity-Asazure','Opportunity-Asazure'[IsMCS]))
+		formatString: #,0
+		lineageTag: 820476ba-0e4d-4f0a-8d65-bf721b7f247d
+
+		changedProperty = FormatString
+
+	measure '## Opps Won Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Won"))
+		formatString: #,0
+		lineageTag: 28034747-1663-433c-b14b-4cc3ade154d7
+
+		changedProperty = FormatString
+
+	measure '## Opps Lost Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Lost"))
+		formatString: #,0
+		lineageTag: 978f5a6b-59b5-4673-bdeb-e1b4de6d1d75
+
+		changedProperty = FormatString
+
+	measure '## Opps Open Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Opportunity.Opportunity Status]="Open"))
+		formatString: #,0
+		lineageTag: 701afe0d-ded4-4403-a4b9-a6e8061ff50e
+
+		changedProperty = FormatString
+
+	measure '## % Win Rate Opps' = IF(([## Opps Lost Count]+[## Opps Won Count]+[## Opps Disengaged Count])>0,[## Opps Won Count]/([## Opps Lost Count]+[## Opps Won Count]+[## Opps Disengaged Count]-[## Opps Win Rate Exception Count]),BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2abeaa48-d40b-44e8-bdd9-309a46b4fc12
+
+		changedProperty = FormatString
+
+	measure '## Opps All $' = CALCULATE(SUM('Opportunity-Asazure'[Opportunity Revenue (CCUS)]),FILTER('Opportunity-Asazure','Opportunity-Asazure'[IsMCS]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: be1cc0c3-1bb2-4f61-bdd8-0eae7c41ab00
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps Lost $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Lost"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 85c0a05d-3474-49d7-8ab6-f48a3ef8b2a1
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps Won $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Won"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: c5f8ed37-e43c-4598-bba3-4604838278e1
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps Open $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Opportunity.Opportunity Status]="Open"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 9e2cb98b-a68c-44fd-992a-cc4d5f683e92
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps Disengaged Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Disengaged"))
+		formatString: #,0
+		lineageTag: a4ed7f35-fc42-4513-9a3c-ecbf962cb5d6
+
+		changedProperty = FormatString
+
+	measure '## Opps Won $ Avg' = IF('Opportunity-Asazure'[## Opps Won Count]>0,'Opportunity-Asazure'[## Opps Won $]/'Opportunity-Asazure'[## Opps Won Count],BLANK())
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 1e63de24-b34c-4017-ac04-3f160ca22119
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps Disengaged $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Disengaged"))
+		lineageTag: e4746660-8fc3-4f47-b56d-187e3b9b191c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '## % Top FY22' = IF('Opportunity-Asazure'[## Opps All Count]>0,CALCULATE(COUNT('Opportunity-Asazure'[Opportunity.Opportunity Id]),FILTER('Opportunity-Asazure','Opportunity-Asazure'[IsTopFY22]))/'Opportunity-Asazure'[## Opps All Count],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 95e79888-a983-49cf-b12c-aee94f4d96e2
+
+		changedProperty = FormatString
+
+	measure '## % Top FY23' = IF('Opportunity-Asazure'[## Opps All Count]>0,CALCULATE(COUNT('Opportunity-Asazure'[Opportunity.Opportunity Id]),FILTER('Opportunity-Asazure','Opportunity-Asazure'[IsTopFY23]))/'Opportunity-Asazure'[## Opps All Count],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0eea299c-0c42-49ca-be0c-cbec4fd09a1c
+
+		changedProperty = FormatString
+
+	measure '## Opps Active Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Active"))
+		formatString: #,0
+		lineageTag: b06aa1da-d181-41ed-975a-a2e70721e215
+
+		changedProperty = FormatString
+
+	measure '## Opps Active $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Active"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: b7bb3ec2-db7c-4b40-b063-2db46480995f
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## DV to NBUE' = if([## NBUE Spent $]>0,[## Opps Won $]/[## NBUE Spent $],BLANK())
+		formatString: #,0.00
+		lineageTag: 060b5eef-514f-4522-ab5a-dcc8ff820cd6
+
+		changedProperty = FormatString
+
+	measure '## Acct in Focus' =
+			if(DISTINCTCOUNT('Opportunity-Asazure'[Account.Account TPID])=1,[## Acct Grouped Most Common Name],
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Account.Account TPID])=0,"No Matching Records","More than 1 Account"))
+		lineageTag: 51d5e117-42fa-45a8-a262-0cd54b174cb4
+
+	measure '## Drill through Focus' = ```
+			
+			    IF(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Opportunity Id])=1,[## Acct Grouped Most Common Name] & " --- " & FIRSTNONBLANK('Opportunity-Asazure'[Opportunity.Opportunity Id],TRUE()),
+			    IF(DISTINCTCOUNT('Opportunity-Asazure'[Account.Account TPID])=1,[## Acct Grouped Most Common Name],
+			    IF(DISTINCTCOUNT('Opportunity-Asazure'[OU])=1,FIRSTNONBLANK('Opportunity-Asazure'[OU],TRUE()),
+			    IF(DISTINCTCOUNT('Opportunity-Asazure'[PLM-Coverage])=1,FIRSTNONBLANK('Opportunity-Asazure'[PLM-Coverage],TRUE()) & "-Coverage",
+			    IF(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Short Solution Area])=1,FIRSTNONBLANK('Opportunity-Asazure'[Opportunity.Short Solution Area],TRUE()),
+			    IF(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Opportunity Id])=0,"No Matching Records","More than 1 Grouping is Shown"))))))
+			```
+		lineageTag: 4ad3cb20-7911-4999-92da-b7fd42ad1dfe
+
+	measure '## C1 DV Gross $' = SUM('Opportunity-Asazure'[C1.DV])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 1df17898-897a-4327-aaa3-8eb6b512719b
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## C1 Revenue $' = SUM('Opportunity-Asazure'[C1.Revenue])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 9a2d58a3-c8c1-47a1-9ab8-38d66168b238
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## C1 Price $' = SUM('Opportunity-Asazure'[C1.Price])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 2b8c54d5-33ae-4803-a774-dbcdcf7d6e63
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## C1 Investment $' = SUM('Opportunity-Asazure'[C1.Investment])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 7553843f-37af-4bf5-8179-6663a1ae16d1
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## C1 % Green $' = IF([## C1 Revenue $]>0,[## C1 Price $]/[## C1 Revenue $],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0430b323-7ad3-4133-a15c-4c9eed07ff27
+
+		changedProperty = FormatString
+
+	measure '## Opps Stalled $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Stalled"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f6388cf4-736b-4279-b64b-4ef66908f86b
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps Stalled Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Stalled"))
+		formatString: 0
+		lineageTag: a485041f-ee45-4a78-911d-a579b035c612
+
+	measure '## Opps Cancelled $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Cancelled"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 850c0b30-22f0-4a0f-b349-9c529a9d5cc8
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps Cancelled Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Pursuit Status]="Cancelled"))
+		formatString: 0
+		lineageTag: 4deca274-9c94-4b4b-8a88-ac51b22faf49
+
+	measure '## Accounts All Count' = DISTINCTCOUNT('Opportunity-Asazure'[Account.Account TPID])
+		formatString: #,0
+		lineageTag: d4c0e677-1640-4239-9e23-5ecfb550bcdc
+
+		changedProperty = FormatString
+
+	measure '## NBUE Remaining Hrs Opp' = SUM('Opportunity-Asazure'[GPO.NBUE Remaining Hrs])
+		lineageTag: d7b0a424-ff1a-43a4-ab2d-f6390723da8f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure '## NBUE Remaining $ Opp' = SUM('Opportunity-Asazure'[GPO.NBUE Remaining $])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 3bbdb2e2-e4b7-4a50-8a82-ebbaa6dbdfe1
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## PL in Focus Report' =
+			IF(DISTINCTCOUNT('Opportunity-Asazure'[GPO.Pursuit Lead])=1,FIRSTNONBLANK('Opportunity-Asazure'[GPO.Pursuit Lead],TRUE()),
+			                        IF(DISTINCTCOUNT('Opportunity-Asazure'[GPO.PLM-HR])=1,FIRSTNONBLANK('Opportunity-Asazure'[GPO.PLM-HR],TRUE()) & " as Mgr",
+			                        "More than 1 PL/Direct Mgr"))
+		lineageTag: 581f6434-3f19-4bb6-951b-87eda31ac1c6
+
+	measure '## First Account Name' = [## Acct Grouped Most Common Name]
+		lineageTag: 3886b49f-54e3-42eb-a9de-2060d63c52f2
+
+	measure '## MBR.SubTitle' = if (DISTINCTCOUNT('Opportunity-Asazure'[OU])=1,FIRSTNONBLANK('Opportunity-Asazure'[OU],TRUE()),if (DISTINCTCOUNT('Opportunity-Asazure'[PLM-Coverage])=1,FIRSTNONBLANK('Opportunity-Asazure'[PLM-Coverage],TRUE()),"All OUs")) & " - " & if (DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Short Solution Area])=1,FIRSTNONBLANK('Opportunity-Asazure'[Opportunity.Short Solution Area],TRUE()),"All Domains")
+		lineageTag: 313afd29-5eb3-42ea-bbaf-4f22e83618de
+
+	measure '## Page Filtering' = ```
+			
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Account.Account TPID])=1,FIRSTNONBLANK('Opportunity-Asazure'[Account.Account Name],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Opportunity Id])=1," || " & FIRSTNONBLANK('Opportunity-Asazure'[Opportunity.Opportunity Id],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[OU])=1," || " & FIRSTNONBLANK('Opportunity-Asazure'[OU],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[IsGPO])=1," || " & "Is GPO=" & FIRSTNONBLANK('Opportunity-Asazure'[IsGPO],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Due Date FY Group])=1," || " & "Fiscal Cluster=" &FIRSTNONBLANK('Opportunity-Asazure'[Due Date FY Group],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Due Date FY Relative])=1," || " & "Fiscal Year=" & FIRSTNONBLANK('Opportunity-Asazure'[Due Date FY Relative],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Short Solution Area])=1," || " & FIRSTNONBLANK('Opportunity-Asazure'[Opportunity.Short Solution Area],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Revenue Cluster])=1," || " & FIRSTNONBLANK('Opportunity-Asazure'[Revenue Cluster],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[PLM-Coverage])=1," || " & FIRSTNONBLANK('Opportunity-Asazure'[PLM-Coverage],TRUE()) & " Coverage","") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[GPO.Pursuit Lead])=1," || "  & "PL=" & FIRSTNONBLANK('Opportunity-Asazure'[GPO.Pursuit Lead],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Services Executive])=1," || " & FIRSTNONBLANK('Opportunity-Asazure'[Opportunity.Services Executive],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[GPO.PLM-HR])=1," || " & FIRSTNONBLANK('Opportunity-Asazure'[GPO.PLM-HR],TRUE()) & " as Direct Mgr","") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Pursuit Status])=1," || " & "Pursuit=" & FIRSTNONBLANK('Opportunity-Asazure'[Pursuit Status],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Opportunity Status] )=1," || " & "Opp=" & FIRSTNONBLANK('Opportunity-Asazure'[Opportunity.Opportunity Status],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[RFP Analysis])=1," || " & "Is RFP?=" & FIRSTNONBLANK('Opportunity-Asazure'[RFP Analysis],TRUE()),"") & 
+			" ||"
+			```
+		lineageTag: e53516f6-eecd-43fc-997f-5cd493d94e8c
+
+	measure '## Inbound Prev Yr Count' = CALCULATE([## PLDeals All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Inbound.Date FY #]=('Opportunity-Asazure'[Current FY #]-1)))
+		formatString: 0
+		lineageTag: 0040367b-aa9b-4431-a976-05341f12c164
+
+	measure '## Inbound Curr Yr Count' = CALCULATE([## PLDeals All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Inbound.Date FY #]=('Opportunity-Asazure'[Current FY #])))
+		formatString: 0
+		lineageTag: 0b6d4d42-0752-443f-bd32-dd8e5686bbfb
+
+	measure '## Due Date Curr Yr Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Due Date Fiscal Year #]=('Opportunity-Asazure'[Current FY #])))
+		formatString: 0
+		lineageTag: 6e7d215a-b0fe-4d9e-bfdc-3e5caf08c6c8
+
+	measure '## Due Date Prev Yr Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Due Date Fiscal Year #]=('Opportunity-Asazure'[Current FY #]-1)))
+		formatString: 0
+		lineageTag: 0c9ea7fb-d348-418a-ad31-1e9dfd22f7e2
+
+	measure '## Due Date Prev Yr $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Due Date Fiscal Year #]=('Opportunity-Asazure'[Current FY #]-1)))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: af28ec7a-c5b7-4e52-a238-afaea4332637
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Due Date Curr Yr $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Due Date Fiscal Year #]=('Opportunity-Asazure'[Current FY #])))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 63b1ef06-84b8-4f1f-8021-418b521303b8
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Due Date YoY % Change Count' = IF('Opportunity-Asazure'[## Due Date Prev Yr Count]>0,([## Due Date Curr Yr Count]-[## Due Date Prev Yr Count])/[## Due Date Prev Yr Count],BLANK())
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 04a5e3af-6e1a-4388-979f-fcb44fb98c86
+
+		changedProperty = FormatString
+
+	measure '## Due Date YoY % Change $' = IF('Opportunity-Asazure'[## Due Date Prev Yr $]>0,([## Due Date Curr Yr $]-[## Due Date Prev Yr $])/[## Due Date Prev Yr $],BLANK())
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: c5334097-ad38-4bda-824d-f15b34bdceb5
+
+		changedProperty = FormatString
+
+	measure '## Opps $ Avg' = IF('Opportunity-Asazure'[## Opps All Count]>0,'Opportunity-Asazure'[## Opps All $]/'Opportunity-Asazure'[## Opps All Count],BLANK())
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f10fc752-4407-49ef-84ba-f3d0a04f39e2
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Inbound YoY % Change Count' = IF('Opportunity-Asazure'[## Inbound Prev Yr Count] >0,([## Inbound Curr Yr Count]-[## Inbound Prev Yr Count])/[## Inbound Prev Yr Count],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1015114d-5748-4a97-83ae-cc929cdadc1c
+
+		changedProperty = FormatString
+
+	measure '## Inbound Prev Yr $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Inbound.Date FY #]=('Opportunity-Asazure'[Current FY #]-1)))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 249de432-991e-4c6b-855e-fd7e9cec1762
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Inbound Curr Yr $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Inbound.Date FY #]=('Opportunity-Asazure'[Current FY #])))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: bcd4dc64-2105-410e-a945-bf45380b04aa
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Inbound YoY % Change $' = IF('Opportunity-Asazure'[## Inbound Prev Yr $] >0,([## Inbound Curr Yr $]-[## Inbound Prev Yr $])/[## Inbound Prev Yr $],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: e51a731e-266c-4e70-98ee-8fee21db74f3
+
+		changedProperty = FormatString
+
+	measure '## Hygiene Banner New' = if(AND('Opportunity-Asazure'[## Hygiene Issues Count]=1,'Opportunity-Asazure'[## Opps All Count]=1),"Single deal w/ hygiene",if(AND('Opportunity-Asazure'[## Hygiene Issues Count]=[## Opps All Count],'Opportunity-Asazure'[## Hygiene Issues Count]>0),"Viewing Hygiene ONLY",""))
+		lineageTag: 6d1a6428-6056-4ff2-897c-65a68f5e52d3
+
+	measure '## Hygiene Issues Count' = ```
+			CALCULATE(COUNT('Opportunity-Asazure'[Opportunity.Opportunity Id]),FILTER('Opportunity-Asazure',
+			    NOT ISBLANK('Opportunity-Asazure'[Hygiene]) && 
+			    ISBLANK('Opportunity-Asazure'[Candidate for Stalling]) && 
+			    ISBLANK('Opportunity-Asazure'[Candidate for Marking Lost])))
+			```
+		formatString: 0
+		lineageTag: 97dafb6f-14b1-4e8f-b437-4087410c8374
+
+	measure '## Opps New Model $' = CALCULATE('Opportunity-Asazure'[## Opps All $],FILTER('Opportunity-Asazure',NOT ISBLANK('Opportunity-Asazure'[OU-FY23])))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 192ed9de-48f6-4f87-a2b9-d46671c53c9b
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps New Model Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure',NOT ISBLANK('Opportunity-Asazure'[OU-FY23])))
+		formatString: #,0
+		lineageTag: 7c0286be-f451-40af-b4b2-66b57ef28f8a
+
+		changedProperty = FormatString
+
+	measure '## New Model YoY % Change Count' = IF([## Opps All Count]>0,([## Opps New Model Count]-[## Opps All Count])/[## Opps All Count],BLANK())
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: dd9e339b-189c-4c19-80a6-38cee71624ea
+
+		changedProperty = FormatString
+
+	measure '## Opps New Model Won $' = CALCULATE('Opportunity-Asazure'[## Opps Won $],FILTER('Opportunity-Asazure',NOT ISBLANK('Opportunity-Asazure'[OU-FY23])))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 5d6eb9c7-7824-4006-babd-fece7722077e
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps New Model Won $ Avg' = CALCULATE('Opportunity-Asazure'[## Opps Won $ Avg],FILTER('Opportunity-Asazure',NOT ISBLANK('Opportunity-Asazure'[OU-FY23])))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: c07aa8e5-a0aa-40a5-a671-3865300b89b7
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps New Model Win Rate' = CALCULATE('Opportunity-Asazure'[## % Win Rate Opps],FILTER('Opportunity-Asazure',NOT ISBLANK('Opportunity-Asazure'[OU-FY23])))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 36b6a787-105e-46a1-ac1f-d464692a4ee8
+
+		changedProperty = FormatString
+
+	measure '## New Model YoY % Change $' = IF([## Opps All $]>0,([## Opps New Model $]-[## Opps All $])/[## Opps All $],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c854c6a8-7f40-4be6-91c1-f64428ce8c5e
+
+		changedProperty = FormatString
+
+	measure '## New Model YoY % Change Won $' = IF([## Opps Won $]>0,([## Opps New Model Won $]-[## Opps Won $])/[## Opps Won $],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 50ec0b0b-e090-42f5-bfb6-bf517cc25af6
+
+		changedProperty = FormatString
+
+	measure '## New Model YoY % Change Win Rate' = [## Opps New Model Win Rate]-[## % Win Rate Opps]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 5c62602d-99d6-4aa7-9449-dd4a84c422bf
+
+		changedProperty = FormatString
+
+	measure '## New Model YoY % Change Won $ Avg' = IF([## Opps Won $ Avg]>0,([## Opps New Model Won $ Avg]-[## Opps Won $ Avg])/[## Opps Won $ Avg],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 7591a1c2-d0c5-4552-92f7-6a00e249065c
+
+		changedProperty = FormatString
+
+	measure '## Active PL Opps Count Avg' = [## Active PL Opps Count]/[## Active PL Count]
+		formatString: 0.0
+		lineageTag: 5805014d-0790-4470-8966-5c962ca49e21
+
+		changedProperty = FormatString
+
+	measure '## Active PL Opps Count' = CALCULATE(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Opportunity Id]),FILTER('Opportunity-Asazure','Opportunity-Asazure'[GPO.PLM-HR]<>"Legacy" && 'Opportunity-Asazure'[IsGPO]="Yes"))
+		formatString: 0
+		lineageTag: aa179de7-d695-4f04-a741-89084ea65b03
+
+	measure '## Active PL Count' = CALCULATE(DISTINCTCOUNT('Opportunity-Asazure'[GPO.Pursuit Lead]),FILTER('Opportunity-Asazure','Opportunity-Asazure'[GPO.PLM-HR]<>"Legacy" && 'Opportunity-Asazure'[IsGPO]="Yes"))
+		formatString: 0
+		lineageTag: 115927bc-9a92-47c7-9542-bda5fb21d108
+
+	measure '## Opps New Model Active PL Count' = CALCULATE('Opportunity-Asazure'[## Active PL Count],FILTER('Opportunity-Asazure',NOT ISBLANK('Opportunity-Asazure'[OU-FY23])))
+		formatString: 0
+		lineageTag: 8d4fa825-3f81-4a00-87af-842b260ffffe
+
+	measure '## Opps New Model Active PL Avg Opps Count' = CALCULATE('Opportunity-Asazure'[## Active PL Opps Count Avg],FILTER('Opportunity-Asazure',NOT ISBLANK('Opportunity-Asazure'[OU-FY23])))
+		formatString: 0.0
+		lineageTag: 85140148-180d-4ff2-b792-21c7ae99f2d2
+
+		changedProperty = FormatString
+
+	measure '## New Model YoY % Change PL Opps Avg' = IF('Opportunity-Asazure'[## Active PL Opps Count Avg]>0,('Opportunity-Asazure'[## Opps New Model Active PL Avg Opps Count]-[## Active PL Opps Count Avg])/[## Active PL Opps Count Avg],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1fa7b3c4-d5c6-453f-9c7b-e328236f83b8
+
+		changedProperty = FormatString
+
+	measure '## New Model YoY % Change Active PL Count' = IF('Opportunity-Asazure'[## Active PL Count]>0,('Opportunity-Asazure'[## Opps New Model Active PL Count]-[## Active PL Count])/[## Active PL Count],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 370ce5bf-47bc-426f-a5d4-2f36a8ce7564
+
+		changedProperty = FormatString
+
+	measure '## Exception Opps Count' = CALCULATE(COUNT('Opportunity-Asazure'[Opportunity.Opportunity Id]),FILTER('Opportunity-Asazure','Opportunity-Asazure'[C1.Is Exception]))
+		formatString: 0
+		lineageTag: 98c0f2ce-52ec-4a2e-a1c0-e5f38e392320
+
+	measure '## PLDeals All Count' = SUM('Opportunity-Asazure'[GPO.Pursuit Count]) + 'Opportunity-Asazure'[## Exception Opps Count]
+		formatString: #,0
+		lineageTag: acf7c239-9d09-45ed-9219-d7c250fcc916
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## PLDeals Won Count' = CALCULATE([## PLDeals All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[Opportunity.Opportunity Status]="Won"))
+		formatString: #,0
+		lineageTag: c7480e1a-cf40-4c76-bd68-f7941689159c
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## C1 Package Count' = DISTINCTCOUNT('Package-Asazure'[Package.Package Id])
+		formatString: 0
+		lineageTag: ecd387b3-a134-4ef3-8d99-c5dfa39d5dac
+
+	measure '## C1 Offerings' = CONCATENATEX(DISTINCT('Package-Asazure'[Package.Package Offering Name]),'Package-Asazure'[Package.Package Offering Name],"; ",'Package-Asazure'[Package.Package Offering Name],ASC)
+		lineageTag: dfd9361a-b75f-4d46-b9cd-9588db6f0eee
+
+	measure '## Acct Grouped Most Common Name' =
+			CALCULATE(MAX('Opportunity-Asazure'[Account.Account Name]),
+			    TOPN(1,GROUPBY('Opportunity-Asazure','Opportunity-Asazure'[Account.Account TPID],'Opportunity-Asazure'[Account.Account Name],
+			            "Instances",COUNTX(CURRENTGROUP(),'Opportunity-Asazure'[Account.Account Name])),[Instances],DESC))
+		lineageTag: fde49aa0-2feb-4de9-802c-1d3b49eb8b46
+
+	measure '## Workload Filtering' = ```
+			SUBSTITUTE(" " &
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[IsGPO])=1,"; "& "IsGPO=" & FIRSTNONBLANK('Opportunity-Asazure'[IsGPO],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Aggregate Status])=1,"; "& FIRSTNONBLANK('Opportunity-Asazure'[Aggregate Status],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[OU])=1,"; "& "OU=" & FIRSTNONBLANK('Opportunity-Asazure'[OU],TRUE()),
+			            if(DISTINCTCOUNT('Opportunity-Asazure'[PLM-Coverage])=1,"; "& "Coverage="&FIRSTNONBLANK('Opportunity-Asazure'[PLM-Coverage],TRUE()),"")) & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Opportunity.Short Solution Area])=1,"; "& "Domain=" & FIRSTNONBLANK('Opportunity-Asazure'[Opportunity.Short Solution Area],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[Revenue Cluster])=1,"; "& "Rev="&FIRSTNONBLANK('Opportunity-Asazure'[Revenue Cluster],TRUE()),"") & 
+			        if(DISTINCTCOUNT('Opportunity-Asazure'[GPO.Pursuit Lead])=1,"; " & "PL=" & FIRSTNONBLANK('Opportunity-Asazure'[GPO.Pursuit Lead],TRUE()),
+			            if(DISTINCTCOUNT('Opportunity-Asazure'[GPO.PLM-HR])=1,"; "& "Mgr="&FIRSTNONBLANK('Opportunity-Asazure'[GPO.PLM-HR],TRUE()),""))," ; ","")
+			```
+		lineageTag: b830a9d7-3809-4f3a-90d8-0789be506412
+
+	measure '## Current Fiscal Year' = "FY20" & FORMAT(MIN('Opportunity-Asazure'[Current FY #]),"00")
+		lineageTag: 672f1d12-d871-4f64-9707-87833424b768
+
+	measure '## Current Fiscal Month' = "P" & FORMAT(MIN('Opportunity-Asazure'[Current FY Month #]),"00")
+		lineageTag: 801427a9-b002-4538-bbf6-cd48d916d7a6
+
+	measure '## Current Fiscal Month #' = MIN('Opportunity-Asazure'[Current FY Month #])
+		formatString: 0
+		lineageTag: 0a617330-c00d-4ed3-bebc-d487fc631cd1
+
+	measure '## Opps Won $ Less Leakage' = [## Opps Won $] + [## DV Leakage]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 89b37d57-2e76-4547-a383-3eabef82663b
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Opps Win Rate Exception Count' = CALCULATE('Opportunity-Asazure'[## Opps All Count],FILTER('Opportunity-Asazure','Opportunity-Asazure'[MCEM Win Rate Exception]=1))
+		formatString: 0
+		lineageTag: a9e5385f-b77b-4c21-81a7-d5f83b690977
+
+	measure '## Win Rate Stats' = CONVERT([## Opps Won Count],STRING) & "W  " & CONVERT([## Opps Lost Count]+[## Opps Disengaged Count],STRING) & "L  " & CONVERT([## Opps Win Rate Exception Count]*-1,STRING) & "E"
+		lineageTag: 85aa5e67-0594-4013-82cf-fe0a4b08277e
+
+	measure '## C1 DV $' = SUM('Opportunity-Asazure'[C1.DV])
+		lineageTag: da2d2bec-3d81-47dc-9b30-f2da8f9c1017
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Account.Account Industry Name'
+		dataType: string
+		lineageTag: 1e054f57-c517-44dd-a584-4facb20c6015
+		summarizeBy: none
+		sourceColumn: Account.Account Industry Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account.Account Name'
+		dataType: string
+		lineageTag: c9317d34-18ae-4230-839e-05a58e66eb7b
+		summarizeBy: none
+		sourceColumn: Account.Account Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account.Account Sub Segment Name'
+		dataType: string
+		lineageTag: 751c3ddf-60d1-49d4-b5bd-ff9b5663d8c2
+		summarizeBy: none
+		sourceColumn: Account.Account Sub Segment Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account.Account TPID'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad8ff8fb-cf8e-450f-8e82-eada5dc9e556
+		summarizeBy: none
+		sourceColumn: Account.Account TPID
+
+		annotation SummarizationSetBy = User
+
+	column 'Account.Account Type Name'
+		dataType: string
+		lineageTag: 764b0478-1e6a-4be4-b24e-5d6dd994938a
+		summarizeBy: none
+		sourceColumn: Account.Account Type Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account.Is Public Sector Account'
+		dataType: string
+		lineageTag: fcbc901a-ae8f-4b73-a897-c73aa15b4905
+		summarizeBy: none
+		sourceColumn: Account.Is Public Sector Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account.MS Sales TP ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: aaeba6d8-85a2-42b4-b1bb-efaef8054335
+		summarizeBy: none
+		sourceColumn: Account.MS Sales TP ID
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = User
+
+	column 'Account.MS Sales TP Name'
+		dataType: string
+		lineageTag: 4d83aeb8-31fb-4d70-9a02-be65006136f9
+		summarizeBy: none
+		sourceColumn: Account.MS Sales TP Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account.Strategic Account'
+		dataType: string
+		lineageTag: b061c09d-ec55-47b1-bdf7-bf3a5c712c2c
+		summarizeBy: none
+		sourceColumn: Account.Strategic Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Commitment Level'
+		dataType: string
+		lineageTag: 9034c04e-d9c4-46a6-8d73-29e834e6d074
+		summarizeBy: none
+		sourceColumn: Opportunity.Commitment Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Customer CRM ID'
+		dataType: string
+		lineageTag: 757acd67-1d24-4118-9690-01f72c2a1a4a
+		summarizeBy: none
+		sourceColumn: Opportunity.Customer CRM ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Deal Created'
+		dataType: string
+		lineageTag: 09f143fe-3201-41c5-aea1-ec30515b2327
+		summarizeBy: none
+		sourceColumn: Opportunity.Deal Created
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Forecast Recommendation'
+		dataType: string
+		lineageTag: 0d61178d-8422-424a-ac8b-45bacb520593
+		summarizeBy: none
+		sourceColumn: Opportunity.Forecast Recommendation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Is GPO'
+		dataType: string
+		lineageTag: a2adb372-06fc-4064-be54-360e478479b0
+		summarizeBy: none
+		sourceColumn: Opportunity.Is GPO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Is MCS Opportunity'
+		dataType: string
+		lineageTag: 995c2f83-4b1a-426c-b92b-758fd6eef4f1
+		summarizeBy: none
+		sourceColumn: Opportunity.Is MCS Opportunity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Last Sales Stage'
+		dataType: string
+		lineageTag: e4b14101-1a10-450b-9c3b-a034c8047ffa
+		summarizeBy: none
+		sourceColumn: Opportunity.Last Sales Stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Latest Win Probability %'
+		dataType: double
+		formatString: 0%;-0%;0%
+		lineageTag: 43e3bf28-8c4b-410c-9f44-cbd2c558afe7
+		summarizeBy: sum
+		sourceColumn: Opportunity.Latest Win Probability %
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Must Win'
+		dataType: string
+		lineageTag: 23c15556-d43f-4c21-bfc9-408d48e82285
+		summarizeBy: none
+		sourceColumn: Opportunity.Must Win
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Business Scenario'
+		dataType: string
+		lineageTag: 7eeda30b-5970-4d90-9a9f-493bd8b10a22
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Business Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Domain'
+		dataType: string
+		lineageTag: 28f2530d-1691-429c-993a-2bf281a3d305
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Domain
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Due Date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 7eee5dc5-6992-4df1-8772-37c4dfb29f99
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Due Date
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Opportunity.Opportunity Due Date Fiscal Month'
+		dataType: string
+		lineageTag: 43e158a0-bb0d-4fa7-971f-cf2a92704a89
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Due Date Fiscal Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Due Date Fiscal Quarter'
+		dataType: string
+		lineageTag: 86b5b00b-a6fe-4d50-9d35-3d7b711ab5fd
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Due Date Fiscal Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Due Date Fiscal Year'
+		dataType: string
+		lineageTag: 4cea7681-31b0-4e9b-a2c3-fb888b45d01c
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Due Date Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Due in 2 Weeks'
+		dataType: string
+		lineageTag: ba2cff05-d7b7-45ad-b3a6-20057c2a9fdd
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Due in 2 Weeks
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Has Exception'
+		dataType: string
+		lineageTag: 9b121eb0-5412-4a7c-81af-a7139e7c3194
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Has Exception
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Id'
+		dataType: string
+		lineageTag: c006a7c5-6167-445d-b8e8-1394bbab3f33
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Name'
+		dataType: string
+		lineageTag: a34e1c5d-04d3-4122-b56e-504f0301f39a
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Owner'
+		dataType: string
+		lineageTag: 22998c34-82b6-48c2-ad91-61a138888f23
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Owner
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Sales Stage'
+		dataType: string
+		lineageTag: 86d49c13-d924-4f96-9837-02ff727bc629
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Sales Stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Solution Area'
+		dataType: string
+		lineageTag: 545386f4-05b5-4a46-a40c-86dbd3f6dba0
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Solution Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Status'
+		dataType: string
+		lineageTag: 22a688c4-99f4-4a5a-a3e2-c050beee14a7
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Services Executive'
+		dataType: string
+		lineageTag: 5ef01045-025f-44ce-af1e-05ee24c06ece
+		summarizeBy: none
+		sourceColumn: Opportunity.Services Executive
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Count'
+		dataType: int64
+		formatString: 0
+		lineageTag: 006958cd-ec57-4661-b392-9309af211872
+		summarizeBy: sum
+		sourceColumn: Opportunity Count
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Area'
+		dataType: string
+		lineageTag: 738d3ac8-37bc-43b5-902f-803ae61f6b7a
+		summarizeBy: none
+		sourceColumn: Sales Geography.Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Area Short Name'
+		dataType: string
+		lineageTag: d1ed6f79-0c49-4c50-9453-974acbcf75cd
+		summarizeBy: none
+		sourceColumn: Sales Geography.Area Short Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.ATU Group'
+		dataType: string
+		lineageTag: efe69208-a62c-40d9-a997-1dfb468c132f
+		summarizeBy: none
+		sourceColumn: Sales Geography.ATU Group
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.ATU Name'
+		dataType: string
+		lineageTag: 9c39d1ee-5c70-4d84-9e21-9688fecd57c5
+		summarizeBy: none
+		sourceColumn: Sales Geography.ATU Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Commercial/Public Sector'
+		dataType: string
+		lineageTag: 0370553d-0290-4904-be83-2db7faff1f89
+		summarizeBy: none
+		sourceColumn: Sales Geography.Commercial/Public Sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Region'
+		dataType: string
+		lineageTag: ba95c593-da4e-449a-8630-d2c256e81ce0
+		summarizeBy: none
+		sourceColumn: Sales Geography.Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sales Territory'
+		dataType: string
+		lineageTag: 4ecc861c-c726-4ea8-b056-b63d432437fa
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sales Territory
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sales Unit'
+		dataType: string
+		lineageTag: 27c80cd2-decd-4d71-ad9f-86dc068e4d5d
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sales Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sub Region'
+		dataType: string
+		lineageTag: 1de83ca7-fc95-4cfe-b8b8-4eff93ce844b
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sub Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Subsidiary'
+		dataType: string
+		lineageTag: b062da90-7d83-412c-8a77-4377bafbf32f
+		summarizeBy: none
+		sourceColumn: Sales Geography.Subsidiary
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Time Zone'
+		dataType: string
+		lineageTag: 574b2acf-2ed8-4600-82d6-f0e61f337073
+		summarizeBy: none
+		sourceColumn: Sales Geography.Time Zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsGPO = IF(ISBLANK(CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]),FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[Opportunity.Opportunity Id]='Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]))),IF('Opportunity-Asazure'[C1.Is Exception],"Yes","No"),IF(AND(CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.Request State]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id]))="Submitted",'Opportunity-Asazure'[Opportunity.Opportunity Status]<>"Open"),IF('Opportunity-Asazure'[C1.Is Exception],"Yes","No"),"Yes"))
+		lineageTag: ad3c4f0a-1489-4b73-9256-b4808f898dcb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OU.Sales Unit Matches' = IF(ISBLANK(CALCULATE(MIN('Static-Sales Unit to OU'[OU]),FILTER('Static-Sales Unit to OU','Opportunity-Asazure'[Sales Geography.Sales Unit]='Static-Sales Unit to OU'[Sales Unit or Special Account]))),"No","Yes")
+		lineageTag: e71a61b6-df50-481b-bf82-3c5f351514a3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OU.Static Table Match' = if('Opportunity-Asazure'[OU.Sales Unit Matches]="Yes",CALCULATE(MIN('Static-Sales Unit to OU'[OU]),FILTER('Static-Sales Unit to OU','Opportunity-Asazure'[Sales Geography.Sales Unit]='Static-Sales Unit to OU'[Sales Unit or Special Account])),"Unmapped")
+		lineageTag: cb395136-1665-4bb7-a845-a401ccb35ca8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'OU.OU from Territory' =
+			IF('Opportunity-Asazure'[OU.Static Table Match]="Special",
+			IF(ISBLANK(CALCULATE(MIN('Static-Territory to OU Map'[OU]),FILTER('Static-Territory to OU Map','Opportunity-Asazure'[Sales Geography.Sales Territory]='Static-Territory to OU Map'[Territory]))),'Opportunity-Asazure'[Account.Strategic Account],
+			IF(CALCULATE(MIN('Static-Territory to OU Map'[OU]),FILTER('Static-Territory to OU Map','Opportunity-Asazure'[Sales Geography.Sales Territory]='Static-Territory to OU Map'[Territory]))<>"Special",
+			   CALCULATE(MIN('Static-Territory to OU Map'[OU]),FILTER('Static-Territory to OU Map','Opportunity-Asazure'[Sales Geography.Sales Territory]='Static-Territory to OU Map'[Territory])),
+			   IF(ISBLANK(CALCULATE(MIN('Static-Territory to OU Map'[OU]),FILTER('Static-Territory to OU Map','Opportunity-Asazure'[Account.Account Name]='Static-Territory to OU Map'[Territory]))),
+			      IF('Opportunity-Asazure'[Account.Strategic Account]="Strategic",
+			         "Unmapped Strategic Account - Need Account",
+			        "Unmapped-" & 'Opportunity-Asazure'[Account.Strategic Account]),
+			      CALCULATE(MIN('Static-Territory to OU Map'[OU]),FILTER('Static-Territory to OU Map','Opportunity-Asazure'[Account.Account Name]='Static-Territory to OU Map'[Territory]))))),
+			"OU Computed from Sales Unit")
+		lineageTag: 29e714b9-4176-48a6-86a5-eaea8ad4a195
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column OU =
+			IF('Opportunity-Asazure'[OU.Static Table Match]="Special",
+			    IF(AND('Opportunity-Asazure'[IsGPO]="No",'Opportunity-Asazure'[Sales Geography.Sales Unit]="USA - SMC"),'Opportunity-Asazure'[Sales Geography.Sales Unit],
+			        'Opportunity-Asazure'[OU.OU from Territory]),'Opportunity-Asazure'[OU.Static Table Match])
+		lineageTag: 8a3ae873-da25-4164-8ebd-9d051cd30eec
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Solution Areas' = CALCULATE(CONCATENATEX(DISTINCT('Package-Asazure'[Package.Package Solution Area]),'Package-Asazure'[Package.Package Solution Area],","),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 5ec842f8-78df-4743-8abe-c6d9a3fd7155
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Primary Products' = CALCULATE(CONCATENATEX(DISTINCT('Package-Asazure'[Package.Package Primary Product]),'Package-Asazure'[Package.Package Primary Product],","),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 23b2ab84-f5ac-4f52-b977-36a69fca1195
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Primary PL' = CALCULATE(MIN('Package-Asazure'[Pursuit Lead - Common Name]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 1bdbab1e-5c18-4210-ab90-abc2bee27496
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.IsInExceptionList' =
+			NOT ISBLANK(CALCULATE(MIN('Static-C1 Amendments with no PMxP'[GlobalCRMID]),
+			                                       FILTER('Static-C1 Amendments with no PMxP','Static-C1 Amendments with no PMxP'[GlobalCRMID]='Opportunity-Asazure'[Opportunity.Opportunity Id])))
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: a75e39c7-b532-43c9-a01f-805c88e4744c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Is BE' = IF(CALCULATE(MIN('Package-Asazure'[Contract.Is Budgetary Estimate]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))="TRUE",TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 4802e07d-a298-4045-b054-158fcb901a59
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Is Amendment' = IF(CALCULATE(MIN('Package-Asazure'[Contract.Is Amendment]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))="-1",TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 55392e1a-d803-42d0-b4be-7c1f388a15bc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column C1 = CALCULATE(MIN('Package-Asazure'[Contract.Contract Hyperlink]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 338de7bd-f4f6-4d00-9bea-f38e8befe6cf
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.DV' = CALCULATE(SUM('Package-Asazure'[Planned Package Delivery Cost (CCUS)])-SUM('Package-Asazure'[Planned Package Reimbursable Expenses W Exceptions (CCUS)]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 2dec3675-d898-4c9c-b223-6be5d1788425
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'C1.Color' = IF(ISBLANK('Opportunity-Asazure'[C1]),0,IF('Opportunity-Asazure'[C1.Is Amendment],1,2))
+		formatString: 0
+		lineageTag: 6e855412-85c7-47d9-bd4d-92b9b78ed707
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Icon' = IF(ISBLANK('Opportunity-Asazure'[C1]),0,IF('Opportunity-Asazure'[C1.Is BE],1,2))
+		formatString: 0
+		lineageTag: 8ac4fb47-a1d1-4647-a665-e00993e0d105
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Is Exception' =
+			IF(ISBLANK('Opportunity-Asazure'[C1]),FALSE(),
+			                    IF(AND('Opportunity-Asazure'[C1.Is Amendment], 'Opportunity-Asazure'[C1.IsInExceptionList]),TRUE(),
+			                           IF(AND(AND(AND(
+			                                  NOT 'Opportunity-Asazure'[C1.Is Amendment],
+			                                  NOT ISBLANK('Opportunity-Asazure'[C1.Primary PL])),
+			                                  OR('Opportunity-Asazure'[Opportunity.Opportunity Status]="Won",'Opportunity-Asazure'[Opportunity.Opportunity Status]="Open")),
+			                                  ISBLANK(CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.Request State]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id] && 'Pursuit Request-Asazure'[Pursuit Request.Request State]<>"Submitted")))
+			                              ),
+			                              TRUE(),FALSE())
+			                       )
+			                     )
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: c39a168a-0a01-4669-8683-ba5dc939f3fa
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Request ID' = If('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MAX('Pursuit Request-Asazure'[Pursuit Request.Request ID]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id] && 'Pursuit Request-Asazure'[PreSales Type]="Standard")),BLANK())
+		lineageTag: 0c0a0418-89be-46c0-acae-3fc791263649
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Request ID 8hr' = If('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MAX('Pursuit Request-Asazure'[Pursuit Request.Request ID]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id] && 'Pursuit Request-Asazure'[PreSales Type]="8hr")),BLANK())
+		lineageTag: ac564801-9b52-43e7-856c-bc772dd9dffe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Request State 8hr' = IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID 8hr]),BLANK(),CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.Request State]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID 8hr])))
+		lineageTag: 7fdeeab3-6f5d-4fe7-8f11-7b05451d667b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Request State' = IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),BLANK(),CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.Request State]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID])))
+		lineageTag: 8644d4f5-bcfe-4a64-b634-8dcace518137
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Due Date' = IF(AND('Opportunity-Asazure'[IsGPO]="Yes",NOT 'Opportunity-Asazure'[C1.Is Exception]),CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.Initial Oppty Due Date]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id])),IF('Opportunity-Asazure'[C1.Is Exception],'Opportunity-Asazure'[Opportunity.Opportunity Due Date],BLANK()))
+		formatString: yyyy-mm-dd
+		lineageTag: b5e712b8-85f0-492e-925b-5855a10809b9
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'GPO.Pursuit Count' = If('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(COUNT('Pursuit Request-Asazure'[Pursuit Request.Request ID]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id])),0)
+		formatString: 0
+		lineageTag: 4eace1bc-b67d-47b8-82cc-41097d8ea1eb
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Primary PL Standard' = IF('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Lead Common Name]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID])),"No PL Assigned")
+		lineageTag: 6d4985d5-7f8b-4aff-bc7d-4cfc024334e9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Primary PL 8hr' = IF('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Lead Common Name]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID 8hr])),BLANK())
+		lineageTag: 65bbe5e8-8538-42fd-854f-8278a3050a55
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.PL Conf Standard' = IF('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MAX('Pursuit Request-Asazure'[PL Confidence]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID])),BLANK())
+		lineageTag: 3b8b8a2f-3f5f-437f-b049-d74441387b72
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.PL Conf 8Hr' = IF('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MAX('Pursuit Request-Asazure'[PL Confidence]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID 8hr])),BLANK())
+		lineageTag: 8af80aa4-e1c6-4a03-bcec-5586ffebc06a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.PL Conf' =
+			IF('Opportunity-Asazure'[GPO.Pursuit Count]=2,
+			                   IF(AND(ISBLANK('Opportunity-Asazure'[GPO.PL Conf Standard]),ISBLANK('Opportunity-Asazure'[GPO.PL Conf 8Hr])), BLANK(),
+			                      IF(ISBLANK('Opportunity-Asazure'[GPO.PL Conf 8Hr]),'Opportunity-Asazure'[GPO.PL Conf Standard],"(" & 'Opportunity-Asazure'[GPO.PL Conf Standard] & "," & 'Opportunity-Asazure'[GPO.PL Conf 8Hr] & ")")),
+			              IF(ISBLANK('Opportunity-Asazure'[GPO.PL Conf 8Hr]),'Opportunity-Asazure'[GPO.PL Conf Standard]))
+		lineageTag: 3911d00a-546a-4a04-ae01-aef8b27e32c8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Initiatives Standard' = If('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MIN('Pursuit Request-Asazure'[Initiatives]),FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[GPO.Pursuit Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID])),BLANK())
+		lineageTag: 9ad98e28-4a68-48b0-b348-e93606a0a3e7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Initiatives 8hr' = If('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MIN('Pursuit Request-Asazure'[Initiatives]),FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[GPO.Pursuit Request ID 8hr]='Pursuit Request-Asazure'[Pursuit Request.Request ID])),BLANK())
+		lineageTag: cebac0b5-62fc-4a95-aa11-a2dd0d83fa1d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.hyperlink 8hr' = IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID 8hr]),"","https://esxp.microsoft.com/#/request/" & 'Opportunity-Asazure'[GPO.Pursuit Request ID 8hr] & "/darequestdetails")
+		lineageTag: 71c4fc1e-1298-4169-8135-94f9cdc1ae50
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.hyperlink' = IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),'Opportunity-Asazure'[GPO.hyperlink 8hr],"https://esxp.microsoft.com/#/request/" & 'Opportunity-Asazure'[GPO.Pursuit Request ID] & "/requestdetails")
+		lineageTag: 267d5d86-42b6-49e6-93fd-ced2f8c281b7
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Due Date Match' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF('Opportunity-Asazure'[Opportunity.Opportunity Due Date]='Opportunity-Asazure'[GPO.Pursuit Due Date],"Match","Mismatch"),BLANK())
+		lineageTag: d492b515-8049-434d-a7e2-dc306169542a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Due Date +6mo' = IF('Opportunity-Asazure'[IsGPO]="Yes",CALCULATE(MIN('Pursuit Request-Asazure'[Due Date +6mo]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id])),BLANK())
+		lineageTag: 445e2175-245d-4a49-a65c-c52883803b27
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Due Date Fiscal Yr #' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF(NOT 'Opportunity-Asazure'[C1.Is Exception],YEAR('Opportunity-Asazure'[GPO.Due Date +6mo])-2000,CONVERT(RIGHT('Opportunity-Asazure'[Opportunity.Opportunity Due Date Fiscal Year],2),INTEGER)),BLANK())
+		formatString: 0
+		lineageTag: 1081c579-2f7a-4e5f-98ea-6887f005566c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Due Date Fiscal Yr' = "FY" & CONVERT('Opportunity-Asazure'[GPO.Due Date Fiscal Yr #],STRING)
+		lineageTag: b62c0b45-d4c1-4b86-aaf9-aba327b28cb8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Due Date Fiscal Month #' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF('Opportunity-Asazure'[C1.Is Exception],CONVERT(RIGHT('Opportunity-Asazure'[Opportunity.Opportunity Due Date Fiscal Month],2),INTEGER),MONTH('Opportunity-Asazure'[GPO.Due Date +6mo])),BLANK())
+		formatString: 0
+		lineageTag: 1823a3ce-fef3-4028-bf90-ad3138da136a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Due Date Fiscal Month' = "FY20" & FORMAT('Opportunity-Asazure'[GPO.Due Date Fiscal Yr #],"##") & "-P" & FORMAT('Opportunity-Asazure'[GPO.Due Date Fiscal Month #],"00")
+		lineageTag: 7640dfc5-b72c-4337-bb10-7360187cc45a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date Fiscal Year' =
+			IF('Opportunity-Asazure'[IsGPO]="Yes",
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="Opp",'Opportunity-Asazure'[Opportunity.Opportunity Due Date Fiscal Year],
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="C1",'Opportunity-Asazure'[C1.Completed Fiscal Year],
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="Pursuit",'Opportunity-Asazure'[GPO.Due Date Fiscal Yr]))),
+			            'Opportunity-Asazure'[Opportunity.Opportunity Due Date Fiscal Year])
+		lineageTag: 6496c4c6-d4f1-4a29-a713-6bd0d01eeb94
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date Fiscal Month' =
+			IF('Opportunity-Asazure'[IsGPO]="Yes",
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="Opp",'Opportunity-Asazure'[Opportunity.Opportunity Due Date Fiscal Month],
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="C1",'Opportunity-Asazure'[C1.Completed Fiscal Month],
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="Pursuit",'Opportunity-Asazure'[GPO.Due Date Fiscal Month]))),
+			            'Opportunity-Asazure'[Opportunity.Opportunity Due Date Fiscal Month])
+		lineageTag: 698a1084-d50b-4dd3-9267-b2b61105a550
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date' =
+			IF('Opportunity-Asazure'[IsGPO]="Yes",
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="Opp",'Opportunity-Asazure'[Opportunity.Opportunity Due Date],
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="C1",'Opportunity-Asazure'[C1.CompletedDate],
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="Pursuit",'Opportunity-Asazure'[GPO.Pursuit Due Date],'Opportunity-Asazure'[Opportunity.Opportunity Due Date]))),
+			            'Opportunity-Asazure'[Opportunity.Opportunity Due Date])
+		formatString: yyyy-mm-dd
+		lineageTag: 77e5cf5f-c54f-4950-87d0-2e3bc0c72063
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Opportunity.Opportunity Created Date'
+		dataType: dateTime
+		formatString: yyyy-mm-dd
+		lineageTag: 19084ebb-0194-4c56-b3ae-0aee6d29163a
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Created Date
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Sales Geography.SLGE.TerritoryRoot1' =
+			IF(ISBLANK('Opportunity-Asazure'[Sales Geography.Sales Territory]),
+			                    BLANK(),
+			                    IF('Opportunity-Asazure'[Sales Geography.Subsidiary]="United States",
+			                        IF(OR(LEFT('Opportunity-Asazure'[Sales Geography.Sales Territory],3)="EDU",LEFT('Opportunity-Asazure'[Sales Geography.Sales Territory],3)="SLG"),
+			                            MID('Opportunity-Asazure'[Sales Geography.Sales Territory],FIND("~",SUBSTITUTE('Opportunity-Asazure'[Sales Geography.Sales Territory],".","~",2))+1,20),"N/A"),
+			                        "N/A")
+			)
+		lineageTag: 57f8bcce-382d-476a-a02e-5a3f80d16547
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SalesGeography.SLGE.TerritoryRoot' =
+			IF(ISBLANK('Opportunity-Asazure'[Sales Geography.SLGE.TerritoryRoot1]),BLANK(),
+			                    IF('Opportunity-Asazure'[Sales Geography.SLGE.TerritoryRoot1]="N/A","N/A",
+			                        MID('Opportunity-Asazure'[Sales Geography.SLGE.TerritoryRoot1],1,FIND(".",'Opportunity-Asazure'[Sales Geography.SLGE.TerritoryRoot1])-1)))
+		lineageTag: cfd70417-4216-471c-b4c8-3c24dc00028d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Risk Rating' = CALCULATE(MIN('Package-Asazure'[Contract.Overall Risk Rating]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 3af43e39-580b-43ec-9e61-1cf480f423a0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Notes' = IF('Opportunity-Asazure'[IsGPO]="Yes",'Opportunity-Asazure'[GPO.Pursuit Notes 8hr] & UNICHAR(10) & UNICHAR(13) & 'Opportunity-Asazure'[GPO.Pursuit Notes Standard],"")
+		lineageTag: 67d412ae-a395-40fe-9298-89fd586f5b6d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Is MCS' = IF(CALCULATE(MIN('Package-Asazure'[Opportunity.Is MCS Opportunity]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))="Yes","Yes","No")
+		lineageTag: a8e76746-0dea-4607-bff5-ce6394f79165
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsMCS =
+			IF(OR(OR(OR('Opportunity-Asazure'[C1.Is MCS]="Yes",'Opportunity-Asazure'[IsGPO]="Yes"),
+			        AND(AND('Opportunity-Asazure'[IsGPO]="No",'Opportunity-Asazure'[Opportunity.Is MCS Opportunity]="Yes"),OR('Opportunity-Asazure'[PLM-Coverage]<>"No PLM Coverage",'Opportunity-Asazure'[PLM-Coverage]<>"Unmapped"))),
+			        AND(AND(AND(AND('Opportunity-Asazure'[IsGPO]="No",'Opportunity-Asazure'[Opportunity.Is MCS Opportunity]="Yes"),OR('Opportunity-Asazure'[PLM-Coverage]<>"No PLM Coverage",'Opportunity-Asazure'[PLM-Coverage]<>"Unmapped")),'Opportunity-Asazure'[Pursuit Status]="Won"),NOT ISBLANK('Opportunity-Asazure'[C1]))),
+			            TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: cf27dce3-a3c3-41cd-aaff-a26af6f70094
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLM-OU =
+			CALCULATE(MIN('Static-OU to PLM Map'[PLM Name]),FILTER('Static-OU to PLM Map','Static-OU to PLM Map'[OU]=
+			if('Opportunity-Asazure'[Sales Geography.Time Zone]="Americas",'Opportunity-Asazure'[OU],'Opportunity-Asazure'[Sales Geography.Subsidiary])))
+		lineageTag: bb4cb862-aac9-424e-95d5-87c9ec975320
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLM-NamedAccount = CALCULATE(MIN('Static-PLM to Named Account Map'[PLM Name]),FILTER('Static-PLM to Named Account Map','Static-PLM to Named Account Map'[MSSalesTPID]='Opportunity-Asazure'[Account.Account TPID]))
+		lineageTag: 615b3d01-e142-4e79-b182-df354d154c87
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column PLM-Coverage = if(NOT ISBlank('Opportunity-Asazure'[PLM-NamedAccount]),'Opportunity-Asazure'[PLM-NamedAccount],if(NOT IsBlank('Opportunity-Asazure'[PLM-OU]),'Opportunity-Asazure'[PLM-OU],if('Opportunity-Asazure'[Sales Geography.Time Zone] IN {"Americas", "APJ", "EMEA"},"No PLM Coverage",'Opportunity-Asazure'[GPO.PLM-HR])))
+		lineageTag: 72d0f9ed-22fe-4cb2-b2a8-bf3abf6506ef
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.PLM-HR' =
+			IF('Opportunity-Asazure'[GPO.PLM-HR Round 2]="Not GPO","No PLM - Not GPO",
+			        IF(ISBLANK('Opportunity-Asazure'[GPO.PLM-HR Round 2]),
+			            "Legacy",
+			            'Opportunity-Asazure'[GPO.PLM-HR Round 2]))
+		lineageTag: 829acc13-e314-475e-89e4-4fec86d9a551
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Revenue Cluster' = ```
+			if(ISBLANK('Opportunity-Asazure'[Opportunity Revenue (CCUS)]),"Blank",
+			            if('Opportunity-Asazure'[Opportunity Revenue (CCUS)]<50000,"$.05M-",
+			            if(AND('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>=50000,'Opportunity-Asazure'[Opportunity Revenue (CCUS)]<100000),"$.05M to $.1M",
+			            if(AND('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>=100000,'Opportunity-Asazure'[Opportunity Revenue (CCUS)]<300000),"$.1M to $.3M",
+			            if(AND('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>=300000,'Opportunity-Asazure'[Opportunity Revenue (CCUS)]<500000),"$.3M to $.5M",
+			            if(AND('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>=500000,'Opportunity-Asazure'[Opportunity Revenue (CCUS)]<1000000),"$.5M to $1M",
+			            if('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>=1000000,"$1M+","Undetermined")))))))
+			
+			```
+		lineageTag: aea45ffa-fbc1-4fc5-9119-7ab333cefddd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Lead' =
+			IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Lead - Primary Common]),
+			        IF('Opportunity-Asazure'[Pursuit Status]="PL not engaged",
+			            "Not Yet Assigned",
+			            IF(NOT ISBLANK('Opportunity-Asazure'[C1.Primary PL]),'Opportunity-Asazure'[C1.Primary PL],"Unmapped")),
+			    IF(ISBLANK(CALCULATE(MIN('Static-PL Dup Name'[Geo Mapping Name]),
+			        FILTER('Static-PL Dup Name','Static-PL Dup Name'[Duplicate Name]='Opportunity-Asazure'[GPO.Pursuit Lead - Primary Common]))),
+			            'Opportunity-Asazure'[GPO.Pursuit Lead - Primary Common],
+			        CALCULATE(MIN('Static-PL Dup Name'[Geo Mapping Name]),
+			            FILTER('Static-PL Dup Name','Static-PL Dup Name'[Duplicate Name]='Opportunity-Asazure'[GPO.Pursuit Lead - Primary Common]))))
+		lineageTag: 1eaacc46-7d67-4516-9a3a-fdbf977b4746
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Revenue' = CALCULATE(SUM('Package-Asazure'[Planned Package Revenue (CCUS)]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: a85529d2-2b9c-41b9-84f3-77d8a786f832
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'C1.Price' = CALCULATE(SUM('Package-Asazure'[Planned Package Price To Customer (CCUS)]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 5125c8bc-b020-47ea-b9ec-15849b2acd37
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'C1.FullyExecutedDate' = IF('Opportunity-Asazure'[C1.ContractStatus]="Completed",CALCULATE(MIN('Package-Asazure'[Contract.Contract Fully Executed Date]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id])),BLANK())
+		formatString: yyyy-mm-dd
+		lineageTag: a7017968-c9d0-4e4c-8005-24af3adf3a39
+		summarizeBy: none
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'C1.CompletedDate' = IF('Opportunity-Asazure'[C1.ContractStatus]="Completed",CALCULATE(MIN('Package-Asazure'[Contract.Contract Completed Date]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id])),BLANK())
+		formatString: yyyy-mm-dd
+		lineageTag: 30768592-3014-434f-8be8-981fce06686a
+		summarizeBy: none
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'C1.ContractStatus' = CALCULATE(MIN('Package-Asazure'[Contract.Contract Status]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 081c3c57-7164-4913-ae86-0c115b95e4c9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Refreshed
+		dataType: dateTime
+		formatString: yyyy-mm-dd hh:nn
+		lineageTag: 9312a3b8-7831-4301-94db-08554783cf67
+		summarizeBy: none
+		sourceColumn: Refreshed
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Current FY #'
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c6a26ae-c0f3-4799-adb8-7a682d101ea4
+		summarizeBy: sum
+		sourceColumn: Current FY #
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current FY Month #'
+		dataType: int64
+		formatString: 0
+		lineageTag: e2ec13b3-b0d2-4336-8fb4-926e0964bd57
+		summarizeBy: sum
+		sourceColumn: Current FY Month #
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Current FY Qtr #'
+		dataType: int64
+		formatString: 0
+		lineageTag: bcfb8132-cf1d-4311-880e-bfff7047151e
+		summarizeBy: sum
+		sourceColumn: Current FY Qtr #
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date Fiscal Year #' = CONVERT(RIGHT('Opportunity-Asazure'[Due Date Fiscal Year],2),INTEGER)
+		formatString: 0
+		lineageTag: f18db37a-a6f8-4b70-a9be-c1f5266cb95a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date FY Group' = IF('Opportunity-Asazure'[Current FY #]<='Opportunity-Asazure'[Due Date Fiscal Year #],"FY Current+","FY Earlier")
+		lineageTag: d3f5da80-a57c-4cee-a195-5c7109b23544
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date FY Relative' = IF('Opportunity-Asazure'[Current FY #]='Opportunity-Asazure'[Due Date Fiscal Year #],"Current",IF('Opportunity-Asazure'[Due Date Fiscal Year #]-'Opportunity-Asazure'[Current FY #]>0,"Current+" & CONVERT('Opportunity-Asazure'[Due Date Fiscal Year #]-'Opportunity-Asazure'[Current FY #],STRING),"Current" & CONVERT('Opportunity-Asazure'[Due Date Fiscal Year #]-'Opportunity-Asazure'[Current FY #],STRING)))
+		lineageTag: a4006327-ecd8-4c40-8422-fc67daf74a3c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column LowComplexity =
+			if(AND('Opportunity-Asazure'[Sales Geography.Time Zone] IN {"Americas", "APJ", "EMEA"},'Opportunity-Asazure'[IsGPO]="Yes"),
+			        if(NOT ISBLANK(CALCULATE(MIN('Static-Low Complexity Mgr'[Mgr Name]),
+			                    FILTER('Static-Low Complexity Mgr','Opportunity-Asazure'[GPO.PLM-HR]='Static-Low Complexity Mgr'[Mgr Name]))),
+			            "Low Complexity Team",BLANK()),
+			        BLANK())
+		lineageTag: 0ba04d98-91f2-4e05-8c1f-e89a767d1ef3
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Submitted Date' =
+			IF('Opportunity-Asazure'[IsGPO]="No", BLANK(),
+			                    IF('Opportunity-Asazure'[C1.Is Exception],'Opportunity-Asazure'[Opportunity.Opportunity Created Date],
+			                    CALCULATE(MAX('Pursuit Request-Asazure'[Pursuit Request.Submitted Date]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id]))))
+		formatString: yyyy-mm-dd
+		lineageTag: 5254c1ef-8c91-40a0-94b9-4828b76bde93
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Inbound.Date' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF(NOT 'Opportunity-Asazure'[C1.Is Exception],'Opportunity-Asazure'[GPO.Submitted Date],'Opportunity-Asazure'[Opportunity.Opportunity Created Date]),'Opportunity-Asazure'[Opportunity.Opportunity Created Date])
+		formatString: yyyy-mm-dd
+		lineageTag: cc2ba21e-d2f7-4a8d-8cc0-9db6ebd91b02
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Inbound.Date FY #' = IF('Opportunity-Asazure'[Inbound.Date FY Month #]<=6,YEAR('Opportunity-Asazure'[Inbound.Date])+1,YEAR('Opportunity-Asazure'[Inbound.Date]))-2000
+		formatString: 0
+		lineageTag: ae3f813e-7579-4db9-8737-2ca884aa00b4
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inbound.Date Fiscal Year' = "FY" & CONVERT('Opportunity-Asazure'[Inbound.Date FY #],STRING)
+		lineageTag: d5669e30-354a-4122-9fd5-b409ca29a8ba
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inbound.Date Fiscal Month' = "FY" & CONVERT('Opportunity-Asazure'[Inbound.Date FY #]+2000,STRING) & "-P" & FORMAT('Opportunity-Asazure'[Inbound.Date FY Month #],"00")
+		lineageTag: 4279af13-ab0d-4b71-81e1-b952cacf5a50
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inbound.Date FY Relative' = IF('Opportunity-Asazure'[Current FY #]='Opportunity-Asazure'[Inbound.Date FY #],"Current",IF('Opportunity-Asazure'[Inbound.Date FY #]-'Opportunity-Asazure'[Current FY #]>0,"Inbount Current+" & CONVERT('Opportunity-Asazure'[Inbound.Date FY #]-'Opportunity-Asazure'[Current FY #],STRING),"Current" & CONVERT('Opportunity-Asazure'[Inbound.Date FY #]-'Opportunity-Asazure'[Current FY #],STRING)))
+		lineageTag: e8275acc-233c-4a5b-8b29-8c783577c72c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inbound.Date FY Month #' = IF(MONTH('Opportunity-Asazure'[Inbound.Date])<=6,MONTH('Opportunity-Asazure'[Inbound.Date])+6,MONTH('Opportunity-Asazure'[Inbound.Date])-6)
+		formatString: 0
+		lineageTag: 3295c228-ce92-4aa1-9137-9c0f06c370f2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Notes 8hr' = IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID 8hr]),BLANK(),CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Status Notes]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID 8hr])))
+		lineageTag: 34150531-6023-4bb4-ac2a-8774885f5970
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Notes Standard' = IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),BLANK(),CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Status Notes]),FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID])))
+		lineageTag: 65bd80f7-990f-4970-8dd0-e63ca74c9131
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsTopFY22 = IF(ISBLANK(CALCULATE(MIN('Static-Top Accounts'[MSSalesID]),FILTER('Static-Top Accounts','Static-Top Accounts'[MSSalesID]='Opportunity-Asazure'[Account.MS Sales TP ID]))),0,1)
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 53ddc389-2f7a-4ba3-9e9e-408660e3797c
+		summarizeBy: none
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsTopFY23 = IF(ISBLANK(CALCULATE(MIN('Static-FY23 Top Accounts'[MSSalesID]),FILTER('Static-FY23 Top Accounts','Static-FY23 Top Accounts'[MSSalesID]='Opportunity-Asazure'[Account.MS Sales TP ID]))),FALSE(),TRUE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 90835e0a-1d37-4fa3-93fa-288a75c0a499
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsS500Account = if ('Opportunity-Asazure'[Account.Strategic Account]="Strategic",TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 008de0f8-6f33-45d1-b824-c7ad6ee0fb32
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Profile Link' = IF(NOT ISBLANK('Opportunity-Asazure'[Account.MS Sales TP ID]),"https://aka.ms/Customer270Profile?filter=Account/TPID%20eq%20" & 'Opportunity-Asazure'[Account.MS Sales TP ID], BLANK())
+		lineageTag: bc24e8e7-fcfe-4771-9c0d-eeb504328ed1
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Status' = ```
+			IF(OR('Opportunity-Asazure'[Opportunity.Opportunity Status]="Won",
+			            AND('Opportunity-Asazure'[IsGPO]="Yes",AND('Opportunity-Asazure'[Opportunity.Opportunity Status]="Open",'Opportunity-Asazure'[C1.ContractStatus]="Completed"))),"Won",
+			    IF(AND('Opportunity-Asazure'[Opportunity.Opportunity Status]="Lost",
+			            OR('Opportunity-Asazure'[Opportunity.Opportunity Sales Stage]="Loss",'Opportunity-Asazure'[Opportunity.Opportunity Sales Stage]="N/A %")),"Lost",
+			    IF(AND('Opportunity-Asazure'[Opportunity.Opportunity Status]="Lost",
+			            'Opportunity-Asazure'[Opportunity.Opportunity Sales Stage]="Disengaged"),"Disengaged",
+			    IF('Opportunity-Asazure'[Opportunity.Opportunity Status]="Open",
+			        IF(AND('Opportunity-Asazure'[IsGPO]="Yes",NOT 'Opportunity-Asazure'[C1.Is Exception]), 
+			            IF('Opportunity-Asazure'[GPO.Pursuit Status]<>"Active",'Opportunity-Asazure'[GPO.Pursuit Status],
+			                IF(AND(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),NOT ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID 8hr])),"8hr Active",
+			                    "Active")),
+			        IF('Opportunity-Asazure'[Opportunity.Opportunity Sales Stage]="N/A","Disengaged",
+			            "Active")),BLANK()))))
+			```
+		lineageTag: 587f179b-bb58-4955-aa48-ae0ef915fb13
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Status' =
+			IF('Opportunity-Asazure'[IsGPO]="Yes",
+			    IF(NOT ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request State]),CALCULATE(MIN('Static-Request Status Map'[Status]),FILTER('Static-Request Status Map','Opportunity-Asazure'[GPO.Pursuit Request State]='Static-Request Status Map'[Pursuit Status])),
+			    IF(NOT ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request State 8hr]),CALCULATE(MIN('Static-Request Status Map'[Status]),FILTER('Static-Request Status Map','Opportunity-Asazure'[GPO.Pursuit Request State 8hr]='Static-Request Status Map'[Pursuit Status])),
+			BLANK())))
+		lineageTag: f803fe26-3ed1-4b97-bc23-1c1ca3fd491d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Alignment' =
+			if('Opportunity-Asazure'[Sales Geography.Time Zone] IN {"Americas", "APJ", "EMEA"},
+			        IF(AND(AND(NOT 'Opportunity-Asazure'[IsTopFY22],NOT 'Opportunity-Asazure'[IsS500Account]), NOT 'Opportunity-Asazure'[IsTopFY23]) ,"Isn't Anything",
+			        IF(AND(AND(NOT 'Opportunity-Asazure'[IsTopFY22],    'Opportunity-Asazure'[IsS500Account]),     'Opportunity-Asazure'[IsTopFY23]) ,"S500 TOPFY23",
+			        IF(AND(AND(NOT 'Opportunity-Asazure'[IsTopFY22],NOT 'Opportunity-Asazure'[IsS500Account]),     'Opportunity-Asazure'[IsTopFY23]) ,"TOPFY23 Only",
+			        IF(AND(AND(NOT 'Opportunity-Asazure'[IsTopFY22],    'Opportunity-Asazure'[IsS500Account]), NOT 'Opportunity-Asazure'[IsTopFY23]) ,"S500 Only",
+			        IF(AND(AND(    'Opportunity-Asazure'[IsTopFY22],NOT 'Opportunity-Asazure'[IsS500Account]),     'Opportunity-Asazure'[IsTopFY23]) ,"TOPFY22 TOPFY23",
+			        IF(AND(AND(    'Opportunity-Asazure'[IsTopFY22],    'Opportunity-Asazure'[IsS500Account]), NOT 'Opportunity-Asazure'[IsTopFY23]) ,"TOPFY22 S500",
+			        IF(AND(AND(    'Opportunity-Asazure'[IsTopFY22],NOT 'Opportunity-Asazure'[IsS500Account]), NOT 'Opportunity-Asazure'[IsTopFY23]) ,"TOPFY22 Only",
+			        IF(AND(AND(    'Opportunity-Asazure'[IsTopFY22],    'Opportunity-Asazure'[IsS500Account]),     'Opportunity-Asazure'[IsTopFY23]) ,"Is All")))))))))
+		lineageTag: 15241ea7-c6f0-46d5-ae91-99a4d7247d0d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Link.C270' = "1"
+		lineageTag: 7c1b28ff-710b-434e-b9e5-7e4f0482fd76
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.Earliest' = CALCULATE(Min('GRM Delivery Projects'[GCM Project Request.Project Start Date]),FILTER('GRM Delivery Projects','GRM Delivery Projects'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: a5827802-d880-426c-a33b-4295333e7571
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.HasEarly' = CALCULATE(MIN('GRM Delivery Projects'[GCM Project Request.Has EarlyStaffing Requests]),FILTER('GRM Delivery Projects','GRM Delivery Projects'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 4141eeed-64c4-4614-8675-1762fe4d87c1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.HasOrphan' = CALCULATE(MIN('GRM Delivery Projects'[GCM Project Request.Has Orphan Requests]),FILTER('GRM Delivery Projects','GRM Delivery Projects'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 5fb3fd39-e854-4caf-b15e-b69c2ce8fcb2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.HasOutdated' = CALCULATE(MIN('GRM Delivery Projects'[GCM Project Request.Has Outdated Request]),FILTER('GRM Delivery Projects','GRM Delivery Projects'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 42a4832d-5c76-4f6d-b6ce-e4de9e040ed6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.HasSuspended' = CALCULATE(MIN('GRM Delivery Projects'[GCM Project Request.Has Suspended Requests]),FILTER('GRM Delivery Projects','GRM Delivery Projects'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: b8d8dc21-6648-4943-b103-711c4e4e1cfe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.Latest' = CALCULATE(MAX('GRM Delivery Projects'[GCM Project Request.Project End Date]),FILTER('GRM Delivery Projects','GRM Delivery Projects'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 1a3fcc4b-ddf6-4ae4-96ab-d3c8c6610129
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.Project Count' = CALCULATE(COUNT('GRM Delivery Projects'[Opportunity.Opportunity Id]),FILTER('GRM Delivery Projects','GRM Delivery Projects'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		formatString: 0
+		lineageTag: a1d6332c-2d09-4c99-a75d-e6239af8d4f0
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.PresalesStatus' = ```
+			IF(NOT ISBLANK('Opportunity-Asazure'[GRM Hygiene flag]), 
+			                        IF('Opportunity-Asazure'[GRM.Project Count]>0, 
+			                            "Delivery Projects=" & FORMAT('Opportunity-Asazure'[GRM.Project Count],"00") & " --- [" & 
+			                            'Opportunity-Asazure'[GRM.Earliest] & " thru " & 'Opportunity-Asazure'[GRM.Latest] & "] " & 
+			                            'Opportunity-Asazure'[GRM.State Details], 
+			                        'Opportunity-Asazure'[GRM.State Details]), 
+			                    BLANK())
+			```
+		lineageTag: a29225d3-b897-4b61-83cc-37ee38537951
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Until Due' = if('Opportunity-Asazure'[Opportunity.Opportunity Status]="Open",DATEDIFF(TODAY(),'Opportunity-Asazure'[Due Date],DAY),BLANK())
+		formatString: 0
+		lineageTag: 5b53f8b9-bad0-453b-b9c5-c9edddd12a3f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate for GRM Issues' = if('Opportunity-Asazure'[GRM.State]="Issue","GRM Issues",BLANK())
+		lineageTag: 2dfe9810-f5f6-49b6-845a-b58d3c06a73e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM Hygiene flag' = ```
+			IF('Opportunity-Asazure'[GRM.State]="Issue",1,IF(OR('Opportunity-Asazure'[GRM.State]="Action Needed",'Opportunity-Asazure'[GRM.State]="Suspicious"),2,IF('Opportunity-Asazure'[GRM.State]="Good",0,BLANK()))) 
+			```
+		formatString: 0
+		lineageTag: f186b309-a3fc-4c05-a1fd-65ac9391591f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Seller Notes' = CALCULATE(MAX('Opportunity Additional'[Opportunity.Forecast Comments]),FILTER('Opportunity Additional','Opportunity Additional'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 39ee0adb-ad42-4386-aab4-1f453fd57fdd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Risk Numeric' = CALCULATE(MIN('Package-Asazure'[Contract.Risk Rating And Fee Type-Numeric]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 03e0ddf9-4c83-44d8-b947-02f7fdf02953
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.SQA' = CALCULATE(MIN('Package-Asazure'[Contract.SQA Review]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: bc7d716e-eb5b-4871-8d68-fc1cc3419a0e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.ADE' = CALCULATE(MAX('Opportunity Additional'[Opportunity.Engagement Manager Alias]),FILTER('Opportunity Additional','Opportunity Additional'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: 28020ec3-82ab-42a9-ba32-487ca71e5170
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Since Won' = if('Opportunity-Asazure'[Opportunity.Opportunity Status]="Won",DATEDIFF('Opportunity-Asazure'[Due Date],TODAY(),DAY),BLANK())
+		formatString: 0
+		lineageTag: c72dc1ab-e56f-4386-ad63-9bde761c0dd2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Since Stalled' =
+			IF('Opportunity-Asazure'[Pursuit Status]="Stalled",
+			            CALCULATE(MAX('Pursuit Request Stalled Stats'[Current Stalled Days]),FILTER('Pursuit Request Stalled Stats','Pursuit Request Stalled Stats'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id])),
+			        BLANK())
+		formatString: 0
+		lineageTag: f661c3e6-0053-4614-b3a3-c530387a5277
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Investment' = 'Opportunity-Asazure'[C1.Price]-'Opportunity-Asazure'[C1.Revenue]
+		lineageTag: ae479aa8-6f8a-48da-9b95-7ccf92badd34
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'C1.Price % Green $' = IF('Opportunity-Asazure'[C1.Revenue]>0,'Opportunity-Asazure'[C1.Price]/'Opportunity-Asazure'[C1.Revenue],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 8e33e4fd-87bc-4954-8856-a16f958e25c9
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.DV Delta' =
+			IF(ISBLANK('Opportunity-Asazure'[C1]),BLANK(),
+			                IF('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>0,('Opportunity-Asazure'[C1.DV]-'Opportunity-Asazure'[Opportunity Revenue (CCUS)])/'Opportunity-Asazure'[Opportunity Revenue (CCUS)],BLANK()))
+		formatString: 0%;-0%;0%
+		lineageTag: e57d4ab8-ddd8-434c-93e1-08fa231744f6
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Since Last Billed' = if('Opportunity-Asazure'[Opportunity.Opportunity Status]="Open",if(AND('Opportunity-Asazure'[Pursuit Status]<>"Complete",'Opportunity-Asazure'[Pursuit Status]<>"Cancelled"),[## NBUE Days Since Last Billed],BLANK()),BLANK())
+		formatString: 0
+		lineageTag: b6fa2237-6458-4788-80b7-181e20ef842f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Since Submitted' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF(OR('Opportunity-Asazure'[Pursuit Status]="Stalled",CONTAINSSTRING('Opportunity-Asazure'[Pursuit Status],"Active")),DATEDIFF('Opportunity-Asazure'[GPO.Submitted Date],TODAY(),DAY),BLANK()),BLANK())
+		formatString: 0
+		lineageTag: 343e7bb4-097e-4f7b-a4ee-e62c89dc949f
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate for Complete' = IF(AND('Opportunity-Asazure'[IsGPO]="Yes",NOT 'Opportunity-Asazure'[C1.Is Exception]),IF(AND(OR(AND('Opportunity-Asazure'[Opportunity.Opportunity Status]="Won",'Opportunity-Asazure'[Days Since Won]>'Opportunity-Asazure'[Days Tolerance for Win Complete]),'Opportunity-Asazure'[Opportunity.Opportunity Status]="Lost"),AND(AND(AND('Opportunity-Asazure'[GPO.Pursuit Request State]<>"Complete",'Opportunity-Asazure'[GPO.Pursuit Request State 8hr]<>"Complete"),AND('Opportunity-Asazure'[GPO.Pursuit Request State]<>"Cancelled",'Opportunity-Asazure'[GPO.Pursuit Request State 8hr]<>"Cancelled")),'Opportunity-Asazure'[Pursuit Status]<>"PL not engaged")),"Complete candidate",BLANK()),BLANK())
+		lineageTag: 634d48e3-ae0f-49c0-b904-5b61d11bf29a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Tolerance for Win Complete'
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a052aaa-63aa-4e44-af9b-050b28c1132a
+		summarizeBy: sum
+		sourceColumn: Days Tolerance for Win Complete
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Overspent Tolerance'
+		dataType: int64
+		formatString: 0
+		lineageTag: bc1a4f79-9d0f-4581-9992-c85b2016dff6
+		summarizeBy: sum
+		sourceColumn: Overspent Tolerance
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate for Marking Lost' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF(AND(AND('Opportunity-Asazure'[Days Since Last Billed]>180,'Opportunity-Asazure'[Pursuit Status]="Stalled"),'Opportunity-Asazure'[RFP Analysis]<>"Possible Candidate"),"Mark Lost Candidate",BLANK()),BLANK())
+		lineageTag: c958c479-af6d-47b0-b6d0-e3df22a47ec8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate for Overassigned' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF(AND(AND('Opportunity-Asazure'[Pursuit Status]<>"Complete",'Opportunity-Asazure'[Pursuit Status]<>"Cancelled"),[## NBUE Total PreSales Provided Hrs]<[## NBUE Assigned Hrs]),"Possibly overassigned",BLANK()),BLANK())
+		lineageTag: 3a236b3f-777f-4ee0-a160-c4e99f462098
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate for Overspent' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF(AND(AND(AND('Opportunity-Asazure'[Pursuit Status]<>"Complete",'Opportunity-Asazure'[Pursuit Status]<>"Cancelled"),'Opportunity-Asazure'[Pursuit Status]<>"Won"),'Opportunity-Asazure'[## NBUE Remaining Hrs Opp]<'Opportunity-Asazure'[Overspent Tolerance]),"Possibly overspent",BLANK()),BLANK())
+		lineageTag: b5bd09e3-8f27-4040-8ace-b1c85594967b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate for Oversubmitted' = IF('Opportunity-Asazure'[IsGPO]="Yes",IF(AND(AND('Opportunity-Asazure'[Pursuit Status]<>"Complete",'Opportunity-Asazure'[Pursuit Status]<>"Cancelled"),[## NBUE Assigned Over/Under Hrs]<-4),"Possibly oversubmitted",BLANK()),BLANK())
+		lineageTag: fc5c6079-c7dd-44f5-9ce1-3c5ffe457e05
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate for Stalling' = IF(AND('Opportunity-Asazure'[IsGPO]="Yes",'Opportunity-Asazure'[Pursuit Status]="Active"),IF(AND(AND('Opportunity-Asazure'[Days Since Last Billed]>90,'Opportunity-Asazure'[Pursuit Status]<>"Stalled"),'Opportunity-Asazure'[RFP Analysis]<>"Possible Candidate"),"Stall Candidate",BLANK()),BLANK())
+		lineageTag: 74c7f14f-aa9a-435a-9384-a9082df38c46
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Hygiene = ```
+			IF(AND(AND(AND(AND(AND(ISBLANK('Opportunity-Asazure'[Candidate for Complete]),ISBLANK('Opportunity-Asazure'[Candidate for Stalling])),
+			                        ISBLANK('Opportunity-Asazure'[Candidate for Overspent])),ISBLANK('Opportunity-Asazure'[Candidate for GRM Issues])),ISBLANK('Opportunity-Asazure'[Candidate for Marking Lost])),ISBLANK('Opportunity-Asazure'[Candidate for Mismatch])),
+			            BLANK(),
+			            SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(
+			            "+" & 'Opportunity-Asazure'[Candidate for Complete] & ", " & 'Opportunity-Asazure'[Candidate for Stalling] & ", " & 
+			            'Opportunity-Asazure'[Candidate for Overspent] & ", " & 'Opportunity-Asazure'[Candidate for GRM Issues] & ", " & 'Opportunity-Asazure'[Candidate for Marking Lost] & ", " & 'Opportunity-Asazure'[Candidate for Mismatch] & "+"
+			            ,", , , , ",", "),", , , ",", "),", , ",", "),"+, ",""),", +",""),"+","")
+			)
+			```
+		lineageTag: e7abd0a8-7538-4121-8b77-3c34963a7e77
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Digital SRM link' = if(ISBLANK('Opportunity-Asazure'[C1]),BLANK(), if('Opportunity-Asazure'[Opportunity.Opportunity Status]="Open","https://msit.powerbi.com/groups/me/apps/68f4b05d-a972-4bc6-8787-ea1fd73316fb/reports/2fca4c14-9fed-408e-90b9-effefc7cffa5/ReportSection5cea03d3e4d856467901?filter=Opportunity%2FOpportunity_x0020_Id%20eq%20%27" & 'Opportunity-Asazure'[Opportunity.Opportunity Id] & "%27",BLANK()))
+		lineageTag: de63d5a3-fba5-407a-bd89-d75204d4ef52
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opp Color' =
+			IF('Opportunity-Asazure'[Pursuit Status]="Won",1,
+			                        IF('Opportunity-Asazure'[Pursuit Status]="Stalled",2,
+			                        IF('Opportunity-Asazure'[MCEM Win Rate Exception]=1,7,
+			                        IF('Opportunity-Asazure'[Pursuit Status]="Lost",3,
+			                        IF('Opportunity-Asazure'[Pursuit Status]="Disengaged",4,
+			                        IF('Opportunity-Asazure'[Pursuit Status]="Cancelled",5,
+			                        IF('Opportunity-Asazure'[Hygiene]="Mismatched Status",6,
+			                        0)))))))
+		formatString: 0
+		lineageTag: 2d29e536-c55a-4b6a-aa22-2507f995bb3c
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ACR Estimate' = if(NOT ISBLANK('Opportunity-Asazure'[C1]),CALCULATE(SUM('OSE Cloud Consumption'[OSE ACR Estimates]),FILTER('OSE Cloud Consumption','OSE Cloud Consumption'[OSECloudEstimates.OpportunityKey]='Opportunity-Asazure'[Opportunity.Opportunity Id])),BLANK())
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 519dca90-dcbc-46c8-97dc-b4ff456cbb2b
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Opportunity.Product List' = CONCATENATEX(FILTER('Opportunity Additional','Opportunity-Asazure'[Opportunity.Opportunity Id]='Opportunity Additional'[Opportunity.Opportunity Id]),'Opportunity Additional'[Opportunity.Opportunity Primary Product],",")
+		lineageTag: b9da7dc8-da4a-468a-a04a-39fc974b3d5b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Risk Color' = ROUNDDOWN('Opportunity-Asazure'[C1.Risk Numeric],0)
+		lineageTag: 9ef2797a-85bf-4a59-8556-608cd9b5d93a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CrossTableKey
+		dataType: string
+		lineageTag: 93321cda-e80b-4f9e-890d-3619d04f3589
+		summarizeBy: none
+		sourceColumn: CrossTableKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DV Budget from Key Match' = CALCULATE(SUM('MCS Budget-Raw'[DV Budget]),FILTER('MCS Budget-Raw','MCS Budget-Raw'[CrossTableKey]='Opportunity-Asazure'[CrossTableKey]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f049ef03-963b-46dd-8b13-39f0753a14bd
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Due Date Fiscal Qtr' =
+			IF('Opportunity-Asazure'[IsGPO]="Yes",
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="Opp",'Opportunity-Asazure'[Opportunity.Opportunity Due Date Fiscal Quarter],
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="C1",'Opportunity-Asazure'[C1.Completed Fiscal Quarter],
+			        IF('Opportunity-Asazure'[GPO.Reconciled Choice]="Pursuit",'Opportunity-Asazure'[GPO.Due Date Fiscal Quarter]))),
+			            'Opportunity-Asazure'[Opportunity.Opportunity Due Date Fiscal Quarter])
+		lineageTag: 9b9afb46-cfc4-46fb-a999-12036dd1fc6b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Due Date Fiscal Quarter' = IF('Opportunity-Asazure'[IsGPO]="Yes","FY" & FORMAT('Opportunity-Asazure'[GPO.Due Date Fiscal Yr #],"##") & "-Q" & FORMAT(ROUNDDOWN((('Opportunity-Asazure'[GPO.Due Date Fiscal Month #]-1)/3)+1,0),"#"))
+		lineageTag: 1100df7d-fd10-40fe-b3bb-b31599f949e4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.NBUE Remaining Hrs' =
+			IF(AND('Opportunity-Asazure'[IsGPO]="Yes",NOT 'Opportunity-Asazure'[C1.Is Exception]),
+			
+			            CALCULATE([## NBUE Unassigned Hours]+[## NBUE Assigned Over/Under Hrs],
+			
+			                FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id])),BLANK())
+		formatString: #,0.00
+		lineageTag: bb234cb8-06bc-4109-9f52-08031767695c
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.NBUE Remaining $' =
+			IF(ISBLANK('Opportunity-Asazure'[GPO.NBUE Remaining Hrs]),BLANK(),
+			    CALCULATE([## NBUE Unassigned $]+[## NBUE Assigned Over/Under $],
+			        FILTER('Pursuit Request-Asazure','Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id])))
+		lineageTag: 32894bc5-997b-4132-a0d9-f78036730512
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'GPO.Architect List' = IF(AND('Opportunity-Asazure'[IsGPO]="Yes",NOT 'Opportunity-Asazure'[C1.Is Exception]),CONCATENATEX(FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[Opportunity.Opportunity Id]='Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]),'Pursuit Request-Asazure'[Task.Architect List],"; "),BLANK())
+		lineageTag: bb43fb29-7522-402b-a423-95874c62ac4b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Architect Count' = IF(AND('Opportunity-Asazure'[IsGPO]="Yes",NOT 'Opportunity-Asazure'[C1.Is Exception]),CALCULATE(SUM('Pursuit Request-Asazure'[Task.Architect Count]),FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[Opportunity.Opportunity Id]='Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID])),BLANK())
+		formatString: 0
+		lineageTag: 6c02893b-0912-4c9a-86bd-dc4b22bb1d69
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.IsInSellersNotes' = CONTAINSSTRINGEXACT('Opportunity-Asazure'[Opportunity.Seller Notes],"RFP")
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e356dd78-3d9b-4710-b9ed-82e54a373be1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.IsInPLComments' = CONTAINSSTRINGEXACT('Opportunity-Asazure'[GPO.Pursuit Notes],"RFP")
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 180f6ae2-5378-4ebd-9789-c349b20e659b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.IsInOppName' = CONTAINSSTRINGEXACT('Opportunity-Asazure'[Opportunity.Opportunity Name],"RF")
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f3b05cbc-8ea5-4548-87f7-338ecc9e9567
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.IsInCandidateList' = if(ISBLANK(CALCULATE(MIN('Static-Candidate RFPs'[CRM Opportunity ID]),FILTER('Static-Candidate RFPs','Static-Candidate RFPs'[CRM Opportunity ID]='Opportunity-Asazure'[Opportunity.Opportunity Id]))),FALSE(),TRUE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 90af891f-3d01-4413-9a7f-158c8fcc3dab
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Expected Outcome' = IF(AND('Opportunity-Asazure'[IsGPO]="Yes",NOT 'Opportunity-Asazure'[C1.Is Exception]),CONCATENATEX(FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[Opportunity.Opportunity Id]='Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID]),'Pursuit Request-Asazure'[Expected Outcome],";"),BLANK())
+		lineageTag: c4fd8498-9927-4783-bf0a-3f035a7ba78b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.IsExpectedOutcome' = IF(CONTAINSSTRING('Opportunity-Asazure'[GPO.Expected Outcome],"RFP"),TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e6b81a14-83d0-405c-a778-59e1fb929d17
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP Analysis' = if(OR(OR(OR(OR('Opportunity-Asazure'[RFP.IsInCandidateList],'Opportunity-Asazure'[RFP.IsInOppName]),'Opportunity-Asazure'[RFP.IsInPLComments]),'Opportunity-Asazure'[RFP.IsInSellersNotes]),'Opportunity-Asazure'[RFP.IsExpectedOutcome]),"Possible Candidate","Not in the list")
+		lineageTag: 48935e00-6046-4696-b8ff-ce1d68168ae6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due in the Future' = IF('Opportunity-Asazure'[Due Date]>='Opportunity-Asazure'[Refreshed],TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ebd226cb-7068-4a8d-b859-45f124ea85a5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inbound Flag for YoY Stats' = if(OR('Opportunity-Asazure'[Inbound.Date FY #]='Opportunity-Asazure'[Current FY #],'Opportunity-Asazure'[Inbound.Date FY #]='Opportunity-Asazure'[Current FY #]-1),if('Opportunity-Asazure'[Inbound.Date FY Month #]<'Opportunity-Asazure'[Current FY Month #],1,if('Opportunity-Asazure'[Inbound.Date FY Month #]='Opportunity-Asazure'[Current FY Month #],0,-1)))
+		lineageTag: 180efa2b-4ad0-476f-b9c0-3d9588308be9
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inbound YoY Period Filter' = if('Opportunity-Asazure'[Inbound Flag for YoY Stats]=1,"Completed",if('Opportunity-Asazure'[Inbound Flag for YoY Stats]=0,"Current","Future"))
+		lineageTag: 72377b5b-3f6b-4571-96b9-c5e49842b0da
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Inbound.Date Fiscal Period' = "P" & FORMAT('Opportunity-Asazure'[Inbound.Date FY Month #],"00")
+		lineageTag: 48a02e1d-c266-43d8-8d34-df76773b8e4c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Aging = if(ISBLANK('Opportunity-Asazure'[Days Since Submitted]),BLANK(),if ('Opportunity-Asazure'[Days Since Submitted]>=120,"More than 120",if ('Opportunity-Asazure'[Days Since Submitted]>=90,"90 to 120",if ('Opportunity-Asazure'[Days Since Submitted]>=60,"60 to 90","0 to 60"))))
+		lineageTag: 45306981-5929-4bba-8354-60b7265b2884
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Stalling = if(ISBLANK('Opportunity-Asazure'[Days Since Last Billed]),BLANK(),if ('Opportunity-Asazure'[Days Since Last Billed]>=120,"More than 120",if ('Opportunity-Asazure'[Days Since Last Billed]>=90,"90 to 120",if ('Opportunity-Asazure'[Days Since Last Billed]>=60,"60 to 90","0 to 60"))))
+		lineageTag: 7899e389-d298-4b85-8612-2a132b7484cb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Reconciled Choice' =
+			IF(NOT ISBLANK('Opportunity-Asazure'[GPO.Due Date Match]),
+			        IF('Opportunity-Asazure'[Pursuit Status] ="Won",
+			            IF(AND('Opportunity-Asazure'[C1.CompletedDate]<>CONVERT("1900-01-01",DATETIME),NOT ISBLANK('Opportunity-Asazure'[C1.Completed Fiscal Year])),"C1","Opp"),
+			        IF('Opportunity-Asazure'[GPO.Due Date Match]="Mismatch","Opp","Pursuit")),
+			                        BLANK())
+		lineageTag: c2c911c0-5052-4264-af48-3b9733231247
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Completed Fiscal Year' =
+			IF('Opportunity-Asazure'[C1.ContractStatus]="Completed",
+			    CALCULATE(MIN('Package-Asazure'[Contract.Agreement Setup Completed Date Fiscal Year]),
+			    FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id])),BLANK())
+		lineageTag: a9c88a9f-1d3c-4821-bb60-a490ffc5a48e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Completed Fiscal Month' =
+			IF('Opportunity-Asazure'[C1.ContractStatus]="Completed",
+			    "FY" & FORMAT(CONVERT(RIGHT(
+			                CALCULATE(MIN('Package-Asazure'[Contract.Agreement Setup Completed Date Fiscal Year]),
+			                    FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id])),2),INTEGER)+2000,"####") &
+			    "-P" & FORMAT(CONVERT(RIGHT(
+			                CALCULATE(MIN('Package-Asazure'[Contract.Agreement Setup Completed Date Fiscal Short Month]),
+			                    FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id])),2),INTEGER),"00"),
+			        BLANK())
+		lineageTag: d7c68374-41c7-4ae9-8e50-945288ed624c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Completed Fiscal Quarter' =
+			IF('Opportunity-Asazure'[C1.ContractStatus]="Completed",
+			    CALCULATE(MIN('Package-Asazure'[Contract.Agreement Setup Completed Date Fiscal Quarter]),
+			    FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id])),BLANK())
+		lineageTag: 40a452fc-20b7-423d-942c-50dc68a7f2fe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date Fiscal YoY Period Filter' = if('Opportunity-Asazure'[Due Date Flag for YoY Stats]=1,"Completed",if('Opportunity-Asazure'[Due Date Flag for YoY Stats]=0,"Current","Future"))
+		lineageTag: 26b62026-b4aa-4bad-b700-7340f351e7f5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date Flag for YoY Stats' = if(OR('Opportunity-Asazure'[Due Date Fiscal Year #]='Opportunity-Asazure'[Current FY #],'Opportunity-Asazure'[Due Date Fiscal Year #]='Opportunity-Asazure'[Current FY #]-1),if('Opportunity-Asazure'[Due Date Fiscal Month #]<'Opportunity-Asazure'[Current FY Month #],1,if('Opportunity-Asazure'[Due Date Fiscal Month #]='Opportunity-Asazure'[Current FY Month #],0,-1)))
+		formatString: 0
+		lineageTag: c12053e5-a5b5-4443-a2ad-f3706227f121
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date Fiscal Month #' = CONVERT(RIGHT('Opportunity-Asazure'[Due Date Fiscal Month],2),INTEGER)
+		formatString: 0
+		lineageTag: 5a134b34-de50-400b-8f59-a7c96dec8bff
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Due Date Fiscal Period' = "P" & FORMAT('Opportunity-Asazure'[Due Date Fiscal Month #],"00")
+		lineageTag: f8822572-33ee-444c-be4e-05e331b7015a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country Flag' = CALCULATE(MIN('Static-Country Flags'[Image]),FILTER('Static-Country Flags','Static-Country Flags'[Subsidiary]='Opportunity-Asazure'[Sales Geography.Subsidiary]))
+		lineageTag: 5008617e-555e-4eb6-a520-a4a63cffbba4
+		dataCategory: ImageUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column OU-FY23 = CALCULATE(MIN('Static-OU to PLM Map'[FY23 OU]),FILTER('Static-OU to PLM Map','Opportunity-Asazure'[OU]='Static-OU to PLM Map'[OU] && 'Opportunity-Asazure'[IsTopFY23]))
+		lineageTag: a011d474-d5a2-41dc-ada2-64e918daefbe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Rev Cluster-FY23' =
+			IF(AND(ISBLANK('Opportunity-Asazure'[OU-FY23]),NOT('Opportunity-Asazure'[IsTopFY23])),BLANK(),
+			    if('Opportunity-Asazure'[Opportunity Revenue (CCUS)]<300000,"$.3M-",
+			    if(AND('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>=300000,'Opportunity-Asazure'[Opportunity Revenue (CCUS)]<1000000),"$.3M to $1M",
+			    if(AND('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>=1000000,'Opportunity-Asazure'[Opportunity Revenue (CCUS)]<5000000),"$1M to $5M",
+			    if('Opportunity-Asazure'[Opportunity Revenue (CCUS)]>=5000000,"$5M+",
+			    "Undetermined")))))
+		lineageTag: 4bfa4e24-6f60-4240-b3f5-f1fec88124e4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.8hr Color' = IF(AND(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),NOT ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID 8hr])),"Colored",BLANK())
+		lineageTag: 76c00c77-ffca-4fe5-a3d9-1729b8849682
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.Combined Text' = IF(OR('Opportunity-Asazure'[OU]="SLG",'Opportunity-Asazure'[OU]="Education"),'Opportunity-Asazure'[GPO.Expected Outcome] & " " & 'Opportunity-Asazure'[Opportunity.Opportunity Name] & " " & 'Opportunity-Asazure'[GPO.Pursuit Notes] & " " & 'Opportunity-Asazure'[Opportunity.Seller Notes],BLANK())
+		lineageTag: ba60555c-a8eb-46a5-b239-ea937414ba81
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.Possibly Health and Human Services' =
+			IF(OR(OR(OR(
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Child Welfare"),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Child Support")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Youth Teams")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"WIC")),TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 08d98118-8aa2-4eb1-8b13-b7a4f7b95864
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.Possibly Justice and Public Safety' =
+			IF(OR(OR(OR(OR(OR(
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Corrections"),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Probation")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Courts")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Jail Management")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Police")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Connected Care")),TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f7a890ed-34a0-4d45-8aff-c65abac67b91
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.Possibly Inf Invest and Jobs Act' =
+			IF(OR(OR(OR(
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Airport"),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Tollway")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Ports")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"DOT")),TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: d11e6991-87ff-4401-8268-101824e0a8a4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.Possibly White House Exec Order' =
+			IF(
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Cyber"),TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e5b74b92-129e-4f90-8318-b01f72a51bc0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.Possibly Intelligent Gov Services' =
+			IF(OR(OR(OR(
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Portal"),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Identity")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Case Management")),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Integration")),TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 8277312e-1ddb-4d97-adb5-6f1a5aa47aca
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.Possibly Worker Compensation' =
+			IF(OR(
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Worker"),
+			    CONTAINSSTRING('Opportunity-Asazure'[RFP.Combined Text],"Compensation")),TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 5b1f6a4f-583d-4db8-9dd1-039e01d8b070
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RFP.SLGE RFP Categories' = ```
+			IF('Opportunity-Asazure'[RFP.Possibly Health and Human Services],"Health and Human Services",
+			                        IF('Opportunity-Asazure'[RFP.Possibly Inf Invest and Jobs Act],"Infra Investment and Jobs Act", 
+			                        IF('Opportunity-Asazure'[RFP.Possibly Intelligent Gov Services],"Intelligent Gov Services", 
+			                        IF('Opportunity-Asazure'[RFP.Possibly Justice and Public Safety],"Justice and Public Safety", 
+			                        IF('Opportunity-Asazure'[RFP.Possibly White House Exec Order],"White House Exec Order", 
+			                        IF('Opportunity-Asazure'[RFP.Possibly Worker Compensation],"Worker Compensation",BLANK()))))))
+			```
+		lineageTag: c81168fb-acdb-465a-9ee9-2bb0bf3330ec
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Refresh Override'
+		dataType: string
+		lineageTag: 5c061e0e-a95d-41c1-bdf8-f9a52b24f747
+		summarizeBy: none
+		sourceColumn: Refresh Override
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Package Count' = 'Opportunity-Asazure'[## C1 Package Count]
+		formatString: 0
+		lineageTag: da713986-094c-4058-891a-68ef83a4ef68
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Offerings' = [## C1 Offerings]
+		lineageTag: 4736279f-f837-4769-ac99-93cf1e1b7647
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Primary PL Revised' =
+			IF(NOT ISBLANK('Opportunity-Asazure'[C1.Primary PL Exception Not Resolved]),
+			            IF(NOT ISBLANK(CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Lead Common Name]),FILTER('Pursuit Request-Asazure',CONTAINSSTRING('Pursuit Request-Asazure'[Pursuit Lead Common Name],
+			                            'Opportunity-Asazure'[C1.Primary PL Exception Not Resolved])))),
+			                    CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Lead Common Name]),FILTER('Pursuit Request-Asazure',CONTAINSSTRING('Pursuit Request-Asazure'[Pursuit Lead Common Name],
+			                            'Opportunity-Asazure'[C1.Primary PL Exception Not Resolved]))),'Opportunity-Asazure'[C1.Primary PL]),BLANK())
+		lineageTag: 747ff6d2-5c23-4974-846d-11b22c45faf2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.Primary PL Exception Not Resolved' =
+			IF(AND(AND('Opportunity-Asazure'[IsGPO]="Yes",'Opportunity-Asazure'[C1.Is Exception]),CONTAINSSTRING('Opportunity-Asazure'[C1.Primary PL],", ")),
+			            LEFT('Opportunity-Asazure'[C1.Primary PL],FIND(", ",'Opportunity-Asazure'[C1.Primary PL])-1),"Is Resolved")
+		lineageTag: b9aada4c-f3ad-4c62-a323-a28c44610c4a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Solution Area Short Name' =
+			IF('Opportunity-Asazure'[IsGPO]="Yes",
+			    IF(NOT ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.Domain Short Name]),FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[GPO.Pursuit Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID])),
+			    IF(NOT ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID 8hr]),CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.Domain Short Name]),FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[GPO.Pursuit Request ID 8hr]='Pursuit Request-Asazure'[Pursuit Request.Request ID])),
+			BLANK())))
+		lineageTag: 853e4c60-990d-481c-8c0c-fff574461b28
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Short Solution Area Raw'
+		dataType: string
+		lineageTag: 97ef9185-15a2-4de1-ae77-db8687f81b2d
+		summarizeBy: none
+		sourceColumn: Short Solution Area Raw
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Short Solution Area' = ```
+			IF(AND(ISBLANK('Opportunity-Asazure'[Opportunity.Opportunity Solution Area]),NOT ISBLANK('Opportunity-Asazure'[GPO.Solution Area Short Name])), 
+			
+			        IF(OR('Opportunity-Asazure'[GPO.Solution Area Short Name]="MW",'Opportunity-Asazure'[GPO.Solution Area Short Name]="BA"), 
+			
+			            'Opportunity-Asazure'[GPO.Solution Area Short Name],IF(ISBLANK('Opportunity-Asazure'[Short Solution Area Raw]),"NULL",'Opportunity-Asazure'[Short Solution Area Raw])), 
+			
+			        IF(ISBLANK('Opportunity-Asazure'[Short Solution Area Raw]),"NULL",'Opportunity-Asazure'[Short Solution Area Raw])) 
+			```
+		lineageTag: 471a023a-9bf3-4c00-8d19-6e71ad51238f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Aggregate Status' =
+			IF('Opportunity-Asazure'[Pursuit Status]="PL not engaged","No PL Yet",
+			                    IF(OR(CONTAINSSTRING('Opportunity-Asazure'[Pursuit Status],"Active"),
+			                        'Opportunity-Asazure'[Pursuit Status]="Stalled"),"In Pipe","Out of Pipe"))
+		lineageTag: fbe62436-bd6c-45ba-b428-bdf87def443a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Budget.Key' = IF(AND('Opportunity-Asazure'[Due Date FY Relative]="Current",'Opportunity-Asazure'[IsMCS]),'Opportunity-Asazure'[Sales Geography.Area Short Name] & "|" & 'Opportunity-Asazure'[Sales Geography.Subsidiary] & "|" & 'Opportunity-Asazure'[Sales Geography.Sales Unit] & "|" & 'Opportunity-Asazure'[Due Date Fiscal Period] & "|" & 'Opportunity-Asazure'[Opportunity.Short Solution Area],BLANK())
+		lineageTag: e6d148e9-3d51-45d8-8718-d9e83b2afc94
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Forecast' =
+			IF('Opportunity-Asazure'[Aggregate Status]="In Pipe",
+			        IF(CONTAINSSTRING('Opportunity-Asazure'[Opportunity.Forecast Recommendation],"At Risk"),"C At Risk",
+			        IF(CONTAINSSTRING('Opportunity-Asazure'[Opportunity.Forecast Recommendation],"Upside"),"Upside",
+			        'Opportunity-Asazure'[Opportunity.Forecast Recommendation])),BLANK())
+		lineageTag: f14b7b09-fb5e-49bc-b470-e3a8c1774e41
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Adjustment.Has Match' = IF(NOT ISBLANK(CALCULATE(MIN('DV Adjustments'[DeliveryValue.Project Opportunity ID]),FILTER('DV Adjustments','Opportunity-Asazure'[Opportunity.Opportunity Id]='DV Adjustments'[DeliveryValue.Project Opportunity ID]))),TRUE(),FALSE())
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 1fb65857-c704-4e22-8cd1-48f492e77542
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Adjustment.Gross CCUS' = IF('Opportunity-Asazure'[Adjustment.Has Match],CALCULATE([## DV Gross CCUS],FILTER('DV Adjustments','Opportunity-Asazure'[Opportunity.Opportunity Id]='DV Adjustments'[DeliveryValue.Project Opportunity ID])),BLANK())
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: ba1730b4-1ef9-45de-924e-38571a59994e
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Adjustment.Net CCUS' = IF('Opportunity-Asazure'[Adjustment.Has Match],CALCULATE([## DV Net CCUS],FILTER('DV Adjustments','Opportunity-Asazure'[Opportunity.Opportunity Id]='DV Adjustments'[DeliveryValue.Project Opportunity ID])),BLANK())
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 575bacb6-60d7-49dd-ba50-2080b8925b41
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Adjustment.Leakage CCUS' = IF('Opportunity-Asazure'[Adjustment.Has Match],CALCULATE([## DV Leakage CCUS],FILTER('DV Adjustments','Opportunity-Asazure'[Opportunity.Opportunity Id]='DV Adjustments'[DeliveryValue.Project Opportunity ID])),BLANK())
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 3f67ca09-265b-4646-a4b3-12911f39e64a
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Adjustments.Adjusted DV' = IF('Opportunity-Asazure'[IsGPO]="Yes",'Opportunity-Asazure'[Opportunity Revenue (CCUS)]+'Opportunity-Asazure'[Adjustment.Leakage CCUS],'Opportunity-Asazure'[Adjustment.Net CCUS])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: eff83b55-9a03-4c7c-9282-46d9399b84ab
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'GPO.Pursuit Lead - Primary Common' =
+			IF('Opportunity-Asazure'[IsGPO]="No", "No PL- Not GPO",
+			                    IF('Opportunity-Asazure'[C1.Is Exception],'Opportunity-Asazure'[C1.Primary PL Revised],
+			                    IF(NOT ISBLANK('Opportunity-Asazure'[GPO.Primary PL Standard]),'Opportunity-Asazure'[GPO.Primary PL Standard], 'Opportunity-Asazure'[GPO.Primary PL 8hr])))
+		lineageTag: d2cc082c-df0b-4b72-ab50-193bddd06961
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.PLM Org Search Key' =
+			IF('Opportunity-Asazure'[IsGPO]="Yes",
+			            CALCULATE(MIN('PLs Names Matrix'[Pursuit Request.Pursuit Lead]),FILTER('PLs Names Matrix','PLs Names Matrix'[Pursuit Request.PL GeoMapping Name]='Opportunity-Asazure'[GPO.Pursuit Lead])),
+			        BLANK())
+		lineageTag: dae61af0-1893-460a-8c14-992a991aed57
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.PLM-HR Direct from Org' =
+			IF('Opportunity-Asazure'[IsGPO]="Yes",
+			    IF(NOT ISBLANK('Opportunity-Asazure'[GPO.Pursuit Lead]),
+			        IF(NOT ISBLANK('Opportunity-Asazure'[GPO.PLM Org Search Key]),
+			            CALCULATE(MIN('GPO TZ Org'[PLM-HR]),FILTER('GPO TZ Org','GPO TZ Org'[PL]='Opportunity-Asazure'[GPO.PLM Org Search Key])),
+			            "Blank Search Key"),
+			    BLANK()),
+			"Not GPO")
+		lineageTag: 5a5f046e-a9c3-4fe1-b5d9-c88347404743
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Pursuit Lead Mgr Alias' =
+			IF('Opportunity-Asazure'[IsGPO]="No", "No Alias - Not GPO",
+			                    IF(NOT ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),
+			                        CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.PL Manager 1 Alias]),
+			                            FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[GPO.Pursuit Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID])),
+			                        CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.PL Manager 1 Alias]),
+			                            FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[GPO.Pursuit Request ID 8hr]='Pursuit Request-Asazure'[Pursuit Request.Request ID]))))
+		lineageTag: b65c226f-ad7c-45a0-84c6-08dc8be9a514
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.PLM-HR Round 2' =
+			IF(OR(ISBLANK('Opportunity-Asazure'[GPO.PLM-HR Direct from Org]),'Opportunity-Asazure'[GPO.PLM-HR Direct from Org]="Blank Search Key"),
+			            CALCULATE(MIN('GPO TZ Org'[PLM-HR]),FILTER('GPO TZ Org','GPO TZ Org'[PLM-HR Alias]='Opportunity-Asazure'[GPO.Pursuit Lead Mgr Alias])),
+			        'Opportunity-Asazure'[GPO.PLM-HR Direct from Org])
+		lineageTag: 62e4676c-43f1-4e65-a886-d71ce954f498
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Staffing Link' =
+			IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),"",
+			    CALCULATE(MIN('Pursuit Request-Asazure'[Pre-Sales Staffing Hyperlink]),
+			        FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[GPO.Pursuit Request ID]='Pursuit Request-Asazure'[Pursuit Request.Request ID])))
+		lineageTag: 0a8f3e66-b291-46ba-bc41-7c742e4eb1cb
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Staffing Link 8hr' =
+			IF(ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID]),"",
+			    CALCULATE(MIN('Pursuit Request-Asazure'[Pre-Sales Staffing Hyperlink]),
+			        FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[GPO.Pursuit Request ID]='Opportunity-Asazure'[GPO.Pursuit Request ID 8hr])))
+		lineageTag: 4f22ad8c-4b4a-4063-8e50-73e672f058b0
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Has Proposal Services'
+		dataType: string
+		lineageTag: 0faf2a00-d6db-4383-87c3-1bdad4660cb2
+		summarizeBy: none
+		sourceColumn: Opportunity.Has Proposal Services
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Oppty Hyperlink' = CALCULATE(MAX('Opportunity Additional'[Opportunity.Oppty Hyperlink]),FILTER('Opportunity Additional','Opportunity Additional'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id]))
+		lineageTag: dab16526-489c-47a6-bd54-b2104a16de26
+		dataCategory: WebUrl
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Revenue Cluster'
+		dataType: string
+		lineageTag: 8b5e3b0c-1624-4ae4-9f12-ade9dcc6a3c1
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Revenue Cluster
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.OpportunityKey'
+		dataType: string
+		lineageTag: d7a121fd-f4c7-41be-9bf1-1e48e7e98c6f
+		summarizeBy: none
+		sourceColumn: Opportunity.OpportunityKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Qualified Pipeline'
+		dataType: string
+		lineageTag: 3160628d-4694-44f9-a84c-baafd9608edf
+		summarizeBy: none
+		sourceColumn: Opportunity.Qualified Pipeline
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity Revenue (LOC)'
+		dataType: double
+		lineageTag: 5810c66b-e386-493d-b8aa-ba10dea7ecf8
+		summarizeBy: sum
+		sourceColumn: Opportunity Revenue (LOC)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Opportunity Revenue Raw'
+		dataType: double
+		lineageTag: 96a1b28a-3f21-4f72-acc7-0847fe68c918
+		summarizeBy: sum
+		sourceColumn: Opportunity Revenue Raw
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Opportunity Revenue (CCUS)' = ```
+			IF('Opportunity-Asazure'[Due Date Fiscal Year #] >= 23,
+			    IF(AND('Opportunity-Asazure'[Adjustment.Has Match],'Opportunity-Asazure'[Adjustment.Net CCUS]>'Opportunity-Asazure'[Opportunity Revenue Raw]),'Opportunity-Asazure'[Adjustment.Net CCUS],
+			    IF(AND('Opportunity-Asazure'[Pursuit Status]="Won",'Opportunity-Asazure'[Opportunity Revenue Raw]>0),'Opportunity-Asazure'[Opportunity Revenue Raw],
+			    IF(AND('Opportunity-Asazure'[Pursuit Status]="Won",'Opportunity-Asazure'[Estimated DV (MSX)]>0),'Opportunity-Asazure'[Estimated DV (MSX)],
+			    IF(AND('Opportunity-Asazure'[Pursuit Status]="Won",'Opportunity-Asazure'[C1.DV]>0),'Opportunity-Asazure'[C1.DV],
+			    IF(NOT ISBLANK('Opportunity-Asazure'[Opportunity Revenue Raw]),'Opportunity-Asazure'[Opportunity Revenue Raw],
+			    IF(NOT ISBLANK('Opportunity-Asazure'[Estimated DV (MSX)]),'Opportunity-Asazure'[Estimated DV (MSX)],
+			    IF('Opportunity-Asazure'[C1.DV]>0,'Opportunity-Asazure'[C1.DV],BLANK()))))))),
+			    IF(NOT ISBLANK('Opportunity-Asazure'[Opportunity Revenue Raw]),'Opportunity-Asazure'[Opportunity Revenue Raw],
+			    IF('Opportunity-Asazure'[C1.DV]>0,'Opportunity-Asazure'[C1.DV],BLANK())))
+			
+			
+			```
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 10baa6c6-4dc4-4f48-a3de-9f5ca304e3a6
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Candidate for Mismatch' = IF(AND(AND(AND('Opportunity-Asazure'[IsGPO]="Yes",'Opportunity-Asazure'[Opportunity.Opportunity Status]="Open"),'Opportunity-Asazure'[Pursuit Status]="Complete"),ISBLANK('Opportunity-Asazure'[GPO.Pursuit Request ID 8hr])),"Mismatched Status",BLANK())
+		lineageTag: fea9a313-3db7-4f5e-8739-91bb3b21da57
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Licensing Program'
+		dataType: string
+		lineageTag: 8c256117-a4e9-4104-9f2c-3942b957ed72
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Licensing Program
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Opportunity Sales Stage Sort Order'
+		dataType: string
+		lineageTag: 97cb9bc5-6c6e-4da2-8460-b3760706efb0
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Sales Stage Sort Order
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.OU Initiative' = CALCULATE(MIN('Static-Product to Initiative Map'[Initiative]),FILTER('Static-Product to Initiative Map','Opportunity-Asazure'[Opportunity.Product List]='Static-Product to Initiative Map'[Product]))
+		lineageTag: a443deb3-e239-4e7b-afb5-68a04071d59b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GPO.Days from Assigned to Resource' = IF(AND('Opportunity-Asazure'[IsGPO]="Yes",NOT 'Opportunity-Asazure'[C1.Is Exception]),CALCULATE(MIN('Pursuit Request-Asazure'[Pursuit Request.Days from Assigned to Planned]),FILTER('Pursuit Request-Asazure','Opportunity-Asazure'[Opportunity.Opportunity Id]='Pursuit Request-Asazure'[Pursuit Request.CRM Opportunity ID])),BLANK())
+		formatString: 0
+		lineageTag: bbe74479-915b-4a99-976c-278ec667cbcf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	column 'C1.SubConName(s)' = ```
+			CALCULATE(MIN('Package-Asazure'[Subcon.SubconNames]),FILTER('Package-Asazure','Package-Asazure'[Opportunity.Opportunity Id]='Opportunity-Asazure'[Opportunity.Opportunity Id])) 
+			```
+		lineageTag: 2ef7e2f1-60ce-41b1-8947-77b488377b78
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'C1.HasSubCon' = ```
+			IF(ISBLANK('Opportunity-Asazure'[C1.SubConName(s)]),"No","Yes") 
+			```
+		lineageTag: 685dc2c8-41b9-4901-bba9-9016ec567f74
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.State Analysis' = ```
+			IF('Opportunity-Asazure'[Opportunity.Opportunity Status]="Open",
+			                        IF('Opportunity-Asazure'[GRM.Project Count]>0,
+			                            IF(AND(AND(NOT 'Opportunity-Asazure'[C1.Is Amendment],'Opportunity-Asazure'[Days Until Due]<=30),
+			                                    'Opportunity-Asazure'[Days Until Earliest GRM]<=14),"Issue - Core Signature due <=30 Days and 1st GRM <=14 days from Today ",
+			                            IF(AND(AND(NOT 'Opportunity-Asazure'[C1.Is Amendment],'Opportunity-Asazure'[Days Until Due]<=30),
+			                                    'Opportunity-Asazure'[Days Until Earliest GRM]<=30),"Action Needed - Core Signature due <=30 Days and 1st GRM <30 days from Today ",
+			                            IF('Opportunity-Asazure'[GRM.HasOutdated]="YES","Action Needed - Some Outdated ","+") &
+			                            IF('Opportunity-Asazure'[GRM.HasSuspended]="YES","Action Needed - Some Suspended ","+") &
+			                            IF('Opportunity-Asazure'[GRM.HasOrphan]="YES","Action Needed - Some Orphan ") &
+			                            "+")),
+			                        IF(NOT ISBLANK('Opportunity-Asazure'[C1]),
+			                            IF('Opportunity-Asazure'[C1.Is BE],"N/A - Is BE",
+			                                IF('Opportunity-Asazure'[Days Until Due]>30,"N/A - More than 30 days out",
+			                                    IF('Opportunity-Asazure'[C1.Is Amendment],"Suspicious - Amendment No Projects",
+			                                        IF('Opportunity-Asazure'[Days Until Due]<=10,"Issue - Core <=10 days til Signature No Projects","Suspicious - Core within 30 days No Projects")))),
+			                            IF(AND('Opportunity-Asazure'[Opportunity.Opportunity Status]="Open",'Opportunity-Asazure'[Days Until Due]<=10),
+			                                "Issue - No C1 and <=10 days til Signature No Projects",
+			                                IF('Opportunity-Asazure'[Opportunity.Opportunity Status]="Won",
+			                                    "Suspicious - Won but No C1 and No Projects",
+			                                    "N/A - No C1 but > 10 days out")))),
+			                    "N/A - Not in Pipe")
+			
+			```
+		lineageTag: 60d46b21-04ec-4df0-a9f3-1f7868a2e7cc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.State' = ```
+			IF('Opportunity-Asazure'[GRM.State Analysis]="+++","Good", 
+			            IF(CONTAINSSTRING('Opportunity-Asazure'[GRM.State Analysis],"N/A"),"N/A", 
+			            IF(CONTAINSSTRING('Opportunity-Asazure'[GRM.State Analysis],"Action"),"Action Needed", 
+			            IF(CONTAINSSTRING('Opportunity-Asazure'[GRM.State Analysis],"Issue"),"Issue", 
+			            IF(CONTAINSSTRING('Opportunity-Asazure'[GRM.State Analysis],"Suspicious"),"Suspicious")))))
+			```
+		lineageTag: a5f40669-869e-4d22-89ad-401c295033f4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'GRM.State Details' = ```
+			TRIM(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(SUBSTITUTE('Opportunity-Asazure'[GRM.State Analysis], 
+			        "+++","No Issues"), 
+			        "+",""), 
+			        "Action Needed - ",""), 
+			        "Suspicious - ",""), 
+			        "Issue - ",""))
+			```
+		lineageTag: 75ae53a2-4001-4658-9561-09eeba842c86
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MCEM Win Rate Exception' =
+			IF(AND(AND(AND('Opportunity-Asazure'[Due Date Fiscal Year #] >=23,
+			OR('Opportunity-Asazure'[Pursuit Status]="Lost",'Opportunity-Asazure'[Pursuit Status]="Disengaged")),
+			'Opportunity-Asazure'[Opportunity.Last Sales Stage]<>"Inspire & Design"),
+			'Opportunity-Asazure'[Opportunity.Last Sales Stage]<>"Empower & Achieve"),
+			1,BLANK())
+		formatString: 0
+		lineageTag: 44c5b206-7baa-44df-a5aa-c53a7d3f41ef
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account.Account Segment Name'
+		dataType: string
+		lineageTag: f97843a2-c072-47e3-a398-2a4501eeeb6c
+		summarizeBy: none
+		sourceColumn: Account.Account Segment Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column PubSec/Commercial = ```
+			SWITCH(
+			    'Opportunity-Asazure'[Account.Account Segment Name],
+			    "Major Commercial", "Commercial", 
+			    "Small, Medium & Corporate Commercial", "Commercial", 
+			    "Strategic Commercial", "Commercial",
+			    "Small, Medium & Corporate Scale", "Commercial",
+			    "Major Public Sector", "Public Sector",
+			    "Small, Medium & Corporate Public Sector", "Public Sector",
+			    "Strategic Public Sector", "Public Sector",
+			    "Unknown")
+			```
+		lineageTag: 66a383e9-a5fb-47ba-b16a-8010c220dd4d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Estimated DV (MSX)' = CALCULATE(MIN('Opportunity Additional'[Opportunity.Estimated Revenue]),FILTER('Opportunity Additional','Opportunity-Asazure'[Opportunity.Opportunity Id]='Opportunity Additional'[Opportunity.Opportunity Id]))
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: ab50dcf4-44fe-4320-a308-d8a16d829e48
+		summarizeBy: sum
+
+		changedProperty = DataType
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Days Until Earliest GRM' =
+			if('Opportunity-Asazure'[Opportunity.Opportunity Status]="Open",
+			    DATEDIFF(TODAY(),'Opportunity-Asazure'[GRM.Earliest],DAY),BLANK())
+		formatString: 0
+		lineageTag: ad92816f-570a-48af-9c95-43dc11b26185
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Candidate for GRMs Missing' = if(AND(AND(AND(OR('Opportunity-Asazure'[Aggregate Status]="In Pipe",'Opportunity-Asazure'[Pursuit Status]="Won"),'Opportunity-Asazure'[Days Until Due]<=20),ISBLANK('Opportunity-Asazure'[GRM.PresalesStatus])),OR('Opportunity-Asazure'[Opportunity.Forecast Recommendation]="Committed",'Opportunity-Asazure'[Opportunity.Forecast Recommendation]="Committed At Risk")),"In Pipe or Won/C or C@R/Due in <=20 days but No GRMs",BLANK())
+		lineageTag: 23bde897-ced8-4980-ae18-234972ade5c7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Opportunity-Asazure-f9f9083f-4742-4b8a-bcc8-6228516f2123 = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model = #"Deal Management"{[Id="Model"]}[Data],
+				    #"Pursuit Management and Presales1" = Model{[Id="Pursuit Management and Presales"]}[Data],
+				    #"Added Items" = Cube.Transform(#"Pursuit Management and Presales1",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Account]", {"[Account].[Account Industry Name].[Account Industry Name]", "[Account].[Account Name].[Account Name]", "[Account].[Account Segment Name].[Account Segment Name]", "[Account].[Account Sub Segment Name].[Account Sub Segment Name]", "[Account].[Account TPID].[Account TPID]", "[Account].[Account Type Name].[Account Type Name]", "[Account].[Is Public Sector Account].[Is Public Sector Account]", "[Account].[MS Sales TP ID].[MS Sales TP ID]", "[Account].[MS Sales TP Name].[MS Sales TP Name]", "[Account].[Strategic Account].[Strategic Account]"}, {"Account.Account Industry Name", "Account.Account Name", "Account.Account Segment Name", "Account.Account Sub Segment Name", "Account.Account TPID", "Account.Account Type Name", "Account.Is Public Sector Account", "Account.MS Sales TP ID", "Account.MS Sales TP Name", "Account.Strategic Account"}},
+				            {Cube.AddAndExpandDimensionColumn, "[Opportunity]", {"[Opportunity].[Commitment Level].[Commitment Level]", "[Opportunity].[Customer CRM ID].[Customer CRM ID]", "[Opportunity].[Deal Created].[Deal Created]", "[Opportunity].[Forecast Recommendation].[Forecast Recommendation]", "[Opportunity].[Has Proposal Services].[Has Proposal Services]", "[Opportunity].[Is GPO].[Is GPO]", "[Opportunity].[Is MCS Opportunity].[Is MCS Opportunity]", "[Opportunity].[Last Sales Stage].[Last Sales Stage]", "[Opportunity].[Latest Win Probability %].[Latest Win Probability %]", "[Opportunity].[Must Win].[Must Win]", "[Opportunity].[Opportunity Business Scenario].[Opportunity Business Scenario]", "[Opportunity].[Opportunity Created Date].[Opportunity Created Date]", "[Opportunity].[Opportunity Domain].[Opportunity Domain]", "[Opportunity].[Opportunity Due Date].[Opportunity Due Date]", "[Opportunity].[Opportunity Due Date Fiscal Month].[Opportunity Due Date Fiscal Month]", "[Opportunity].[Opportunity Due Date Fiscal Quarter].[Opportunity Due Date Fiscal Quarter]", "[Opportunity].[Opportunity Due Date Fiscal Year].[Opportunity Due Date Fiscal Year]", "[Opportunity].[Opportunity Due in 2 Weeks].[Opportunity Due in 2 Weeks]", "[Opportunity].[Opportunity Has Exception].[Opportunity Has Exception]", "[Opportunity].[Opportunity Id].[Opportunity Id]", "[Opportunity].[Opportunity Licensing Program].[Opportunity Licensing Program]", "[Opportunity].[Opportunity Name].[Opportunity Name]", "[Opportunity].[Opportunity Owner].[Opportunity Owner]", "[Opportunity].[Opportunity Revenue Cluster].[Opportunity Revenue Cluster]", "[Opportunity].[Opportunity Sales Stage].[Opportunity Sales Stage]", "[Opportunity].[Opportunity Sales Stage Sort Order].[Opportunity Sales Stage Sort Order]", "[Opportunity].[Opportunity Solution Area].[Opportunity Solution Area]", "[Opportunity].[Opportunity Status].[Opportunity Status]", "[Opportunity].[OpportunityKey].[OpportunityKey]", "[Opportunity].[Qualified Pipeline].[Qualified Pipeline]", "[Opportunity].[Services Executive].[Services Executive]", "[Opportunity].[Short Solution Area].[Short Solution Area]"}, {"Opportunity.Commitment Level", "Opportunity.Customer CRM ID", "Opportunity.Deal Created", "Opportunity.Forecast Recommendation", "Opportunity.Has Proposal Services", "Opportunity.Is GPO", "Opportunity.Is MCS Opportunity", "Opportunity.Last Sales Stage", "Opportunity.Latest Win Probability %", "Opportunity.Must Win", "Opportunity.Opportunity Business Scenario", "Opportunity.Opportunity Created Date", "Opportunity.Opportunity Domain", "Opportunity.Opportunity Due Date", "Opportunity.Opportunity Due Date Fiscal Month", "Opportunity.Opportunity Due Date Fiscal Quarter", "Opportunity.Opportunity Due Date Fiscal Year", "Opportunity.Opportunity Due in 2 Weeks", "Opportunity.Opportunity Has Exception", "Opportunity.Opportunity Id", "Opportunity.Opportunity Licensing Program", "Opportunity.Opportunity Name", "Opportunity.Opportunity Owner", "Opportunity.Opportunity Revenue Cluster", "Opportunity.Opportunity Sales Stage", "Opportunity.Opportunity Sales Stage Sort Order", "Opportunity.Opportunity Solution Area", "Opportunity.Opportunity Status", "Opportunity.OpportunityKey", "Opportunity.Qualified Pipeline", "Opportunity.Services Executive", "Opportunity.Short Solution Area"}},
+				            {Cube.AddMeasureColumn, "Opportunity Count", "[Measures].[Opportunity Count]"},
+				            {Cube.AddMeasureColumn, "Opportunity Revenue (CCUS)", "[Measures].[Opportunity Revenue (CCUS)]"},
+				            {Cube.AddAndExpandDimensionColumn, "[Sales Geography]", {"[Sales Geography].[Area].[Area]", "[Sales Geography].[Area Short Name].[Area Short Name]", "[Sales Geography].[ATU Group].[ATU Group]", "[Sales Geography].[ATU Name].[ATU Name]", "[Sales Geography].[Commercial/Public Sector].[Commercial/Public Sector]", "[Sales Geography].[Region].[Region]", "[Sales Geography].[Sales Territory].[Sales Territory]", "[Sales Geography].[Sales Unit].[Sales Unit]", "[Sales Geography].[Sub Region].[Sub Region]", "[Sales Geography].[Subsidiary].[Subsidiary]", "[Sales Geography].[Time Zone].[Time Zone]"}, {"Sales Geography.Area", "Sales Geography.Area Short Name", "Sales Geography.ATU Group", "Sales Geography.ATU Name", "Sales Geography.Commercial/Public Sector", "Sales Geography.Region", "Sales Geography.Sales Territory", "Sales Geography.Sales Unit", "Sales Geography.Sub Region", "Sales Geography.Subsidiary", "Sales Geography.Time Zone"}},
+				            {Cube.AddMeasureColumn, "Opportunity Revenue (LOC)", "[Measures].[Opportunity Revenue (LOC)]"}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each [Sales Geography.Sales Unit] <> "USA - Federal"),
+				    #"Filtered Rows6" = Table.SelectRows(#"Filtered Rows", each [Sales Geography.ATU Group] <> "USA - FED - Defense"),
+				    #"Filtered Rows2" = Table.SelectRows(#"Filtered Rows6", each Text.Contains([Opportunity.Opportunity Id], "-")),
+				    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows2", each [Opportunity.Short Solution Area] <> "Support"),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows1",{{"Opportunity.Opportunity Due Date", type date}}),
+				    #"Filtered Rows3" = Table.SelectRows(#"Changed Type", each [Opportunity.Opportunity Due Date] >= #"Min Due Date"),
+				    #"Filtered Rows5" = Table.SelectRows(#"Filtered Rows3", each [Opportunity.Opportunity Due Date] <= #"Max Due Date"),
+				    #"Added Custom7" = Table.AddColumn(#"Filtered Rows5", "Refresh Override", each #"Current Fiscal Override Date"),
+				    #"Added Custom" = Table.AddColumn(#"Added Custom7", "Refreshed", each if [Refresh Override]<>null then [Refresh Override] else DateTimeZone.UtcNow()),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Refreshed", type datetimezone}}),
+				    #"Added Custom1" = Table.AddColumn(#"Changed Type1", "Current FY #", each Date.Year(Date.AddMonths([Refreshed],6))-2000),
+				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Current FY Month #", each if(Date.Month([Refreshed])<=6) then Date.Month([Refreshed])+6 else Date.Month([Refreshed])-6),
+				    #"Added Custom3" = Table.AddColumn(#"Added Custom2", "Current FY Qtr #", each Date.QuarterOfYear(Date.AddMonths([Refreshed],6))),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom3",{{"Account.Account TPID", Int64.Type}}),
+				    #"Added Custom4" = Table.AddColumn(#"Changed Type2", "Days Tolerance for Win Complete", each #"Days Tolerance for Win Complete"),
+				    #"Added Custom5" = Table.AddColumn(#"Added Custom4", "Overspent Tolerance", each #"Overspent Tolerance"),
+				    #"Added Custom6" = Table.AddColumn(#"Added Custom5", "CrossTableKey", each [Sales Geography.Area Short Name] & "|" & [Sales Geography.Sales Unit] & "|" & [Opportunity.Opportunity Due Date Fiscal Month] & "|" & [Opportunity.Short Solution Area]),
+				    #"Added Custom8" = Table.AddColumn(#"Added Custom6", "Short Solution Area Raw", each [Opportunity.Short Solution Area]),
+				    #"Added Custom9" = Table.AddColumn(#"Added Custom8", "Opportunity Revenue Raw", each [#"Opportunity Revenue (CCUS)"]),
+				    #"Uppercased Text" = Table.TransformColumns(#"Added Custom9",{{"Account.Account Name", Text.Upper, type text}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Uppercased Text",{"Account.Account Industry Name", "Account.Account Name", "Account.Account Segment Name", "Account.Account Sub Segment Name", "Account.Account TPID", "Account.Account Type Name", "Account.Is Public Sector Account", "Account.MS Sales TP ID", "Account.MS Sales TP Name", "Account.Strategic Account", "Opportunity.Commitment Level", "Opportunity.Customer CRM ID", "Opportunity.Deal Created", "Opportunity.Forecast Recommendation", "Opportunity.Has Proposal Services", "Opportunity.Is GPO", "Opportunity.Is MCS Opportunity", "Opportunity.Last Sales Stage", "Opportunity.Latest Win Probability %", "Opportunity.Must Win", "Opportunity.Opportunity Business Scenario", "Opportunity.Opportunity Created Date", "Opportunity.Opportunity Domain", "Opportunity.Opportunity Due Date", "Opportunity.Opportunity Due Date Fiscal Month", "Opportunity.Opportunity Due Date Fiscal Quarter", "Opportunity.Opportunity Due Date Fiscal Year", "Opportunity.Opportunity Due in 2 Weeks", "Opportunity.Opportunity Has Exception", "Opportunity.Opportunity Id", "Opportunity.Opportunity Licensing Program", "Opportunity.Opportunity Name", "Opportunity.Opportunity Owner", "Opportunity.Opportunity Revenue Cluster", "Opportunity.Opportunity Sales Stage", "Opportunity.Opportunity Sales Stage Sort Order", "Opportunity.Opportunity Solution Area", "Opportunity.Opportunity Status", "Opportunity.OpportunityKey", "Opportunity.Qualified Pipeline", "Opportunity.Services Executive", "Opportunity Count", "Sales Geography.Area", "Sales Geography.Area Short Name", "Sales Geography.ATU Group", "Sales Geography.ATU Name", "Sales Geography.Commercial/Public Sector", "Sales Geography.Region", "Sales Geography.Sales Territory", "Sales Geography.Sales Unit", "Sales Geography.Sub Region", "Sales Geography.Subsidiary", "Sales Geography.Time Zone", "Opportunity Revenue (LOC)", "Refresh Override", "Refreshed", "Current FY #", "Current FY Month #", "Current FY Qtr #", "Days Tolerance for Win Complete", "Overspent Tolerance", "CrossTableKey", "Short Solution Area Raw", "Opportunity Revenue Raw"})
+				in
+				    #"Removed Other Columns"
+
+	annotation PBI_ResultType = Table
+

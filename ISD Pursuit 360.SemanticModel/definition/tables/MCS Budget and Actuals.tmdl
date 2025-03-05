@@ -1,0 +1,341 @@
+table 'MCS Budget and Actuals'
+	lineageTag: a4d2cd40-2b56-4501-9b5e-5c6d651affce
+
+	measure '## DV Actual' = SUM('MCS Budget and Actuals'[DV Actual])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f43582fe-4d8c-49be-925c-2d2107801f19
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## DV Won from Opps' = SUM('MCS Budget and Actuals'[Opportunity.Aligned and Won DV])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 403e4330-25d7-4fd0-87dc-3987d7af2f39
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## DV Won from Opps IsGPO' = SUM('MCS Budget and Actuals'[Opportunity.Aligned and Won DV IsGPO])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 8a72eeae-ee35-403c-9d04-7eb94974c06b
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## DV Target' = SUM('MCS Budget and Actuals'[DV Budget])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: a9057544-6914-4d9a-8735-a72d92042ade
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## VTT %' = IF([## DV Target]<>0,[## Variance to Target]/[## DV Target],BLANK())
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 527fccbb-bfea-4bb0-b71c-e0949db72269
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## Variance to Target' = [## DV Actual]-[## DV Target]
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 9a89eefb-a36c-4db5-b25a-8f4c2ddb54d3
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## DV to Go' = [## Variance to Target]*-1
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 75a1e4b0-e26f-4cc0-9739-cad25c0c9678
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## Coverage %' = IF([## DV to Go]>0,[## DV Pipeline]/[## DV to Go],BLANK())
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		lineageTag: 5dc2cb80-ef30-4db6-8358-a500f5336ae0
+
+		changedProperty = FormatString
+
+		changedProperty = IsHidden
+
+	measure '## DV Pipeline' = SUM('MCS Budget and Actuals'[Opportunity.Aligned and In Pipe])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: a3719f10-668b-42c1-92f9-1ca6aa4c1aa8
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '## DV Committed' = SUM('MCS Budget and Actuals'[Opportunity.Aligned and Committed])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: a4c81b59-81cc-4379-b0c5-aca50ea73a81
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure '% GPO Contribution' = IF([## DV Won from Opps]>0,[## DV Won from Opps IsGPO]/[## DV Won from Opps],BLANK())
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c363bd19-2c19-4644-be02-ff393c8a4efb
+
+		changedProperty = FormatString
+
+	measure '## DV Leakage' = SUM('MCS Budget and Actuals'[DV Leakage])
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 9c0061d7-a8d5-4a2b-9322-a359f9b528bd
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Sales Geography.Time Zone'
+		dataType: string
+		lineageTag: e3083230-eea5-449e-9bc4-287fed2c88a0
+		summarizeBy: none
+		sourceColumn: Sales Geography.Time Zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Area Short Name'
+		dataType: string
+		lineageTag: 18b70ad9-23fa-4c9d-895e-0ac1fb55574d
+		summarizeBy: none
+		sourceColumn: Sales Geography.Area Short Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Service Line Offering.Short Solution Area'
+		dataType: string
+		lineageTag: 5a3d9f9e-4ddd-4ec4-967a-9bdd292ec3c4
+		summarizeBy: none
+		sourceColumn: Service Line Offering.Short Solution Area
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month.Fiscal Month'
+		dataType: string
+		lineageTag: b6dcd4d2-07c4-4532-a5c5-b278f7989cdd
+		summarizeBy: none
+		sourceColumn: Fiscal Month.Fiscal Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month.Fiscal Year'
+		dataType: string
+		lineageTag: 9a86c99d-3635-4b36-8b43-b83d540a4549
+		summarizeBy: none
+		sourceColumn: Fiscal Month.Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sales Unit'
+		dataType: string
+		lineageTag: 60100df8-4b5e-48e5-92b5-4367b40e8792
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sales Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column CrossTableKey
+		dataType: string
+		lineageTag: 58281f15-4491-4f8e-bdac-f3ffc0672e72
+		summarizeBy: none
+		sourceColumn: CrossTableKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DV Budget'
+		dataType: double
+		lineageTag: be52da2e-744d-4c89-a8a0-6b79473ccd37
+		summarizeBy: sum
+		sourceColumn: DV Budget
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'DV Actual'
+		dataType: double
+		lineageTag: bb992b3d-633e-43e7-9671-1cc0ab830417
+		summarizeBy: sum
+		sourceColumn: DV Actual
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Net DV'
+		dataType: double
+		lineageTag: 9907ffdc-d221-4272-9775-5cb4e5f986de
+		summarizeBy: sum
+		sourceColumn: Net DV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Forecast - MCS_DV'
+		dataType: double
+		lineageTag: 8199c78d-bfdb-4ff6-8501-1c17d8c7b719
+		summarizeBy: sum
+		sourceColumn: Forecast - MCS_DV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Budget.Key' = 'MCS Budget and Actuals'[Sales Geography.Area Short Name] & "|" & 'MCS Budget and Actuals'[Sales Geography.Subsidiary] & "|" & 'MCS Budget and Actuals'[Sales Geography.Sales Unit] & "|" & 'MCS Budget and Actuals'[Fiscal Month.Period Short Name] & "|" & 'MCS Budget and Actuals'[Service Line Offering.Short Solution Area]
+		lineageTag: 0588bdca-1caf-4ddc-915b-198030201912
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Opportunity.Aligned and Won DV IsGPO' = CALCULATE([## Opps Won $],FILTER('Opportunity-Asazure','MCS Budget and Actuals'[Budget.Key]='Opportunity-Asazure'[Budget.Key]&& 'Opportunity-Asazure'[IsGPO]="Yes"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 7d80a9ab-fe83-4fb3-ad5e-31fd4f6427a1
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Opportunity.Aligned and Won DV' = CALCULATE([## Opps Won $],FILTER('Opportunity-Asazure','MCS Budget and Actuals'[Budget.Key]='Opportunity-Asazure'[Budget.Key]))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: ba3f7aa5-3df0-469d-91e6-e923a8723053
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Opportunity.Aligned and In Pipe' = CALCULATE([## Opps Open $],FILTER('Opportunity-Asazure','MCS Budget and Actuals'[Budget.Key]='Opportunity-Asazure'[Budget.Key] && 'Opportunity-Asazure'[Aggregate Status]<>"Out of Pipe"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: e9f7b939-5037-47a3-ae46-1c3e82fc65f0
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Opportunity.Aligned and Committed' = CALCULATE([## Opps Open $],FILTER('Opportunity-Asazure','MCS Budget and Actuals'[Budget.Key]='Opportunity-Asazure'[Budget.Key] && 'Opportunity-Asazure'[Aggregate Status]<>"Out of Pipe" && 'Opportunity-Asazure'[Opportunity.Forecast Recommendation]="Committed"))
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 9bbc48b9-1256-4eef-a443-62275f265275
+		summarizeBy: sum
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'DV Leakage'
+		dataType: double
+		lineageTag: 1eee666a-c725-4efc-8bc5-332950d20938
+		summarizeBy: sum
+		sourceColumn: DV Leakage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Gross DV'
+		dataType: double
+		lineageTag: a7f3005d-0250-44eb-a4fe-ad820adae259
+		summarizeBy: sum
+		sourceColumn: Gross DV
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Fiscal Month.Period Short Name' = RIGHT('MCS Budget and Actuals'[Fiscal Month.Fiscal Month],3)
+		lineageTag: e05a3edb-573d-4d49-9496-eadbcbe46e6b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Month #' = CONVERT(RIGHT('MCS Budget and Actuals'[Fiscal Month.Fiscal Month],2),INTEGER)
+		formatString: 0
+		lineageTag: 9aa205b3-1748-42f8-8a17-92be4f18ff4f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = User
+
+	column 'Fiscal Group' =
+			IF('MCS Budget and Actuals'[Fiscal Month #]<[## Current Fiscal Month #],"Complete",
+			                IF('MCS Budget and Actuals'[Fiscal Month #]=[## Current Fiscal Month #],"Current",
+			                IF('MCS Budget and Actuals'[Fiscal Month #]>[## Current Fiscal Month #],"Future")))
+		lineageTag: 5c1dbb8f-94d3-4205-9d74-157b7117f77f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column AreaUnitFilter = IF(OR(OR([## DV Target]>0,[## Opps All $]>0),[## DV Leakage]<>0),'MCS Budget and Actuals'[Sales Geography.Area Short Name] & " | " & 'MCS Budget and Actuals'[Sales Geography.Sales Unit],BLANK())
+		lineageTag: 495b483d-f229-4e41-8bf6-01c6dc3b65f0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Subsidiary'
+		dataType: string
+		lineageTag: ca687286-5bbd-47fd-863e-2de9171240eb
+		summarizeBy: none
+		sourceColumn: Sales Geography.Subsidiary
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'MCS Budget and Actuals-ea4c2685-5f39-4cd8-8acb-5620b186c7b1' = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    Sales1 = Source{[Name="Sales"]}[Data],
+				    Sales2 = Sales1{[Id="Sales"]}[Data],
+				    Sales3 = Sales2{[Id="Sales"]}[Data],
+				    #"Added Items" = Cube.Transform(Sales3,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Sales Geography]", {"[Sales Geography].[Area Short Name].[Area Short Name]", "[Sales Geography].[Is US Federal].[Is US Federal]", "[Sales Geography].[Time Zone].[Time Zone]", "[Sales Geography].[Subsidiary].[Subsidiary]"}, {"Sales Geography.Area Short Name", "Sales Geography.Is US Federal", "Sales Geography.Time Zone", "Sales Geography.Subsidiary"}},
+				            {Cube.AddAndExpandDimensionColumn, "[Service Line Offering]", {"[Service Line Offering].[Short Solution Area].[Short Solution Area]"}, {"Service Line Offering.Short Solution Area"}}
+				        }),
+				    #"Filtered Rows1" = Table.SelectRows(#"Added Items", each (Cube.AttributeMemberId([Sales Geography.Is US Federal]) = "[Sales Geography].[Is US Federal].&[No]" meta [DisplayName = "No"])),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Filtered Rows1",null,"NULL",Replacer.ReplaceValue,{"Service Line Offering.Short Solution Area"}),
+				    #"Filtered Rows2" = Table.SelectRows(#"Replaced Value1", each [Service Line Offering.Short Solution Area] <> null),
+				    #"Removed Duplicates" = Table.Distinct(#"Filtered Rows2"),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Duplicates", {"Sales Geography.Time Zone"}, #"MCS Budget-Raw", {"Sales Geography.Time Zone"}, "MCS Budget", JoinKind.LeftOuter),
+				    #"Expanded for Fiscals" = Table.ExpandTableColumn(#"Merged Queries", "MCS Budget", {"Fiscal Month.Fiscal Month", "Fiscal Month.Fiscal Year"}, {"Fiscal Month.Fiscal Month", "Fiscal Month.Fiscal Year"}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Expanded for Fiscals",{"Sales Geography.Time Zone", "Sales Geography.Area Short Name", "Sales Geography.Subsidiary", "Service Line Offering.Short Solution Area", "Fiscal Month.Fiscal Month", "Fiscal Month.Fiscal Year"}),
+				    #"Filtered Rows5" = Table.SelectRows(#"Removed Other Columns", each (Cube.AttributeMemberId([Fiscal Month.Fiscal Year]) <> "[Fiscal Month].[Fiscal Year].&" meta [DisplayName = "(null)"] and Cube.AttributeMemberId([Fiscal Month.Fiscal Year]) <> "[Fiscal Month].[Fiscal Year].&[FY1900]" meta [DisplayName = "FY1900"])),
+				    #"Removed Duplicates2" = Table.Distinct(#"Filtered Rows5"),
+				    #"Merged Queries1" = Table.NestedJoin(#"Removed Duplicates2", {"Sales Geography.Area Short Name"}, #"MCS Budget-All Sales Units", {"Sales Geography.Area Short Name"}, "MCS Actuals-Categories", JoinKind.LeftOuter),
+				    #"Expanded for Sales Unit" = Table.ExpandTableColumn(#"Merged Queries1", "MCS Actuals-Categories", {"Sales Geography.Sales Unit"}, {"Sales Geography.Sales Unit"}),
+				    #"Removed Duplicates1" = Table.Distinct(#"Expanded for Sales Unit"),
+				    #"Added Custom" = Table.AddColumn(#"Removed Duplicates1", "CrossTableKey", each [Sales Geography.Area Short Name] & "|" & [Sales Geography.Subsidiary] & "|" & [Sales Geography.Sales Unit] & "|" & [Fiscal Month.Fiscal Month] & "|" & [Service Line Offering.Short Solution Area]),
+				    #"Merged Queries2" = Table.NestedJoin(#"Added Custom", {"CrossTableKey"}, #"MCS Budget-Raw", {"CrossTableKey"}, "MCS Budget-Raw", JoinKind.LeftOuter),
+				    #"Filtered Rows" = Table.SelectRows(#"Merged Queries2", each (Cube.AttributeMemberId([Fiscal Month.Fiscal Year]) = "[Fiscal Month].[Fiscal Year].&[FY2023]" meta [DisplayName = "FY2023"])),
+				    #"Expanded MCS Budget-Raw" = Table.ExpandTableColumn(#"Filtered Rows", "MCS Budget-Raw", {"DV Budget", "DV Actual", "DV Leakage", "Forecast - MCS_DV", "Gross DV", "Net DV"}, {"DV Budget", "DV Actual", "DV Leakage", "Forecast - MCS_DV", "Gross DV", "Net DV"}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Expanded MCS Budget-Raw",null,0,Replacer.ReplaceValue,{"DV Budget", "DV Actual", "DV Leakage", "Forecast - MCS_DV", "Gross DV", "Net DV"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_ResultType = Table
+

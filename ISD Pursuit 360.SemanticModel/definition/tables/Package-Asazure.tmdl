@@ -1,0 +1,758 @@
+table Package-Asazure
+	isHidden
+	lineageTag: 2eeb7f6d-de20-4700-817b-9484bec5ac71
+
+	column 'Opportunity.Opportunity Id'
+		dataType: string
+		isHidden
+		lineageTag: 908f94f3-9458-4f1d-b6e2-9c656921236d
+		summarizeBy: none
+		sourceColumn: Opportunity.Opportunity Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Bundle Offering Name'
+		dataType: string
+		isHidden
+		lineageTag: 86df59b8-1a8b-416c-8e51-8f3f58a7a1ec
+		summarizeBy: none
+		sourceColumn: Package.Bundle Offering Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Business Scenario'
+		dataType: string
+		isHidden
+		lineageTag: 7c65f768-93f8-4872-babc-029fd3d3f765
+		summarizeBy: none
+		sourceColumn: Package.Business Scenario
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Estimated End Date'
+		dataType: string
+		isHidden
+		lineageTag: 16e82ba1-0941-437b-8721-95561ce68fbd
+		summarizeBy: none
+		sourceColumn: Package.Estimated End Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Estimated Start Date'
+		dataType: string
+		isHidden
+		lineageTag: 2f1d2217-8e4b-4961-9b33-d49f5662ac6a
+		summarizeBy: none
+		sourceColumn: Package.Estimated Start Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Fee Type'
+		dataType: string
+		isHidden
+		lineageTag: 6fbcc36b-cf34-4dff-a72c-9d3e1c64ecad
+		summarizeBy: none
+		sourceColumn: Package.Fee Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Is Change Request'
+		dataType: string
+		isHidden
+		lineageTag: c28dd285-d3c7-4357-ac2b-d880e9d4f375
+		summarizeBy: none
+		sourceColumn: Package.Is Change Request
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Business Type'
+		dataType: string
+		isHidden
+		lineageTag: f2712a99-2767-496e-9257-83031cd080c4
+		summarizeBy: none
+		sourceColumn: Package.Package Business Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Delivery Domain'
+		dataType: string
+		isHidden
+		lineageTag: ce445046-2482-4504-8b66-ce7ea785d786
+		summarizeBy: none
+		sourceColumn: Package.Package Delivery Domain
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Delivery Domain Short Name'
+		dataType: string
+		isHidden
+		lineageTag: e30000f3-04e5-4ec0-a643-7b4a5f4cad0a
+		summarizeBy: none
+		sourceColumn: Package.Package Delivery Domain Short Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Domain'
+		dataType: string
+		isHidden
+		lineageTag: 3646990b-1802-40a0-898c-a795e9cf1649
+		summarizeBy: none
+		sourceColumn: Package.Package Domain
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Id'
+		dataType: string
+		isHidden
+		lineageTag: 4212a774-8b97-45d9-8ae1-48888a9dcee4
+		summarizeBy: none
+		sourceColumn: Package.Package Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Offering Name'
+		dataType: string
+		isHidden
+		lineageTag: 950d0bf4-ba1a-46e8-8f41-9872491de91d
+		summarizeBy: none
+		sourceColumn: Package.Package Offering Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Primary Product'
+		dataType: string
+		isHidden
+		lineageTag: e4d3c47d-61cc-4636-a640-8c475817f190
+		summarizeBy: none
+		sourceColumn: Package.Package Primary Product
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Solution Area'
+		dataType: string
+		isHidden
+		lineageTag: 1a44e870-d082-474c-a20e-ce553c973ea8
+		summarizeBy: none
+		sourceColumn: Package.Package Solution Area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Title'
+		dataType: string
+		isHidden
+		lineageTag: f93a8fca-6817-489c-ac64-af24e3211622
+		summarizeBy: none
+		sourceColumn: Package.Package Title
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Type'
+		dataType: string
+		isHidden
+		lineageTag: cd1e2fc1-3c5d-47bb-9fd8-c97ac57cbea6
+		summarizeBy: none
+		sourceColumn: Package.Package Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package Discount (CCUS)'
+		dataType: double
+		isHidden
+		lineageTag: 2ed8e88e-cb26-454d-9d1a-61e5c5ecf25e
+		summarizeBy: sum
+		sourceColumn: Package Discount (CCUS)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Planned Package Delivery Cost (CCUS)'
+		dataType: double
+		isHidden
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: a404ab91-0ada-4c6a-af5d-71e2224cf638
+		summarizeBy: sum
+		sourceColumn: Planned Package Delivery Cost (CCUS)
+
+		changedProperty = IsHidden
+
+		changedProperty = FormatString
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	column 'Planned Package Price To Customer (CCUS)'
+		dataType: double
+		isHidden
+		lineageTag: 4c42ce7f-5124-4893-b700-2a031612fa00
+		summarizeBy: sum
+		sourceColumn: Planned Package Price To Customer (CCUS)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Planned Package Reimbursable Expenses W Exceptions (CCUS)'
+		dataType: double
+		isHidden
+		lineageTag: 22c1811b-3c1c-4c87-a637-d5492ac9db76
+		summarizeBy: sum
+		sourceColumn: Planned Package Reimbursable Expenses W Exceptions (CCUS)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Planned Package Revenue (CCUS)'
+		dataType: double
+		isHidden
+		lineageTag: cfb609f8-6b90-4249-995a-7021740f86b9
+		summarizeBy: sum
+		sourceColumn: Planned Package Revenue (CCUS)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Planned Package Risk Reserve %'
+		dataType: double
+		isHidden
+		lineageTag: 286198dc-0323-411c-a928-58974932f357
+		summarizeBy: sum
+		sourceColumn: Planned Package Risk Reserve %
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Planned Package Risk Reserve (CCUS)'
+		dataType: double
+		isHidden
+		lineageTag: dbc5be3f-0fd8-4a1f-a36a-cb8ffcbe3639
+		summarizeBy: sum
+		sourceColumn: Planned Package Risk Reserve (CCUS)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sold Margin %'
+		dataType: double
+		isHidden
+		lineageTag: c3dbe864-da51-46cb-a6d3-e0f45445e328
+		summarizeBy: sum
+		sourceColumn: Sold Margin %
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Sales Geography.Area'
+		dataType: string
+		isHidden
+		lineageTag: b3df9147-89fc-467d-8768-5f6ca215430f
+		summarizeBy: none
+		sourceColumn: Sales Geography.Area
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Area Short Name'
+		dataType: string
+		isHidden
+		lineageTag: d9af842a-5e49-4ad6-b8fd-27b76c124e49
+		summarizeBy: none
+		sourceColumn: Sales Geography.Area Short Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.ATU Group'
+		dataType: string
+		isHidden
+		lineageTag: c876c915-1411-427f-9709-c77e88c92e1c
+		summarizeBy: none
+		sourceColumn: Sales Geography.ATU Group
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.ATU Name'
+		dataType: string
+		isHidden
+		lineageTag: 01159db9-7eaa-4c40-8011-233be0e0ed90
+		summarizeBy: none
+		sourceColumn: Sales Geography.ATU Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Commercial/Public Sector'
+		dataType: string
+		isHidden
+		lineageTag: f1b30ae0-5928-407e-ae67-961eeb2e257a
+		summarizeBy: none
+		sourceColumn: Sales Geography.Commercial/Public Sector
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Region'
+		dataType: string
+		isHidden
+		lineageTag: 2f7fe703-e278-4388-a397-93d6d94758ef
+		summarizeBy: none
+		sourceColumn: Sales Geography.Region
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sales Territory'
+		dataType: string
+		isHidden
+		lineageTag: 2d3039a4-e0fd-4f1c-9563-6347e89c04d9
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sales Territory
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sales Unit'
+		dataType: string
+		isHidden
+		lineageTag: b7a64ded-1a84-4990-9e7d-261c6f0b7a3a
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sales Unit
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Sub Region'
+		dataType: string
+		isHidden
+		lineageTag: 45419ed3-12d4-4206-98c5-f41f0d4fa91f
+		summarizeBy: none
+		sourceColumn: Sales Geography.Sub Region
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Subsidiary'
+		dataType: string
+		isHidden
+		lineageTag: b3bfbf91-bc64-4a60-9478-84cfc83e202b
+		summarizeBy: none
+		sourceColumn: Sales Geography.Subsidiary
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Geography.Time Zone'
+		dataType: string
+		isHidden
+		lineageTag: d1eb1d4b-9dc6-4f2a-8c06-5df962641652
+		summarizeBy: none
+		sourceColumn: Sales Geography.Time Zone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Contract Completed Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 3afb0c8f-768d-4561-9a32-4e8891100322
+		summarizeBy: none
+		sourceColumn: Contract.Contract Completed Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Contract.Contract Created Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: c683a877-4a28-454b-86c5-d02358b943c8
+		summarizeBy: none
+		sourceColumn: Contract.Contract Created Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Contract.Contract Fully Executed Date'
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 59d36061-ddb1-4ae9-9abe-f8878d986621
+		summarizeBy: none
+		sourceColumn: Contract.Contract Fully Executed Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Contract.Contract Hyperlink'
+		dataType: string
+		isHidden
+		lineageTag: 07f86579-8c9e-4e1f-ab6b-742907dbec18
+		summarizeBy: none
+		sourceColumn: Contract.Contract Hyperlink
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Contract Id'
+		dataType: string
+		isHidden
+		lineageTag: abb9ca19-69d4-450a-9a21-86c3fc8433d7
+		summarizeBy: none
+		sourceColumn: Contract.Contract Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Contract Status'
+		dataType: string
+		isHidden
+		lineageTag: f59a8868-25e6-432d-aa8c-720a44b4931b
+		summarizeBy: none
+		sourceColumn: Contract.Contract Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.CRM Deal ID'
+		dataType: string
+		isHidden
+		lineageTag: d3df2f2a-8a7f-49e8-8bbd-c420e7a767f1
+		summarizeBy: none
+		sourceColumn: Contract.CRM Deal ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Is Amendment'
+		dataType: string
+		isHidden
+		lineageTag: b57409fd-9229-4dad-ab24-67bd6b953ac4
+		summarizeBy: none
+		sourceColumn: Contract.Is Amendment
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Is Budgetary Estimate'
+		dataType: string
+		isHidden
+		lineageTag: 1842f40e-0283-4d4e-9970-84ba918c044f
+		summarizeBy: none
+		sourceColumn: Contract.Is Budgetary Estimate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Risk Rating And Fee Type-Numeric'
+		dataType: string
+		isHidden
+		lineageTag: ae6ce6d5-e50e-4f26-9b4b-7037796926da
+		summarizeBy: none
+		sourceColumn: Contract.Risk Rating And Fee Type-Numeric
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.SQA Review'
+		dataType: string
+		isHidden
+		lineageTag: 91cf7a2d-ac0f-4e7e-b02c-29c9cbe07f9a
+		summarizeBy: none
+		sourceColumn: Contract.SQA Review
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.TQA Review'
+		dataType: string
+		isHidden
+		lineageTag: 80745169-dce3-4e46-a89b-ffb136524564
+		summarizeBy: none
+		sourceColumn: Contract.TQA Review
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Deal Id'
+		dataType: string
+		isHidden
+		lineageTag: fc83704b-6ea6-4121-8173-888d2d5ed58b
+		summarizeBy: none
+		sourceColumn: Deal.Deal Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Pursuit Lead'
+		dataType: string
+		isHidden
+		lineageTag: af39b466-dc1e-4d1f-bcf9-a647668edf8a
+		summarizeBy: none
+		sourceColumn: Deal.Pursuit Lead
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package BIF Amount (CCUS)'
+		dataType: double
+		isHidden
+		lineageTag: ac63925b-5e5b-45e0-ba58-3eea479024e0
+		summarizeBy: sum
+		sourceColumn: Package BIF Amount (CCUS)
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Pursuit Lead - Primary' = CALCULATE(MIN('PLs from C1-Asazure'[PL Primary]),FILTER('PLs from C1-Asazure','Package-Asazure'[Deal.Deal Id]='PLs from C1-Asazure'[Deal.Deal Id]))
+		isHidden
+		lineageTag: 0889ecc1-82e4-4419-8e2e-5d6ff774b317
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Lead - Common Name' =
+			CALCULATE(MIN('PLs Names Matrix'[Pursuit Request.PL GeoMapping Name]),
+			                                    FILTER('PLs Names Matrix','Package-Asazure'[Pursuit Lead - Primary]='PLs Names Matrix'[PL Primary] && NOT ISBLANK('PLs Names Matrix'[Pursuit Request.PL GeoMapping Name])))
+		isHidden
+		lineageTag: 995faf50-a755-4575-af0b-030adbad3f87
+		summarizeBy: none
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Overall Risk Rating'
+		dataType: string
+		lineageTag: 29a84bb6-d4f6-4a0d-be78-417e1fc4a12c
+		summarizeBy: none
+		sourceColumn: Contract.Overall Risk Rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.QA Reviewer Name'
+		dataType: string
+		lineageTag: 4259c957-1753-4aa8-86da-ceddc172881d
+		summarizeBy: none
+		sourceColumn: Contract.QA Reviewer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Agreement Setup Completed Date Fiscal Quarter'
+		dataType: string
+		lineageTag: fb10452e-6a7b-4d06-8d6f-d8b2c5e9704a
+		summarizeBy: none
+		sourceColumn: Contract.Agreement Setup Completed Date Fiscal Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Agreement Setup Completed Date Fiscal Short Month'
+		dataType: string
+		lineageTag: 85e9cbb1-c527-43ec-a1c7-9906d19cb335
+		summarizeBy: none
+		sourceColumn: Contract.Agreement Setup Completed Date Fiscal Short Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Agreement Setup Completed Date Fiscal Year'
+		dataType: string
+		lineageTag: f56a9d9b-1ed7-4f3c-851e-4365c6a128fe
+		summarizeBy: none
+		sourceColumn: Contract.Agreement Setup Completed Date Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Package.Package Standard Offering Type'
+		dataType: string
+		lineageTag: ee677ef8-b339-47b5-afef-bda5dd62c8f3
+		summarizeBy: none
+		sourceColumn: Package.Package Standard Offering Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.Contract Primary Domain Short Name'
+		dataType: string
+		lineageTag: 35080492-0e8b-4631-b37c-202f6f0216e0
+		summarizeBy: none
+		sourceColumn: Contract.Contract Primary Domain Short Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Deal Type'
+		dataType: string
+		lineageTag: 411a8311-eaf0-40ba-aca7-f9667eb4b706
+		summarizeBy: none
+		sourceColumn: Deal.Deal Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Is Public Sector'
+		dataType: string
+		lineageTag: cffba13e-35cf-47b7-9b21-95416dfd7810
+		summarizeBy: none
+		sourceColumn: Deal.Is Public Sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Planned Package Revenue (USD)'
+		dataType: double
+		lineageTag: 737dd249-08d1-404f-ab5e-9860121e76d2
+		summarizeBy: sum
+		sourceColumn: Planned Package Revenue (USD)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Opportunity.Is MCS Opportunity'
+		dataType: string
+		lineageTag: 34c2d0f4-8031-48f2-9ff3-d32d50f63f29
+		summarizeBy: none
+		sourceColumn: Opportunity.Is MCS Opportunity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Contract.CRM Id'
+		dataType: string
+		lineageTag: 9525c0c9-3743-4d1a-9d50-779f3cb7d4aa
+		summarizeBy: none
+		sourceColumn: Contract.CRM Id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subcon.SubconNames' = CONCATENATEX(FILTER('Subcons on C1 Deals','Package-Asazure'[Deal.Deal Id]='Subcons on C1 Deals'[Subcon Contract.Subcon Deal ID]),'Subcons on C1 Deals'[Subcon Contract.Subcon Contract Name],"; ")
+		lineageTag: d1e594a6-677e-4b93-9146-b3eb360ab9a0
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Package-Asazure-dbdd46ec-ecf2-4cb1-8f2a-c213b48f990c = m
+		mode: import
+		queryGroup: 'Azure Sourced Tables'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model = #"Deal Management"{[Id="Model"]}[Data],
+				    #"Pursuit Management and Presales1" = Model{[Id="Pursuit Management and Presales"]}[Data],
+				    #"Added Items" = Cube.Transform(#"Pursuit Management and Presales1",
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Package]", {"[Package].[Bundle Offering Name].[Bundle Offering Name]", "[Package].[Business Scenario].[Business Scenario]", "[Package].[Estimated End Date].[Estimated End Date]", "[Package].[Estimated Start Date].[Estimated Start Date]", "[Package].[Fee Type].[Fee Type]", "[Package].[Is Change Request].[Is Change Request]", "[Package].[Package Business Type].[Package Business Type]", "[Package].[Package Delivery Domain].[Package Delivery Domain]", "[Package].[Package Delivery Domain Short Name].[Package Delivery Domain Short Name]", "[Package].[Package Domain].[Package Domain]", "[Package].[Package Id].[Package Id]", "[Package].[Package Offering Name].[Package Offering Name]", "[Package].[Package Primary Product].[Package Primary Product]", "[Package].[Package Solution Area].[Package Solution Area]", "[Package].[Package Standard Offering Type].[Package Standard Offering Type]", "[Package].[Package Title].[Package Title]", "[Package].[Package Type].[Package Type]"}, {"Package.Bundle Offering Name", "Package.Business Scenario", "Package.Estimated End Date", "Package.Estimated Start Date", "Package.Fee Type", "Package.Is Change Request", "Package.Package Business Type", "Package.Package Delivery Domain", "Package.Package Delivery Domain Short Name", "Package.Package Domain", "Package.Package Id", "Package.Package Offering Name", "Package.Package Primary Product", "Package.Package Solution Area", "Package.Package Standard Offering Type", "Package.Package Title", "Package.Package Type"}},
+				            {Cube.AddMeasureColumn, "Package Discount (CCUS)", "[Measures].[Package Discount (CCUS)]"},
+				            {Cube.AddMeasureColumn, "Planned Package Delivery Cost (CCUS)", "[Measures].[Planned Package Delivery Cost (CCUS)]"},
+				            {Cube.AddMeasureColumn, "Planned Package Price To Customer (CCUS)", "[Measures].[Planned Package Price To Customer (CCUS)]"},
+				            {Cube.AddMeasureColumn, "Planned Package Reimbursable Expenses W Exceptions (CCUS)", "[Measures].[Planned Package Reimbursable Expenses W Exceptions (CCUS)]"},
+				            {Cube.AddMeasureColumn, "Planned Package Revenue (CCUS)", "[Measures].[Planned Package Revenue (CCUS)]"},
+				            {Cube.AddMeasureColumn, "Planned Package Risk Reserve %", "[Measures].[Planned Package Risk Reserve %]"},
+				            {Cube.AddMeasureColumn, "Planned Package Risk Reserve (CCUS)", "[Measures].[Planned Package Risk Reserve (CCUS)]"},
+				            {Cube.AddMeasureColumn, "Sold Margin %", "[Measures].[Sold Margin %]"},
+				            {Cube.AddAndExpandDimensionColumn, "[Sales Geography]", {"[Sales Geography].[Area].[Area]", "[Sales Geography].[Area Short Name].[Area Short Name]", "[Sales Geography].[ATU Group].[ATU Group]", "[Sales Geography].[ATU Name].[ATU Name]", "[Sales Geography].[Commercial/Public Sector].[Commercial/Public Sector]", "[Sales Geography].[Region].[Region]", "[Sales Geography].[Sales Territory].[Sales Territory]", "[Sales Geography].[Sales Unit].[Sales Unit]", "[Sales Geography].[Sub Region].[Sub Region]", "[Sales Geography].[Subsidiary].[Subsidiary]", "[Sales Geography].[Time Zone].[Time Zone]"}, {"Sales Geography.Area", "Sales Geography.Area Short Name", "Sales Geography.ATU Group", "Sales Geography.ATU Name", "Sales Geography.Commercial/Public Sector", "Sales Geography.Region", "Sales Geography.Sales Territory", "Sales Geography.Sales Unit", "Sales Geography.Sub Region", "Sales Geography.Subsidiary", "Sales Geography.Time Zone"}},
+				            {Cube.AddAndExpandDimensionColumn, "[Contract]", {"[Contract].[Agreement Setup Completed Date Hierarchy].[Agreement Setup Completed Date Fiscal Quarter]", "[Contract].[Agreement Setup Completed Date Hierarchy].[Agreement Setup Completed Date Fiscal Short Month]", "[Contract].[Agreement Setup Completed Date Hierarchy].[Agreement Setup Completed Date Fiscal Year]", "[Contract].[Contract Completed Date].[Contract Completed Date]", "[Contract].[Contract Created Date].[Contract Created Date]", "[Contract].[Contract Fully Executed Date].[Contract Fully Executed Date]", "[Contract].[Contract Hyperlink].[Contract Hyperlink]", "[Contract].[Contract Id].[Contract Id]", "[Contract].[Contract Primary Domain Short Name].[Contract Primary Domain Short Name]", "[Contract].[Contract Status].[Contract Status]", "[Contract].[CRM Deal ID].[CRM Deal ID]", "[Contract].[Is Amendment].[Is Amendment]", "[Contract].[Is Budgetary Estimate].[Is Budgetary Estimate]", "[Contract].[Overall Risk Rating].[Overall Risk Rating]", "[Contract].[QA Reviewer Name].[QA Reviewer Name]", "[Contract].[Risk Rating And Fee Type-Numeric].[Risk Rating And Fee Type-Numeric]", "[Contract].[SQA Review].[SQA Review]", "[Contract].[TQA Review].[TQA Review]"}, {"Contract.Agreement Setup Completed Date Fiscal Quarter", "Contract.Agreement Setup Completed Date Fiscal Short Month", "Contract.Agreement Setup Completed Date Fiscal Year", "Contract.Contract Completed Date", "Contract.Contract Created Date", "Contract.Contract Fully Executed Date", "Contract.Contract Hyperlink", "Contract.Contract Id", "Contract.Contract Primary Domain Short Name", "Contract.Contract Status", "Contract.CRM Deal ID", "Contract.Is Amendment", "Contract.Is Budgetary Estimate", "Contract.Overall Risk Rating", "Contract.QA Reviewer Name", "Contract.Risk Rating And Fee Type-Numeric", "Contract.SQA Review", "Contract.TQA Review"}},
+				            {Cube.AddAndExpandDimensionColumn, "[Deal]", {"[Deal].[Deal Id].[Deal Id]", "[Deal].[Deal Type].[Deal Type]", "[Deal].[Is Public Sector].[Is Public Sector]", "[Deal].[Pursuit Lead].[Pursuit Lead]"}, {"Deal.Deal Id", "Deal.Deal Type", "Deal.Is Public Sector", "Deal.Pursuit Lead"}},
+				            {Cube.AddMeasureColumn, "Package BIF Amount (CCUS)", "[Measures].[Package BIF Amount (CCUS)]"},
+				            {Cube.AddMeasureColumn, "Planned Package Revenue (USD)", "[Measures].[Planned Package Revenue (USD)]"},
+				            {Cube.AddAndExpandDimensionColumn, "[Opportunity]", {"[Opportunity].[Is MCS Opportunity].[Is MCS Opportunity]", "[Opportunity].[Opportunity Id].[Opportunity Id]"}, {"Opportunity.Is MCS Opportunity", "Opportunity.Opportunity Id"}}
+				        }),
+				    #"Filtered Rows1" = Table.SelectRows(#"Added Items", each [Contract.CRM Deal ID] <> null),
+				    #"Added Custom" = Table.AddColumn(#"Filtered Rows1", "Contract.CRM Id", each Text.BeforeDelimiter([Contract.CRM Deal ID],"/",0)),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Custom", each [Sales Geography.Sales Unit] <> "USA - Federal"),
+				    #"Filtered Rows5" = Table.SelectRows(#"Filtered Rows", each [Package.Package Business Type] = "Consulting"),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Rows5",{{"Contract.Contract Completed Date", type date}, {"Contract.Contract Created Date", type date}, {"Contract.Contract Fully Executed Date", type date}})
+				in
+				    #"Changed Type"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Exception
+

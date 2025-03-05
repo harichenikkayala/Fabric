@@ -1,0 +1,35 @@
+/// Number of calendar days of tolerance before a Won deal will be marked as having a hygiene issue because it has not yet marked as complete.
+expression 'Days Tolerance for Win Complete' = 14 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: eec47b0d-81bb-4178-9c86-08b6f4610bdd
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Number
+
+/// Number of hours tolerance for the overall budgeted NBUE (negative) that will not trigger a deal as being marked as having a hygiene issue.
+expression 'Overspent Tolerance' = -80 meta [IsParameterQuery=true, Type="Number", IsParameterQueryRequired=true]
+	lineageTag: e7fba16d-34ec-4a9e-b1c9-0e683da0f6b6
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Number
+
+/// Earliest Due Date to have in the Opportunity data set.
+expression 'Min Due Date' = #date(2017, 7, 1) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
+	lineageTag: 6e92fce7-7695-441e-8072-acb3b371c779
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Date
+
+/// Last Date of the last fiscal for the Opportunity Data set.
+expression 'Max Due Date' = #date(2024, 6, 30) meta [IsParameterQuery=true, Type="Date", IsParameterQueryRequired=true]
+	lineageTag: 6bdbc4b1-03be-4a13-9d2c-731728df3611
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Date
+
+/// If a value is supplied, then the date of the most recent refresh is NOT used as the determiner of current fiscal and this date is used as the determiner of current fiscal.  Example:  Setting this to 6/30/2022 will make sure that the report thinks it represents end state as of FY22.
+expression 'Current Fiscal Override Date' = null meta [IsParameterQuery=true, List={#date(2022, 6, 30), #date(2021, 6, 30), #date(2020, 6, 30), #date(2023, 6, 30)}, DefaultValue=..., Type="Date", IsParameterQueryRequired=false]
+	lineageTag: 01fad1d4-9428-432f-963d-cc6874b5496a
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Null
+

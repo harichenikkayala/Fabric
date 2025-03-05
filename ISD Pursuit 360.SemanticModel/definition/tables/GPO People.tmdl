@@ -1,0 +1,173 @@
+table 'GPO People'
+	isHidden
+	lineageTag: 5941b9e4-765d-4009-b57f-d2ec50ee57f5
+
+	column 'HR Person.Alias'
+		dataType: string
+		isHidden
+		lineageTag: 4c080227-132d-460d-a96c-98655363e632
+		summarizeBy: none
+		sourceColumn: HR Person.Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Cost Center Code'
+		dataType: string
+		isHidden
+		lineageTag: 02f077da-8f5e-4586-a4c7-064dbc3f35c4
+		summarizeBy: none
+		sourceColumn: HR Person.Cost Center Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.First Name'
+		dataType: string
+		isHidden
+		lineageTag: 10a17b81-059f-416c-a915-3defd645593d
+		summarizeBy: none
+		sourceColumn: HR Person.First Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Full Name'
+		dataType: string
+		isHidden
+		lineageTag: 3cc32018-23bc-45e6-b2c7-a47a66d16952
+		summarizeBy: none
+		sourceColumn: HR Person.Full Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.HR Person Type'
+		dataType: string
+		isHidden
+		lineageTag: 404b1a74-a5fb-40da-8d8b-2817e456506e
+		summarizeBy: none
+		sourceColumn: HR Person.HR Person Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Job Title Name'
+		dataType: string
+		isHidden
+		lineageTag: feee0545-4560-4342-98a9-cae2ad311d5d
+		summarizeBy: none
+		sourceColumn: HR Person.Job Title Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Last Name'
+		dataType: string
+		isHidden
+		lineageTag: f3525137-5fb6-49dd-a22a-d50fe9e22ca7
+		summarizeBy: none
+		sourceColumn: HR Person.Last Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Reports To Alias'
+		dataType: string
+		isHidden
+		lineageTag: 1f572ed1-6636-44d1-844f-bc5061eba838
+		summarizeBy: none
+		sourceColumn: HR Person.Reports To Alias
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Standard Title'
+		dataType: string
+		isHidden
+		lineageTag: e9a0a427-7cf4-4884-bc62-9f8e5615dcc5
+		summarizeBy: none
+		sourceColumn: HR Person.Standard Title
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Active Status'
+		dataType: string
+		lineageTag: a333baee-3147-4344-a153-d8f6dc4a1f83
+		summarizeBy: none
+		sourceColumn: HR Person.Active Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Cost Center Name'
+		dataType: string
+		lineageTag: 382dc637-9f93-47ba-9597-fc55f4f8fe9d
+		summarizeBy: none
+		sourceColumn: HR Person.Cost Center Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Country Code'
+		dataType: string
+		lineageTag: f91a0646-7063-42b9-bf91-be5968ff415d
+		summarizeBy: none
+		sourceColumn: HR Person.Country Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.OrganizationName'
+		dataType: string
+		lineageTag: c171d233-2fb5-488f-8322-a7cb79755972
+		summarizeBy: none
+		sourceColumn: HR Person.OrganizationName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.OrganizationSummaryName'
+		dataType: string
+		lineageTag: ff12c330-f1cd-498b-9a43-bf5364a4a8e1
+		summarizeBy: none
+		sourceColumn: HR Person.OrganizationSummaryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'HR Person.Source Standard Title'
+		dataType: string
+		lineageTag: 5dc3295b-960f-4b7c-83c3-bfafb4fb04ba
+		summarizeBy: none
+		sourceColumn: HR Person.Source Standard Title
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'GPO People-e08a8dc7-f52f-4b55-977e-0b9831b2f887' = m
+		mode: import
+		queryGroup: 'Org Related Queries'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    Sales1 = Source{[Name="Sales"]}[Data],
+				    Sales2 = Sales1{[Id="Sales"]}[Data],
+				    Sales3 = Sales2{[Id="Sales"]}[Data],
+				    #"Added Items" = Cube.Transform(Sales3,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[HR Person]", {"[HR Person].[Active Status].[Active Status]", "[HR Person].[Alias].[Alias]", "[HR Person].[Cost Center Code].[Cost Center Code]", "[HR Person].[Cost Center Name].[Cost Center Name]", "[HR Person].[Country Code].[Country Code]", "[HR Person].[First Name].[First Name]", "[HR Person].[Full Name].[Full Name]", "[HR Person].[HR Person Type].[HR Person Type]", "[HR Person].[Job Title Name].[Job Title Name]", "[HR Person].[Last Name].[Last Name]", "[HR Person].[OrganizationName].[OrganizationName]", "[HR Person].[OrganizationSummaryName].[OrganizationSummaryName]", "[HR Person].[Reports To Alias].[Reports To Alias]", "[HR Person].[Source Standard Title].[Source Standard Title]", "[HR Person].[Standard Title].[Standard Title]"}, {"HR Person.Active Status", "HR Person.Alias", "HR Person.Cost Center Code", "HR Person.Cost Center Name", "HR Person.Country Code", "HR Person.First Name", "HR Person.Full Name", "HR Person.HR Person Type", "HR Person.Job Title Name", "HR Person.Last Name", "HR Person.OrganizationName", "HR Person.OrganizationSummaryName", "HR Person.Reports To Alias", "HR Person.Source Standard Title", "HR Person.Standard Title"}}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each true),
+				    #"Filtered Rows4" = Table.SelectRows(#"Filtered Rows", each Text.Contains([HR Person.Cost Center Name], "pursuit") or Text.Contains([HR Person.Cost Center Name], "Purusit"))
+				in
+				    #"Filtered Rows4"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+

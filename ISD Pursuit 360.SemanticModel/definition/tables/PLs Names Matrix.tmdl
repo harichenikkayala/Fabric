@@ -1,0 +1,69 @@
+table 'PLs Names Matrix'
+	isHidden
+	lineageTag: d67e612f-99fb-44ee-805b-0cf601e24d8b
+
+	column 'Pursuit Request.PL GeoMapping Name'
+		dataType: string
+		isHidden
+		lineageTag: 1ce00d57-8eb7-4f01-8b92-26355ee50921
+		summarizeBy: none
+		sourceColumn: Pursuit Request.PL GeoMapping Name
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pursuit Request.Pursuit Lead'
+		dataType: string
+		isHidden
+		lineageTag: 5850e29a-60e0-4c3b-acfc-223ddeecacd0
+		summarizeBy: none
+		sourceColumn: Pursuit Request.Pursuit Lead
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PL Primary'
+		dataType: string
+		lineageTag: 8b8ec7f2-92d4-4b50-ae80-ee783b02bb0e
+		summarizeBy: none
+		sourceColumn: PL Primary
+
+		annotation SummarizationSetBy = Automatic
+
+	column LikelyMatch
+		dataType: string
+		lineageTag: ba3d162a-433b-47a8-aef4-fd3d8a83974b
+		summarizeBy: none
+		sourceColumn: LikelyMatch
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'PLs Names Matrix-cb603245-048b-4eb5-ab88-fb12f82b06e0' = m
+		mode: import
+		queryGroup: 'Org Related Queries'
+		source =
+				let
+				Source = #"Pursuit Request Additional",
+				#"Removed Other Columns" = Table.SelectColumns(Source,{"Pursuit Request.CRM Opportunity ID", "Pursuit Request.PL GeoMapping Name", "Pursuit Request.Pursuit Lead"}),
+				#"Filtered Rows1" = Table.SelectRows(#"Removed Other Columns", each [Pursuit Request.PL GeoMapping Name] <> null),
+				#"Lowercased Text" = Table.TransformColumns(#"Filtered Rows1",{{"Pursuit Request.Pursuit Lead", Text.Lower, type text}}),
+				#"Capitalized Each Word" = Table.TransformColumns(#"Lowercased Text",{{"Pursuit Request.Pursuit Lead", Text.Proper, type text}}),
+				#"Merged Queries" = Table.NestedJoin(#"Capitalized Each Word", {"Pursuit Request.CRM Opportunity ID"}, #"PLs from C1-Asazure", {"Opportunity.Opportunity Id"}, "PLs from C1-Asazure", JoinKind.LeftOuter),
+				#"Expanded PLs from C1-Asazure" = Table.ExpandTableColumn(#"Merged Queries", "PLs from C1-Asazure", {"PL Primary"}, {"PL Primary"}),
+				#"Filtered Rows" = Table.SelectRows(#"Expanded PLs from C1-Asazure", each [PL Primary] <> null),
+				#"Filtered Rows2" = Table.SelectRows(#"Filtered Rows", each [Pursuit Request.Pursuit Lead] <> null),
+				#"Removed Other Columns1" = Table.SelectColumns(#"Filtered Rows2",{"Pursuit Request.PL GeoMapping Name", "Pursuit Request.Pursuit Lead", "PL Primary"}),
+				#"Added Custom1" = Table.AddColumn(#"Removed Other Columns1", "LikelyMatch", each if Text.Contains([Pursuit Request.Pursuit Lead],[PL Primary]) then "likely" else if Text.Contains([Pursuit Request.PL GeoMapping Name],[PL Primary]) then "likely" else "unlikely"),
+				#"Filtered Rows3" = Table.SelectRows(#"Added Custom1", each ([LikelyMatch] = "likely")),
+				#"Removed Duplicates1" = Table.Distinct(#"Filtered Rows3")
+				in
+				#"Removed Duplicates1"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

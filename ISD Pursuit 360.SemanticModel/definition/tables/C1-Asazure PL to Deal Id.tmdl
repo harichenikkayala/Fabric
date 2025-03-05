@@ -1,0 +1,95 @@
+table 'C1-Asazure PL to Deal Id'
+	isHidden
+	lineageTag: e6328765-bb47-4462-a6b8-ff56e7f58720
+
+	column 'Deal.Deal Id'
+		dataType: string
+		isHidden
+		lineageTag: ae4552d0-74d5-4ce6-bf42-170b23062cfa
+		summarizeBy: none
+		sourceColumn: Deal.Deal Id
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Is Public Sector'
+		dataType: string
+		isHidden
+		lineageTag: 10baa506-7167-4348-aab3-35c42a92a0da
+		summarizeBy: none
+		sourceColumn: Deal.Is Public Sector
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'All PLs'
+		dataType: string
+		isHidden
+		lineageTag: 4bcb95c3-136c-4865-b6d3-87b01c9baca1
+		summarizeBy: none
+		sourceColumn: All PLs
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.TPID'
+		dataType: string
+		isHidden
+		lineageTag: 16ef756d-f0ec-4887-9701-a4688f89ef13
+		summarizeBy: none
+		sourceColumn: Deal.TPID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Deal.Work Performed For TPID'
+		dataType: string
+		isHidden
+		lineageTag: b447320d-0d40-48f0-9585-c1e6417977d9
+		summarizeBy: none
+		sourceColumn: Deal.Work Performed For TPID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PL Primary'
+		dataType: string
+		isHidden
+		lineageTag: 667704a0-8089-410a-bfa6-20c0f06aea08
+		summarizeBy: none
+		sourceColumn: PL Primary
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'C1-Asazure PL to Deal Id-389f8987-d3de-4900-9e41-9ad9dc73dca0' = m
+		mode: import
+		queryGroup: 'Org Related Queries'
+		source =
+				let
+				    Source = AnalysisServices.Databases("MAIPRODL2OAS:1433", [TypedMeasureColumns=true, Implementation="2.0"]),
+				    #"Deal Management" = Source{[Name="Deal Management"]}[Data],
+				    Model1 = #"Deal Management"{[Id="Model"]}[Data],
+				    Model2 = Model1{[Id="Model"]}[Data],
+				    #"Added Items" = Cube.Transform(Model2,
+				        {
+				            {Cube.AddAndExpandDimensionColumn, "[Deal]", {"[Deal].[Deal Id].[Deal Id]", "[Deal].[Is Public Sector].[Is Public Sector]", "[Deal].[Pursuit Lead].[Pursuit Lead]", "[Deal].[Pursuit Lead Primary].[Pursuit Lead Primary]", "[Deal].[Pursuit Lead Secondary].[Pursuit Lead Secondary]", "[Deal].[TPID].[TPID]", "[Deal].[Work Performed For TPID].[Work Performed For TPID]"}, {"Deal.Deal Id", "Deal.Is Public Sector", "Deal.Pursuit Lead", "Deal.Pursuit Lead Primary", "Deal.Pursuit Lead Secondary", "Deal.TPID", "Deal.Work Performed For TPID"}}
+				        }),
+				    #"Filtered Rows" = Table.SelectRows(#"Added Items", each [Deal.Pursuit Lead] <> null),
+				    #"Added Custom" = Table.AddColumn(#"Filtered Rows", "PL Primary", each if ([Deal.Pursuit Lead]<>[Deal.Pursuit Lead Primary]) and [Deal.Pursuit Lead Primary]<>null then [Deal.Pursuit Lead Primary] else [Deal.Pursuit Lead]),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Custom",{{"Deal.Pursuit Lead Secondary", "All PLs"}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns",{"Deal.Deal Id", "Deal.Is Public Sector", "All PLs", "Deal.TPID", "Deal.Work Performed For TPID", "PL Primary"}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Removed Other Columns",{{"PL Primary", Text.Trim, type text}})
+				in
+				    #"Trimmed Text"
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
